@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+*.lock
+table1_*_resume.lock
+*_partial.csv
+.env
+.deepseek_key
+*.log
+node_modules/

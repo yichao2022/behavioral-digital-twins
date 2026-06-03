@@ -1,0 +1,5 @@
+share_pct,share,lambda,P_static_source,MSE,CHR_Wait,Spearman_rho
+30,0.30,0.25,conditional_logit_mean_over_5_seeds,0.02856919,0.2458,0.6239
+50,0.50,0.25,conditional_logit_mean_over_5_seeds,0.02786151,0.2437,0.6293
+70,0.70,0.25,conditional_logit_mean_over_5_seeds,0.02769156,0.2479,0.6241
+100,1.00,0.25,full_sample_grid_P_static,0.00301230,0.0417,0.9520

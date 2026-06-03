@@ -1,0 +1,6 @@
+model,method,MSE,MAE,CHR_Wait,CHR_SE,Spearman_rho,Pearson_r,selected_lambda,parse_success_rate
+DeepSeek V4 Pro,Unconstrained LLM,0.08065957,0.23311174,0.3438,0.1458,0.2445,0.2924,,1.0000
+DeepSeek V4 Pro,Static-BDT Anchor (λ=0.25),0.00504122,0.05827793,0.0000,0.0729,0.9728,0.9704,0.25,1.0000
+DeepSeek V4 Pro,Static-BDT Anchor (λ=0.50),0.02016489,0.11655587,0.0312,0.1354,0.8438,0.8392,0.50,1.0000
+DeepSeek V4 Pro,Static-BDT Anchor (λ=0.75),0.04537101,0.17483380,0.1667,0.1458,0.5941,0.5834,0.75,1.0000
+DeepSeek V4 Pro,"Static-BDT Anchor (MSE-opt, λ=0.25)",0.00504122,0.05827793,0.0000,0.0729,0.9728,0.9704,0.25,1.0000

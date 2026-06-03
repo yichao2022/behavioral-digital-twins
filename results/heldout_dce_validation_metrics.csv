@@ -1,0 +1,4 @@
+method,N,log_loss,brier_score,auc,calibration_intercept,calibration_slope,mean_pred,observed_rate,note
+Pure-DCE,3690,0.604140,0.207624,0.3445,-0.1253,0.8180,0.335089,0.333333,all test rows
+Unconstrained LLM,809,0.814933,0.307875,0.7658,-0.5540,-2.2180,0.431475,0.519159,matched rows only (n=809)
+Static-BDT Anchor,809,0.703443,0.254622,0.3506,0.8100,1.5216,0.386216,0.519159,matched rows only (n=809)

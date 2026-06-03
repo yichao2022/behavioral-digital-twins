@@ -1,0 +1,55 @@
+model,method,policy_id,policy_label,target_attribute,from_value,to_value,eligible_states,ATE
+Qwen2.5-72B,Pure-DCE,p1,WaitTime 6 -> 2,WaitTime,6.0,2.0,16,0.24772954
+Qwen2.5-72B,Pure-DCE,p2,WaitTime 4 -> 0,WaitTime,4.0,0.0,16,0.25227021
+Qwen2.5-72B,Pure-DCE,p3,Efficacy 0.50 -> 0.70,Efficacy,0.5,0.7,16,0.06669278
+Qwen2.5-72B,Pure-DCE,p4,Efficacy 0.70 -> 0.90,Efficacy,0.7,0.9,16,0.06619950
+Qwen2.5-72B,Pure-DCE,p5,SideEffects 3 -> 1,SideEffects,3.0,1.0,16,0.04558154
+Qwen2.5-72B,Pure-DCE,p6,SideEffects 2 -> 0,SideEffects,2.0,0.0,16,0.04571580
+Qwen2.5-72B,Unconstrained LLM,p1,WaitTime 6 -> 2,WaitTime,6.0,2.0,16,0.04404187
+Qwen2.5-72B,Unconstrained LLM,p2,WaitTime 4 -> 0,WaitTime,4.0,0.0,16,-0.14364625
+Qwen2.5-72B,Unconstrained LLM,p3,Efficacy 0.50 -> 0.70,Efficacy,0.5,0.7,16,0.06966687
+Qwen2.5-72B,Unconstrained LLM,p4,Efficacy 0.70 -> 0.90,Efficacy,0.7,0.9,16,0.08437500
+Qwen2.5-72B,Unconstrained LLM,p5,SideEffects 3 -> 1,SideEffects,3.0,1.0,16,-0.02987500
+Qwen2.5-72B,Unconstrained LLM,p6,SideEffects 2 -> 0,SideEffects,2.0,0.0,16,0.03972937
+Qwen2.5-72B,Static-BDT Anchor,p1,WaitTime 6 -> 2,WaitTime,6.0,2.0,16,0.19680763
+Qwen2.5-72B,Static-BDT Anchor,p2,WaitTime 4 -> 0,WaitTime,4.0,0.0,16,0.15329110
+Qwen2.5-72B,Static-BDT Anchor,p3,Efficacy 0.50 -> 0.70,Efficacy,0.5,0.7,16,0.06743630
+Qwen2.5-72B,Static-BDT Anchor,p4,Efficacy 0.70 -> 0.90,Efficacy,0.7,0.9,16,0.07074337
+Qwen2.5-72B,Static-BDT Anchor,p5,SideEffects 3 -> 1,SideEffects,3.0,1.0,16,0.02671740
+Qwen2.5-72B,Static-BDT Anchor,p6,SideEffects 2 -> 0,SideEffects,2.0,0.0,16,0.04421919
+DeepSeek V4 Pro,Pure-DCE,p1,WaitTime 6 -> 2,WaitTime,6.0,2.0,16,0.24772954
+DeepSeek V4 Pro,Pure-DCE,p2,WaitTime 4 -> 0,WaitTime,4.0,0.0,16,0.25227021
+DeepSeek V4 Pro,Pure-DCE,p3,Efficacy 0.50 -> 0.70,Efficacy,0.5,0.7,16,0.06669278
+DeepSeek V4 Pro,Pure-DCE,p4,Efficacy 0.70 -> 0.90,Efficacy,0.7,0.9,16,0.06619950
+DeepSeek V4 Pro,Pure-DCE,p5,SideEffects 3 -> 1,SideEffects,3.0,1.0,16,0.04558154
+DeepSeek V4 Pro,Pure-DCE,p6,SideEffects 2 -> 0,SideEffects,2.0,0.0,16,0.04571580
+DeepSeek V4 Pro,Unconstrained LLM,p1,WaitTime 6 -> 2,WaitTime,6.0,2.0,16,-0.00218750
+DeepSeek V4 Pro,Unconstrained LLM,p2,WaitTime 4 -> 0,WaitTime,4.0,0.0,16,0.02643750
+DeepSeek V4 Pro,Unconstrained LLM,p3,Efficacy 0.50 -> 0.70,Efficacy,0.5,0.7,16,-0.00231250
+DeepSeek V4 Pro,Unconstrained LLM,p4,Efficacy 0.70 -> 0.90,Efficacy,0.7,0.9,16,0.08500000
+DeepSeek V4 Pro,Unconstrained LLM,p5,SideEffects 3 -> 1,SideEffects,3.0,1.0,16,0.05575000
+DeepSeek V4 Pro,Unconstrained LLM,p6,SideEffects 2 -> 0,SideEffects,2.0,0.0,16,0.24250000
+DeepSeek V4 Pro,Static-BDT Anchor,p1,WaitTime 6 -> 2,WaitTime,6.0,2.0,16,0.18525028
+DeepSeek V4 Pro,Static-BDT Anchor,p2,WaitTime 4 -> 0,WaitTime,4.0,0.0,16,0.19581204
+DeepSeek V4 Pro,Static-BDT Anchor,p3,Efficacy 0.50 -> 0.70,Efficacy,0.5,0.7,16,0.04944146
+DeepSeek V4 Pro,Static-BDT Anchor,p4,Efficacy 0.70 -> 0.90,Efficacy,0.7,0.9,16,0.07089962
+DeepSeek V4 Pro,Static-BDT Anchor,p5,SideEffects 3 -> 1,SideEffects,3.0,1.0,16,0.04812365
+DeepSeek V4 Pro,Static-BDT Anchor,p6,SideEffects 2 -> 0,SideEffects,2.0,0.0,16,0.09491185
+MiroThinker-1.7-mini,Pure-DCE,p1,WaitTime 6 -> 2,WaitTime,6.0,2.0,16,0.24772954
+MiroThinker-1.7-mini,Pure-DCE,p2,WaitTime 4 -> 0,WaitTime,4.0,0.0,16,0.25227021
+MiroThinker-1.7-mini,Pure-DCE,p3,Efficacy 0.50 -> 0.70,Efficacy,0.5,0.7,16,0.06669278
+MiroThinker-1.7-mini,Pure-DCE,p4,Efficacy 0.70 -> 0.90,Efficacy,0.7,0.9,16,0.06619950
+MiroThinker-1.7-mini,Pure-DCE,p5,SideEffects 3 -> 1,SideEffects,3.0,1.0,16,0.04558154
+MiroThinker-1.7-mini,Pure-DCE,p6,SideEffects 2 -> 0,SideEffects,2.0,0.0,16,0.04571580
+MiroThinker-1.7-mini,Unconstrained LLM,p1,WaitTime 6 -> 2,WaitTime,6.0,2.0,16,0.05312500
+MiroThinker-1.7-mini,Unconstrained LLM,p2,WaitTime 4 -> 0,WaitTime,4.0,0.0,16,0.09062500
+MiroThinker-1.7-mini,Unconstrained LLM,p3,Efficacy 0.50 -> 0.70,Efficacy,0.5,0.7,16,0.26250000
+MiroThinker-1.7-mini,Unconstrained LLM,p4,Efficacy 0.70 -> 0.90,Efficacy,0.7,0.9,16,0.30625000
+MiroThinker-1.7-mini,Unconstrained LLM,p5,SideEffects 3 -> 1,SideEffects,3.0,1.0,16,-0.09062500
+MiroThinker-1.7-mini,Unconstrained LLM,p6,SideEffects 2 -> 0,SideEffects,2.0,0.0,16,-0.03437500
+MiroThinker-1.7-mini,Static-BDT Anchor,p1,WaitTime 6 -> 2,WaitTime,6.0,2.0,16,0.19907841
+MiroThinker-1.7-mini,Static-BDT Anchor,p2,WaitTime 4 -> 0,WaitTime,4.0,0.0,16,0.21185891
+MiroThinker-1.7-mini,Static-BDT Anchor,p3,Efficacy 0.50 -> 0.70,Efficacy,0.5,0.7,16,0.11564458
+MiroThinker-1.7-mini,Static-BDT Anchor,p4,Efficacy 0.70 -> 0.90,Efficacy,0.7,0.9,16,0.12621212
+MiroThinker-1.7-mini,Static-BDT Anchor,p5,SideEffects 3 -> 1,SideEffects,3.0,1.0,16,0.01152990
+MiroThinker-1.7-mini,Static-BDT Anchor,p6,SideEffects 2 -> 0,SideEffects,2.0,0.0,16,0.02569310

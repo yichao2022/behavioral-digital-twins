@@ -1,0 +1,7 @@
+model,method,num_policy_pairs,num_matching_pairs,PRC_vs_PureDCE
+Qwen2.5-72B,Unconstrained LLM,15,5,0.3333
+Qwen2.5-72B,Static-BDT Anchor,15,13,0.8667
+DeepSeek V4 Pro,Unconstrained LLM,15,2,0.1333
+DeepSeek V4 Pro,Static-BDT Anchor,15,9,0.6000
+MiroThinker-1.7-mini,Unconstrained LLM,15,8,0.5333
+MiroThinker-1.7-mini,Static-BDT Anchor,15,12,0.8000

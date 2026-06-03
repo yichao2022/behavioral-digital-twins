@@ -1,0 +1,7 @@
+sample,method,N,auc_y_p,auc_y_1mp,auc_1my_p
+full,Pure-DCE,3690,0.3445,0.6538,0.6555
+matched,Pure-DCE,809,0.3141,0.6877,0.6859
+full,Unconstrained LLM,809,0.7658,0.2397,0.2342
+matched,Unconstrained LLM,809,0.7658,0.2397,0.2342
+full,Static-BDT,809,0.3506,0.6504,0.6494
+matched,Static-BDT,809,0.3506,0.6504,0.6494

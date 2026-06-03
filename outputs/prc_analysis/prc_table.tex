@@ -1,0 +1,22 @@
+\begin{table}[t]
+\centering
+\caption{Policy Ranking Consistency relative to the Pure-DCE reference.}
+\label{tab:prc}
+\begin{tabular}{l l c c c}
+\toprule
+Model & Method & Policy pairs & Matching pairs & PRC vs. Pure-DCE \\
+\midrule
+Qwen2.5-72B & Unconstrained LLM & 15 & 5 & 0.333 \\
+Qwen2.5-72B & Static-BDT Anchor & 15 & 13 & 0.867 \\
+DeepSeek V4 Pro & Unconstrained LLM & 15 & 2 & 0.133 \\
+DeepSeek V4 Pro & Static-BDT Anchor & 15 & 9 & 0.600 \\
+MiroThinker-1.7-mini & Unconstrained LLM & 15 & 8 & 0.533 \\
+MiroThinker-1.7-mini & Static-BDT Anchor & 15 & 12 & 0.800 \\
+\bottomrule
+\end{tabular}
+\vspace{0.4em}
+\begin{minipage}{0.90\textwidth}
+\small
+\textbf{Note.} PRC measures the share of policy pairs ranked in the same order as the Pure-DCE simulator. The Pure-DCE simulator uses \(P_{\mathrm{static}}\) directly and serves as the ranking reference. Pairwise rankings use a tolerance of \(\epsilon=0.005\).
+\end{minipage}
+\end{table}

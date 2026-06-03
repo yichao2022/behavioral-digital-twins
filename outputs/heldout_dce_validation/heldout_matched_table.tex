@@ -1,0 +1,32 @@
+\begin{table}[t]
+\centering
+\caption{Held-out DCE validation: full test sample and LLM-matched subsample.}
+\label{tab:heldout-dce-matched}
+\small
+\textbf{Panel A: Full held-out test sample}\\
+\begin{tabular}{l r r r r r r}
+\toprule
+Method & $N$ & Log loss & Brier & AUC & Cal. int. & Cal. slope \\
+\midrule
+Pure-DCE & 3690 & 0.604140 & 0.207624 & 0.3445 & -0.1253 & 0.8180 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.6em}
+\textbf{Panel B: LLM-matched held-out test sample (same $N$ for all methods)}\\
+\begin{tabular}{l r r r r r r}
+\toprule
+Method & $N$ & Log loss & Brier & AUC & Cal. int. & Cal. slope \\
+\midrule
+Pure-DCE & 809 & 0.688177 & 0.246484 & 0.3141 & 0.9000 & 1.4356 \\
+Unconstrained LLM & 809 & 0.814933 & 0.307875 & 0.7658 & -0.5540 & -2.2180 \\
+Static-BDT Anchor ($\lambda=0.25$) & 809 & 0.703443 & 0.254622 & 0.3506 & 0.8100 & 1.5216 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.4em}
+\begin{minipage}{0.92\textwidth}
+\footnotesize
+Panel A uses all 3690 held-out choice rows (20\% respondent split, seed 2026). Panel B restricts to 809 rows whose $(w,e,s)$ attributes exactly match the 64-state LLM policy grid; all three methods are evaluated on this same subsample. Static-BDT uses $\lambda=0.25$. Matched-sample deltas: log-loss improvement over Unconstrained LLM = -0.111490; Brier improvement = -0.053253; log-loss minus Pure-DCE = +0.015267; Brier minus Pure-DCE = +0.008138.
+\end{minipage}
+\end{table}
