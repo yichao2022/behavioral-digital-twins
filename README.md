@@ -42,6 +42,34 @@ Set `DEEPSEEK_API_KEY` (and optional `DASHSCOPE_API_KEY` / `OPENROUTER_API_KEY`)
 
 Under `results/` and `outputs/`: λ sensitivity tables, held-out predictions, PRC, runtime summary, Figure 2/3 data.
 
+## Out-of-Design Stress Test
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/out_of_design_stress_test.py` | Generate prompts, compute P_static, run LLM (OpenRouter) |
+| `scripts/compute_out_of_design_metrics.py` | Compute MVR-Wait, MAD, Spearman from LLM outputs |
+
+```bash
+# Step-by-step
+python3 scripts/out_of_design_stress_test.py gen-prompts
+python3 scripts/out_of_design_stress_test.py compute-pstatic
+python3 scripts/out_of_design_stress_test.py run-llm "Qwen2.5-72B"
+python3 scripts/out_of_design_stress_test.py run-llm "DeepSeek V3"
+python3 scripts/compute_out_of_design_metrics.py
+```
+
+### Inputs
+- `out_of_design_scenarios.csv` — 12 scenarios (6 wait-time pairs × 2 levels)
+- `analysis_output/mxl_coefs.csv` — Mixed-logit coefficients for P_static
+
+### Outputs
+- `results/out_of_design_parsed_probabilities.csv` — Parsed LLM probabilities
+- `results/out_of_design_bdt_metrics.csv` — MVR-Wait, MAD, Spearman per model/method
+- `results/out_of_design_stress_test_table.tex` — LaTeX table
+- `section_out_of_design_stress_test.tex` — LaTeX subsection for paper
+
+Under `results/` and `outputs/`: λ sensitivity tables, held-out predictions, PRC, runtime summary, Figure 2/3 data.
+
 ## Citation
 
 If you use this repository, cite the associated job market paper / working paper (update with your citation when public).

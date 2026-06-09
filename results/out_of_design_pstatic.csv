@@ -1,0 +1,13 @@
+scenario_id,wait_time,efficacy,side_effects_numeric,side_effects_text,extra_policy_description,expected_wait_order_group,P_static
+A1,2.0,0.7,0.0,low,neutral standard appointment,group_A,0.619327123916607
+A2,6.0,0.7,0.0,low,neutral standard appointment,group_A,0.3582392173871906
+B1,2.0,0.7,0.0,low,online pre-registration required,group_B,0.619327123916607
+B2,6.0,0.7,0.0,low,online pre-registration required,group_B,0.3582392173871906
+C1,2.0,0.7,0.0,low,walk-in access available,group_C,0.619327123916607
+C2,6.0,0.7,0.0,low,walk-in access available,group_C,0.3582392173871906
+D1,2.0,0.7,0.0,low,appointment site far from home,group_D,0.619327123916607
+D2,6.0,0.7,0.0,low,appointment site far from home,group_D,0.3582392173871906
+E1,2.0,0.7,0.0,low,appointment reminder and flexible scheduling,group_E,0.619327123916607
+E2,6.0,0.7,0.0,low,appointment reminder and flexible scheduling,group_E,0.3582392173871906
+F1,2.0,0.7,0.0,low,uncertain queue length and administrative paperwork,group_F,0.619327123916607
+F2,6.0,0.7,0.0,low,uncertain queue length and administrative paperwork,group_F,0.3582392173871906

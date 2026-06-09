@@ -1,0 +1,5 @@
+model,method,MVR_Wait,MAD,Spearman_rho,n_scenarios
+DeepSeek V3,Unconstrained LLM,0.6666666666666666,0.257262,-0.0725,12
+DeepSeek V3,Static-BDT (lambda=0.25),0.0,0.064316,0.869,12
+Qwen2.5-72B,Unconstrained LLM,0.3333333333333333,0.28955,0.1209,12
+Qwen2.5-72B,Static-BDT (lambda=0.25),0.0,0.072388,0.869,12
