@@ -1,0 +1,44 @@
+{
+  "method": "respondent-level cluster bootstrap",
+  "n_replicates": 2000,
+  "n_respondents": 205,
+  "alpha": 0.05,
+  "metrics": {
+    "Pure-DCE (lambda=0)": {
+      "log_loss": {
+        "estimate": 0.688305,
+        "ci_lo": 0.675885,
+        "ci_hi": 0.700053
+      },
+      "brier": {
+        "estimate": 0.24655,
+        "ci_lo": 0.240664,
+        "ci_hi": 0.252001
+      }
+    },
+    "Static-BDT (lambda=0.25)": {
+      "log_loss": {
+        "estimate": 0.703496,
+        "ci_lo": 0.692307,
+        "ci_hi": 0.713825
+      },
+      "brier": {
+        "estimate": 0.25465,
+        "ci_lo": 0.249265,
+        "ci_hi": 0.259631
+      }
+    },
+    "Unconstrained LLM (lambda=1)": {
+      "log_loss": {
+        "estimate": 0.814944,
+        "ci_lo": 0.793597,
+        "ci_hi": 0.835788
+      },
+      "brier": {
+        "estimate": 0.307835,
+        "ci_lo": 0.29786,
+        "ci_hi": 0.31761
+      }
+    }
+  }
+}
