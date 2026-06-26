@@ -1,6 +1,8 @@
-# Behavioral Digital Twins (Static Frontier)
+# Empirical-Frontier Regularization for LLM Synthetic Agents (Static-BDT)
 
-Replication code and outputs for the **Static-BDT** pipeline: mixed-logit Pure-DCE frontier (`P_static`), unconstrained LLM policy simulation on a 64-state grid, and convex anchoring \(\pi = \lambda p_{\text{LLM}} + (1-\lambda) P_{\text{static}}\) (main specification \(\lambda = 0.25\)).
+Following the precise definition in the manuscript, "Behavioral Discipline Twin (BDT)" here strictly denotes a **population-level response-surface anchor**, rather than an individual-level cognitive replica.
+
+Replication code and outputs for the **Static-BDT** pipeline: mixed-logit empirical choice frontier (`P_static`), unconstrained LLM policy simulation on a 64-state grid, and convex anchoring \\(\\pi_{\\text{BDT}} = \\lambda \\bar{\\pi}_{\\text{LLM}} + (1-\\lambda) P_{\\text{static}}\\) (main specification \\(\\lambda = 0.25\\)). The framework is designed as an empirical correction layer for LLM synthetic agents, not as a replacement for DCE-based choice modeling.
 
 ## Requirements
 
@@ -72,7 +74,9 @@ Under `results/` and `outputs/`: λ sensitivity tables, held-out predictions, PR
 
 ## Citation
 
-If you use this repository, cite the associated job market paper / working paper (update with your citation when public).
+If you use this repository, cite the associated working paper:
+
+> Jin, Y. (2026). *Empirical-Frontier Regularization for LLM Synthetic Agents: A Preference-Anchored Framework*. University of Texas at Dallas.
 
 ## License
 
