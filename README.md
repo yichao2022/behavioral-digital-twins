@@ -1,8 +1,6 @@
-# Empirical-Frontier Regularization for LLM Synthetic Agents (Static-BDT)
+# Empirical-Frontier Regularization for LLM Synthetic Agents
 
-Following the precise definition in the manuscript, "Behavioral Discipline Twin (BDT)" here strictly denotes a **population-level response-surface anchor**, rather than an individual-level cognitive replica.
-
-Replication code and outputs for the **Static-BDT** pipeline: mixed-logit empirical choice frontier (`P_static`), unconstrained LLM policy simulation on a 64-state grid, and convex anchoring \(\pi_{\text{BDT}} = \lambda \bar{\pi}_{\text{LLM}} + (1-\lambda) P_{\text{static}}\) (main specification \(\lambda = 0.25\)). The framework is designed as an empirical correction layer for LLM synthetic agents, not as a replacement for DCE-based choice modeling.
+Replication code and outputs for the empirical-frontier regularization pipeline: mixed-logit empirical choice frontier (`P_static`), unconstrained LLM policy simulation on a 64-state grid, and convex anchoring \\(\\pi_{\\text{EFR}} = \\lambda \\bar{\\pi}_{\\text{LLM}} + (1-\\lambda) P_{\\text{static}}\\) (main specification \\(\\lambda = 0.25\\)). The framework is designed as an empirical correction layer for LLM synthetic agents, not as a replacement for DCE-based choice modeling.
 
 ## Requirements
 
