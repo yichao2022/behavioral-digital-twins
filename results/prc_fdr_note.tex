@@ -1,0 +1,13 @@
+% PRC multiplicity correction note (for Table 4)
+% One-sided binomial test against H0: PRC = 0.5
+% BH FDR correction at q = 0.05
+
+\emph{Note.} Raw one-sided binomial $p$-values (against $H_0$: PRC $= 0.5$):
+
+Qwen2.5-72B (Static-BDT Anchor): $p = 0.0037$;
+
+MiroThinker-1.7-mini (Static-BDT Anchor): $p = 0.0176$;
+
+DeepSeek V4 Pro (Static-BDT Anchor): $p = 0.3036$;
+
+Under Benjamini--Hochberg FDR correction at $q = 0.05$ across the three BDT method comparisons, Qwen2.5-72B ($p = 0.0037$, critical threshold at rank 1: 0.017) and MiroThinker-1.7-mini ($p = 0.0176$, critical threshold at rank 2: 0.033) remain significant. DeepSeek V4 Pro ($p = 0.3036$) does not significantly exceed chance-level PRC.

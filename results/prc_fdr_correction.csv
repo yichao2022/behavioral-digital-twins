@@ -1,0 +1,7 @@
+family,model,method,correct,total,raw_p,bh_sig_m3,bh_sig_m6
+PRC (Table 4),Qwen2.5-72B,Static-BDT Anchor,13,15,0.00369,yes,yes
+PRC (Table 4),MiroThinker-1.7-mini,Static-BDT Anchor,12,15,0.01758,yes,no
+PRC (Table 4),DeepSeek V4 Pro,Static-BDT Anchor,9,15,0.30362,no,no
+PRC (Table 4),MiroThinker-1.7-mini,Unconstrained LLM,8,15,0.50000,no,no
+PRC (Table 4),Qwen2.5-72B,Unconstrained LLM,6,15,0.84912,no,no
+PRC (Table 4),DeepSeek V4 Pro,Unconstrained LLM,5,15,0.94077,no,no
