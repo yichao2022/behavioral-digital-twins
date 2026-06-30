@@ -1,0 +1,101 @@
+model,repeat,scenario_id,wait_time,efficacy,side_effects_text,extra_policy_description,expected_wait_order_group,decision,probability_0_1,reasoning,parse_success
+DeepSeek V3,1,K1,2,0.7,mild,副作用仅为轻微头晕或乏力1到2天内自行消退,group_K,Yes,0.9,"Despite the wait, the high effectiveness and mild side effects make vaccination worthwhile.",True
+DeepSeek V3,2,K1,2,0.7,mild,副作用仅为轻微头晕或乏力1到2天内自行消退,group_K,Yes,0.85,The mild and short-lived side effects are outweighed by the substantial protection from a 2-month wait.,True
+DeepSeek V3,3,K1,2,0.7,mild,副作用仅为轻微头晕或乏力1到2天内自行消退,group_K,Yes,0.9,"Mild side effects are short-lived, and a 70% effectiveness with a 2-month wait is acceptable.",True
+DeepSeek V3,4,K1,2,0.7,mild,副作用仅为轻微头晕或乏力1到2天内自行消退,group_K,Yes,0.9,"The short wait time and high effectiveness outweigh the mild, short-lived side effects.",True
+DeepSeek V3,5,K1,2,0.7,mild,副作用仅为轻微头晕或乏力1到2天内自行消退,group_K,Yes,0.9,"Even with a 2-month wait, the high effectiveness and mild side effects make vaccination a prudent choice.",True
+DeepSeek V3,1,K2,2,0.7,severe,可能导致严重过敏反应需要住院治疗,group_K,No,0.2,The severe side effect risk of hospitalization outweighs the moderate effectiveness and short wait time.,True
+DeepSeek V3,2,K2,2,0.7,severe,可能导致严重过敏反应需要住院治疗,group_K,No,0.1,Severe side effect risk requiring hospitalization outweighs the moderate effectiveness and short wait.,True
+DeepSeek V3,3,K2,2,0.7,severe,可能导致严重过敏反应需要住院治疗,group_K,No,0.1,Severe side effect risk requiring hospitalization outweighs the moderate effectiveness and short wait time.,True
+DeepSeek V3,4,K2,2,0.7,severe,可能导致严重过敏反应需要住院治疗,group_K,No,0.3,The severe side effect risk and long wait time outweigh the moderate vaccine effectiveness.,True
+DeepSeek V3,5,K2,2,0.7,severe,可能导致严重过敏反应需要住院治疗,group_K,No,0.3,The severe side effect risk and long wait time outweigh the moderate effectiveness.,True
+DeepSeek V3,1,L1,2,0.7,mild,无已知副作用安全性经过充分验证,group_L,Yes,0.85,High effectiveness and mild side effects make vaccination beneficial despite the wait.,True
+DeepSeek V3,2,L1,2,0.7,mild,无已知副作用安全性经过充分验证,group_L,Yes,0.85,"The vaccine is effective with no known side effects, and a 2-month wait is acceptable for protection.",True
+DeepSeek V3,3,L1,2,0.7,mild,无已知副作用安全性经过充分验证,group_L,Yes,0.9,"The vaccine is effective with mild side effects and a short wait, so the benefits outweigh the risks.",True
+DeepSeek V3,4,L1,2,0.7,mild,无已知副作用安全性经过充分验证,group_L,Yes,0.95,High effectiveness and mild side effects make vaccination worthwhile despite the short wait.,True
+DeepSeek V3,5,L1,2,0.7,mild,无已知副作用安全性经过充分验证,group_L,Yes,0.85,High effectiveness and mild side effect risk outweigh the short wait time.,True
+DeepSeek V3,1,L2,2,0.7,severe,可能导致长期神经系统影响包括记忆力减退,group_L,No,0.15,The severe side effect risk and potential long-term neurological effects outweigh the moderate vaccine effectiveness given the short wait time.,True
+DeepSeek V3,2,L2,2,0.7,severe,可能导致长期神经系统影响包括记忆力减退,group_L,No,0.2,The severe side effect risk and potential long-term neurological effects outweigh the moderate vaccine effectiveness and short wait time.,True
+DeepSeek V3,3,L2,2,0.7,severe,可能导致长期神经系统影响包括记忆力减退,group_L,No,0.2,The severe side effect risk and potential long-term neurological issues outweigh the moderate effectiveness and short wait time.,True
+DeepSeek V3,4,L2,2,0.7,severe,可能导致长期神经系统影响包括记忆力减退,group_L,No,0.2,The severe risk of long-term neurological side effects outweighs the moderate vaccine effectiveness given the short wait time.,True
+DeepSeek V3,5,L2,2,0.7,severe,可能导致长期神经系统影响包括记忆力减退,group_L,No,0.2,The severe side effect risk and potential long-term neurological effects outweigh the moderate vaccine effectiveness given the short wait time.,True
+DeepSeek V3,1,M1,2,0.7,severe,虽然副作用严重可能需住院但接种点提供高级营养品和一整年免费健康随访,group_M,Yes,0.7,"The severe side effect risk is offset by the free health follow-ups and nutrition support, and the vaccine's 0.7 effectiveness reduces infection risk.",True
+DeepSeek V3,2,M1,2,0.7,severe,虽然副作用严重可能需住院但接种点提供高级营养品和一整年免费健康随访,group_M,Yes,0.85,The free health follow-ups and nutrition support offset the severe side effect risk.,True
+DeepSeek V3,3,M1,2,0.7,severe,虽然副作用严重可能需住院但接种点提供高级营养品和一整年免费健康随访,group_M,Yes,0.55,"Despite severe side effects, the free health follow-up and nutritional support mitigate risks, making vaccination worthwhile.",True
+DeepSeek V3,4,M1,2,0.7,severe,虽然副作用严重可能需住院但接种点提供高级营养品和一整年免费健康随访,group_M,Yes,0.65,The free nutrition and year-long health follow-up offset the severe side effect risk.,True
+DeepSeek V3,5,M1,2,0.7,severe,虽然副作用严重可能需住院但接种点提供高级营养品和一整年免费健康随访,group_M,Yes,0.85,The free health follow-ups and nutrition support offset the severe side effect risk.,True
+DeepSeek V3,1,M2,2,0.7,mild,标准接种流程无需额外安排,group_M,Yes,0.85,"The vaccine is effective and the wait time is manageable, with mild side effect risk.",True
+DeepSeek V3,2,M2,2,0.7,mild,标准接种流程无需额外安排,group_M,Yes,0.8,"The short wait and high effectiveness outweigh mild side effects, and standard scheduling is convenient.",True
+DeepSeek V3,3,M2,2,0.7,mild,标准接种流程无需额外安排,group_M,Yes,0.85,"The vaccine is effective and side effects are mild, and no extra scheduling is needed despite a short wait.",True
+DeepSeek V3,4,M2,2,0.7,mild,标准接种流程无需额外安排,group_M,Yes,0.85,The short wait and mild side effects are outweighed by the high effectiveness and standard process.,True
+DeepSeek V3,5,M2,2,0.7,mild,标准接种流程无需额外安排,group_M,Yes,0.85,High effectiveness and mild side effects outweigh the short wait.,True
+DeepSeek V3,1,N1,2,0.7,mild,副作用轻微但接种前需要签署复杂的免责协议并提供详细既往病史,group_N,No,0.3,The complex consent process and paperwork may deter some despite mild side effects.,True
+DeepSeek V3,2,N1,2,0.7,mild,副作用轻微但接种前需要签署复杂的免责协议并提供详细既往病史,group_N,Yes,0.85,"Despite paperwork and mild side effects, the high effectiveness and short wait time make vaccination worthwhile.",True
+DeepSeek V3,3,N1,2,0.7,mild,副作用轻微但接种前需要签署复杂的免责协议并提供详细既往病史,group_N,Yes,0.75,"The mild side effects and high effectiveness outweigh the inconvenience of paperwork, especially given the moderate wait time.",True
+DeepSeek V3,4,N1,2,0.7,mild,副作用轻微但接种前需要签署复杂的免责协议并提供详细既往病史,group_N,Yes,0.8,The high vaccine effectiveness and mild side effects outweigh the inconvenience of paperwork and wait time.,True
+DeepSeek V3,5,N1,2,0.7,mild,副作用轻微但接种前需要签署复杂的免责协议并提供详细既往病史,group_N,Yes,0.7,"Despite mild side effects and paperwork, the 70% effectiveness and short wait time make vaccination beneficial.",True
+DeepSeek V3,1,N2,2,0.7,severe,标准接种流程无需额外手续,group_N,No,0.3,The severe side effect risk and moderate effectiveness outweigh the benefit given the 2-month wait time.,True
+DeepSeek V3,2,N2,2,0.7,severe,标准接种流程无需额外手续,group_N,No,0.3,The severe side effect risk outweighs the moderate effectiveness and short wait time.,True
+DeepSeek V3,3,N2,2,0.7,severe,标准接种流程无需额外手续,group_N,No,0.3,The severe side effect risk outweighs the moderate vaccine effectiveness given the short wait time.,True
+DeepSeek V3,4,N2,2,0.7,severe,标准接种流程无需额外手续,group_N,No,0.2,Severe side effect risk outweighs the moderate benefit of 0.7 effectiveness with a 2-month wait.,True
+DeepSeek V3,5,N2,2,0.7,severe,标准接种流程无需额外手续,group_N,No,0.3,The severe side effect risk outweighs the moderate effectiveness given the short wait time.,True
+DeepSeek V3,1,O1,2,0.7,none,完全无副作用安全性经过多轮临床试验验证,group_O,Yes,0.95,"The vaccine is highly effective with no side effects, and waiting offers no benefit.",True
+DeepSeek V3,2,O1,2,0.7,none,完全无副作用安全性经过多轮临床试验验证,group_O,Yes,0.95,High effectiveness and zero side effect risk outweigh the short wait time.,True
+DeepSeek V3,3,O1,2,0.7,none,完全无副作用安全性经过多轮临床试验验证,group_O,Yes,1.0,High effectiveness and no side effects make vaccination clearly beneficial despite the short wait.,True
+DeepSeek V3,4,O1,2,0.7,none,完全无副作用安全性经过多轮临床试验验证,group_O,Yes,0.95,"The vaccine is effective and completely safe with no side effects, making vaccination highly beneficial.",True
+DeepSeek V3,5,O1,2,0.7,none,完全无副作用安全性经过多轮临床试验验证,group_O,Yes,0.95,High effectiveness and no side effects make vaccination a clear benefit despite the wait.,True
+DeepSeek V3,1,O2,2,0.7,severe,大约百分之十的接种者可能出现严重残疾如瘫痪或失明,group_O,No,0.1,The severe risk of permanent disability outweighs the moderate effectiveness and short wait time.,True
+DeepSeek V3,2,O2,2,0.7,severe,大约百分之十的接种者可能出现严重残疾如瘫痪或失明,group_O,No,0.05,The severe risk of permanent disability like paralysis or blindness outweighs the moderate 70% effectiveness.,True
+DeepSeek V3,3,O2,2,0.7,severe,大约百分之十的接种者可能出现严重残疾如瘫痪或失明,group_O,No,0.1,The severe side effect risk of 10% causing permanent disability outweighs the moderate vaccine effectiveness given the current low infection risk.,True
+DeepSeek V3,4,O2,2,0.7,severe,大约百分之十的接种者可能出现严重残疾如瘫痪或失明,group_O,No,0.1,The severe side effect risk of 10% for permanent disability outweighs the moderate vaccine effectiveness given the short wait time.,True
+DeepSeek V3,5,O2,2,0.7,severe,大约百分之十的接种者可能出现严重残疾如瘫痪或失明,group_O,No,0.15,The severe side effect risk of 10% causing permanent disability outweighs the moderate vaccine effectiveness.,True
+DeepSeek V3,1,P1,2,0.7,low,该疫苗对当前流行毒株的有效率约为百分之五十,group_P,Yes,0.8,"Despite moderate effectiveness, low side effect risk and a short wait time make vaccination worthwhile for protection.",True
+DeepSeek V3,2,P1,2,0.7,low,该疫苗对当前流行毒株的有效率约为百分之五十,group_P,Yes,0.85,"Despite moderate effectiveness, low side effect risk and a manageable wait time make vaccination a beneficial choice.",True
+DeepSeek V3,3,P1,2,0.7,low,该疫苗对当前流行毒株的有效率约为百分之五十,group_P,Yes,0.85,"Despite the reduced effectiveness against the current strain, the low side effect risk and moderate protection still outweigh waiting.",True
+DeepSeek V3,4,P1,2,0.7,low,该疫苗对当前流行毒株的有效率约为百分之五十,group_P,No,0.4,The low effectiveness against current strains outweighs the short wait time.,True
+DeepSeek V3,5,P1,2,0.7,low,该疫苗对当前流行毒株的有效率约为百分之五十,group_P,Yes,0.85,"Despite the wait, the vaccine still offers moderate protection against the prevalent strain with low side effect risk.",True
+DeepSeek V3,1,P2,2,0.7,low,该疫苗对当前流行毒株的有效率约为百分之九十,group_P,Yes,0.95,The high effectiveness against the current strain outweighs the short wait time and low side effect risk.,True
+DeepSeek V3,2,P2,2,0.7,low,该疫苗对当前流行毒株的有效率约为百分之九十,group_P,Yes,0.95,"The vaccine is highly effective against the current strain, and the wait time and side effect risk are acceptable.",True
+DeepSeek V3,3,P2,2,0.7,low,该疫苗对当前流行毒株的有效率约为百分之九十,group_P,Yes,0.95,The high effectiveness of about 90% against the current strain outweighs the short wait time and low side effect risk.,True
+DeepSeek V3,4,P2,2,0.7,low,该疫苗对当前流行毒株的有效率约为百分之九十,group_P,Yes,0.9,"The vaccine is highly effective against the current strain, and the low side effect risk and short wait time make it a beneficial choice.",True
+DeepSeek V3,5,P2,2,0.7,low,该疫苗对当前流行毒株的有效率约为百分之九十,group_P,Yes,0.95,The high effectiveness against the current strain outweighs the short wait time and low side effect risk.,True
+DeepSeek V3,1,Q1,2,0.7,low,该疫苗仅提供基础免疫保护对变异株效果有限,group_Q,Yes,0.8,"Despite limited variant protection, low side effect risk and moderate effectiveness still reduce severe illness risk.",True
+DeepSeek V3,2,Q1,2,0.7,low,该疫苗仅提供基础免疫保护对变异株效果有限,group_Q,Yes,0.85,"Even with limited variant protection, 70% effectiveness and low side effects outweigh the short wait.",True
+DeepSeek V3,3,Q1,2,0.7,low,该疫苗仅提供基础免疫保护对变异株效果有限,group_Q,Yes,0.8,"Despite limited variant protection, the low side effect risk and moderate effectiveness still reduce infection risk while waiting.",True
+DeepSeek V3,4,Q1,2,0.7,low,该疫苗仅提供基础免疫保护对变异株效果有限,group_Q,Yes,0.8,"Despite limited variant protection, low side effect risk and moderate effectiveness still reduce infection risk while waiting for an updated vaccine.",True
+DeepSeek V3,5,Q1,2,0.7,low,该疫苗仅提供基础免疫保护对变异株效果有限,group_Q,Yes,0.75,"Despite limited variant protection, the low side effect risk and 70% effectiveness still reduce severe illness odds.",True
+DeepSeek V3,1,Q2,2,0.7,low,该疫苗提供针对多种变异株的广谱保护,group_Q,Yes,0.85,The vaccine offers broad protection against variants with high effectiveness and low side effect risk despite the wait.,True
+DeepSeek V3,2,Q2,2,0.7,low,该疫苗提供针对多种变异株的广谱保护,group_Q,Yes,0.85,Broad protection outweighs low side effect risk and moderate wait.,True
+DeepSeek V3,3,Q2,2,0.7,low,该疫苗提供针对多种变异株的广谱保护,group_Q,Yes,0.85,"The vaccine offers broad protection against variants with low side effect risk, making it worth the short wait.",True
+DeepSeek V3,4,Q2,2,0.7,low,该疫苗提供针对多种变异株的广谱保护,group_Q,Yes,0.85,The broad protection against variants outweighs the short wait and low side effect risk.,True
+DeepSeek V3,5,Q2,2,0.7,low,该疫苗提供针对多种变异株的广谱保护,group_Q,Yes,0.85,"Despite the wait, broad protection against variants and high effectiveness outweigh low side effect risk.",True
+DeepSeek V3,1,R1,2,0.7,low,虽然有效率只有百分之五十但接种过程极其快速且无需排队,group_R,Yes,0.85,"The quick and queue-free process outweighs the moderate effectiveness, and low side effect risk makes vaccination worthwhile.",True
+DeepSeek V3,2,R1,2,0.7,low,虽然有效率只有百分之五十但接种过程极其快速且无需排队,group_R,Yes,0.85,"The vaccination process is extremely fast with no wait time, outweighing the moderate effectiveness.",True
+DeepSeek V3,3,R1,2,0.7,low,虽然有效率只有百分之五十但接种过程极其快速且无需排队,group_R,Yes,0.85,"Despite moderate effectiveness, the process is extremely fast with no wait, making vaccination convenient and beneficial.",True
+DeepSeek V3,4,R1,2,0.7,low,虽然有效率只有百分之五十但接种过程极其快速且无需排队,group_R,Yes,0.85,"Despite moderate effectiveness, the quick and queue-free process makes it worthwhile.",True
+DeepSeek V3,5,R1,2,0.7,low,虽然有效率只有百分之五十但接种过程极其快速且无需排队,group_R,Yes,0.85,"The vaccination process is extremely fast with no queue, making it convenient despite the moderate effectiveness.",True
+DeepSeek V3,1,R2,2,0.7,low,标准接种流程,group_R,Yes,0.85,High effectiveness and low side effect risk outweigh the moderate wait time.,True
+DeepSeek V3,2,R2,2,0.7,low,标准接种流程,group_R,Yes,0.85,High effectiveness and low side effect risk outweigh the short wait time.,True
+DeepSeek V3,3,R2,2,0.7,low,标准接种流程,group_R,Yes,0.8,"The vaccine is effective with low side effects, and a 2-month wait is acceptable for standard vaccination.",True
+DeepSeek V3,4,R2,2,0.7,low,标准接种流程,group_R,Yes,0.85,The vaccine is effective with low side effects and a reasonable wait time.,True
+DeepSeek V3,5,R2,2,0.7,low,标准接种流程,group_R,Yes,0.85,The short wait and high effectiveness outweigh the low side effect risk.,True
+DeepSeek V3,1,S1,2,0.7,low,标准接种流程,group_S,Yes,0.85,High effectiveness and low side effect risk outweigh the short wait time.,True
+DeepSeek V3,2,S1,2,0.7,low,标准接种流程,group_S,Yes,0.85,High effectiveness and low side effect risk outweigh the short wait time.,True
+DeepSeek V3,3,S1,2,0.7,low,标准接种流程,group_S,Yes,0.85,High effectiveness and low side effect risk outweigh the short wait time.,True
+DeepSeek V3,4,S1,2,0.7,low,标准接种流程,group_S,Yes,0.85,High effectiveness and low risk outweigh the moderate wait.,True
+DeepSeek V3,5,S1,2,0.7,low,标准接种流程,group_S,Yes,0.85,"Despite a 2-month wait, the high effectiveness and low side effect risk make vaccination worthwhile.",True
+DeepSeek V3,1,S2,2,0.7,low,虽然有效率高达百分之九十但需要跨城接种交通不便,group_S,No,0.3,"Despite high effectiveness, the inconvenience of cross-city travel outweighs the moderate wait time and low side effect risk.",True
+DeepSeek V3,2,S2,2,0.7,low,虽然有效率高达百分之九十但需要跨城接种交通不便,group_S,No,0.3,"The low side effect risk and high effectiveness are positive, but the 2-month wait and inconvenient cross-city travel reduce willingness.",True
+DeepSeek V3,3,S2,2,0.7,low,虽然有效率高达百分之九十但需要跨城接种交通不便,group_S,No,0.3,The inconvenience of cross-city travel outweighs the moderate 70% effectiveness despite low side effect risk.,True
+DeepSeek V3,4,S2,2,0.7,low,虽然有效率高达百分之九十但需要跨城接种交通不便,group_S,No,0.3,"The low wait time and effectiveness are good, but the inconvenience of cross-city travel reduces willingness.",True
+DeepSeek V3,5,S2,2,0.7,low,虽然有效率高达百分之九十但需要跨城接种交通不便,group_S,No,0.4,尽管疫苗有效率高，但跨城接种的交通不便降低了接种意愿。,True
+DeepSeek V3,1,T1,2,0.7,none,该疫苗完全无效相当于安慰剂,group_T,No,0.0,"The vaccine is completely ineffective, so there is no benefit to taking it.",True
+DeepSeek V3,2,T1,2,0.7,none,该疫苗完全无效相当于安慰剂,group_T,No,0.0,"The vaccine is completely ineffective, providing no benefit.",True
+DeepSeek V3,3,T1,2,0.7,none,该疫苗完全无效相当于安慰剂,group_T,No,0.0,"The vaccine is completely ineffective, equivalent to a placebo.",True
+DeepSeek V3,4,T1,2,0.7,none,该疫苗完全无效相当于安慰剂,group_T,No,0.0,"The vaccine is completely ineffective, equivalent to a placebo.",True
+DeepSeek V3,5,T1,2,0.7,none,该疫苗完全无效相当于安慰剂,group_T,No,0.0,"The vaccine is described as completely ineffective, equivalent to a placebo.",True
+DeepSeek V3,1,T2,2,0.7,none,该疫苗可实现百分之九十五终身免疫保护,group_T,Yes,1.0,"The vaccine provides 95% lifelong immunity with no side effects, far outweighing the short wait time.",True
+DeepSeek V3,2,T2,2,0.7,none,该疫苗可实现百分之九十五终身免疫保护,group_T,Yes,0.95,"The vaccine provides 95% lifelong immunity with no side effects, far outweighing the short wait.",True
+DeepSeek V3,3,T2,2,0.7,none,该疫苗可实现百分之九十五终身免疫保护,group_T,Yes,1.0,The vaccine provides 95% lifelong immunity with no side effects and only a 2-month wait.,True
+DeepSeek V3,4,T2,2,0.7,none,该疫苗可实现百分之九十五终身免疫保护,group_T,Yes,0.95,The vaccine offers 95% lifelong immunity with no side effects and only a 2-month wait.,True
+DeepSeek V3,5,T2,2,0.7,none,该疫苗可实现百分之九十五终身免疫保护,group_T,Yes,0.95,"The vaccine offers 95% lifelong protection with no side effects, far outweighing the short wait.",True
