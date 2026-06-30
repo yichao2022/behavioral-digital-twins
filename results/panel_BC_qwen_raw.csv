@@ -1,0 +1,141 @@
+model,repeat,scenario_id,wait_time,efficacy,side_effects,text,P_LLM,P_static,parse_ok
+Qwen-max,1,B_7,2,0.7,severe,"Standard process. After vaccination, you will receive premium nutritional supplements and comprehensive health screening.",0.58,0.545201255171235,True
+Qwen-max,2,B_7,2,0.7,severe,"Standard process. After vaccination, you will receive premium nutritional supplements and comprehensive health screening.",0.58,0.545201255171235,True
+Qwen-max,3,B_7,2,0.7,severe,"Standard process. After vaccination, you will receive premium nutritional supplements and comprehensive health screening.",0.65,0.545201255171235,True
+Qwen-max,4,B_7,2,0.7,severe,"Standard process. After vaccination, you will receive premium nutritional supplements and comprehensive health screening.",0.65,0.545201255171235,True
+Qwen-max,5,B_7,2,0.7,severe,"Standard process. After vaccination, you will receive premium nutritional supplements and comprehensive health screening.",0.58,0.545201255171235,True
+Qwen-max,1,B_7b,2,0.7,low,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,2,B_7b,2,0.7,low,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,3,B_7b,2,0.7,low,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,4,B_7b,2,0.7,low,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,5,B_7b,2,0.7,low,"Standard vaccination process.",0.65,0.6194701753982702,True
+Qwen-max,1,B_8,6,0.7,severe,"Standard process. After vaccination, you will receive premium nutritional supplements and comprehensive health screening.",0.58,0.29179130073675086,True
+Qwen-max,2,B_8,6,0.7,severe,"Standard process. After vaccination, you will receive premium nutritional supplements and comprehensive health screening.",0.58,0.29179130073675086,True
+Qwen-max,3,B_8,6,0.7,severe,"Standard process. After vaccination, you will receive premium nutritional supplements and comprehensive health screening.",0.65,0.29179130073675086,True
+Qwen-max,4,B_8,6,0.7,severe,"Standard process. After vaccination, you will receive premium nutritional supplements and comprehensive health screening.",0.58,0.29179130073675086,True
+Qwen-max,5,B_8,6,0.7,severe,"Standard process. After vaccination, you will receive premium nutritional supplements and comprehensive health screening.",0.65,0.29179130073675086,True
+Qwen-max,1,B_8b,6,0.7,low,"Standard vaccination process.",0.72,0.35877153958458735,True
+Qwen-max,2,B_8b,6,0.7,low,"Standard vaccination process.",0.65,0.35877153958458735,True
+Qwen-max,3,B_8b,6,0.7,low,"Standard vaccination process.",0.72,0.35877153958458735,True
+Qwen-max,4,B_8b,6,0.7,low,"Standard vaccination process.",0.65,0.35877153958458735,True
+Qwen-max,5,B_8b,6,0.7,low,"Standard vaccination process.",0.65,0.35877153958458735,True
+Qwen-max,1,B_9,2,0.7,low,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,2,B_9,2,0.7,low,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,3,B_9,2,0.7,low,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,4,B_9,2,0.7,low,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,5,B_9,2,0.7,low,"Standard vaccination process.",0.65,0.6194701753982702,True
+Qwen-max,1,B_9b,6,0.7,low,"This special upgraded vaccine is the latest globally available formulation with VIP fast-track processing.",0.65,0.35877153958458735,True
+Qwen-max,2,B_9b,6,0.7,low,"This special upgraded vaccine is the latest globally available formulation with VIP fast-track processing.",0.65,0.35877153958458735,True
+Qwen-max,3,B_9b,6,0.7,low,"This special upgraded vaccine is the latest globally available formulation with VIP fast-track processing.",0.65,0.35877153958458735,True
+Qwen-max,4,B_9b,6,0.7,low,"This special upgraded vaccine is the latest globally available formulation with VIP fast-track processing.",0.72,0.35877153958458735,True
+Qwen-max,5,B_9b,6,0.7,low,"This special upgraded vaccine is the latest globally available formulation with VIP fast-track processing.",0.65,0.35877153958458735,True
+Qwen-max,1,B_10,2,0.7,low,"Standard vaccination process.",0.65,0.6194701753982702,True
+Qwen-max,2,B_10,2,0.7,low,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,3,B_10,2,0.7,low,"Standard vaccination process.",0.65,0.6194701753982702,True
+Qwen-max,4,B_10,2,0.7,low,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,5,B_10,2,0.7,low,"Standard vaccination process.",0.65,0.6194701753982702,True
+Qwen-max,1,B_10b,6,0.7,low,"This special upgraded vaccine is the latest globally available formulation with VIP fast-track processing.",0.72,0.35877153958458735,True
+Qwen-max,2,B_10b,6,0.7,low,"This special upgraded vaccine is the latest globally available formulation with VIP fast-track processing.",0.65,0.35877153958458735,True
+Qwen-max,3,B_10b,6,0.7,low,"This special upgraded vaccine is the latest globally available formulation with VIP fast-track processing.",0.65,0.35877153958458735,True
+Qwen-max,4,B_10b,6,0.7,low,"This special upgraded vaccine is the latest globally available formulation with VIP fast-track processing.",0.65,0.35877153958458735,True
+Qwen-max,5,B_10b,6,0.7,low,"This special upgraded vaccine is the latest globally available formulation with VIP fast-track processing.",0.72,0.35877153958458735,True
+Qwen-max,1,C_11a,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,2,C_11a,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,3,C_11a,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,4,C_11a,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,5,C_11a,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,1,C_11b,2,0.7,severe,"Standard vaccination process.",0.55,0.545201255171235,True
+Qwen-max,2,C_11b,2,0.7,severe,"Standard vaccination process.",0.58,0.545201255171235,True
+Qwen-max,3,C_11b,2,0.7,severe,"Standard vaccination process.",0.5,0.545201255171235,True
+Qwen-max,4,C_11b,2,0.7,severe,"Standard vaccination process.",0.56,0.545201255171235,True
+Qwen-max,5,C_11b,2,0.7,severe,"Standard vaccination process.",0.56,0.545201255171235,True
+Qwen-max,1,C_12a,2,0.7,severe,"After vaccination, you will receive a premium nutritional supplement package and comprehensive health screening.",0.65,0.545201255171235,True
+Qwen-max,2,C_12a,2,0.7,severe,"After vaccination, you will receive a premium nutritional supplement package and comprehensive health screening.",0.58,0.545201255171235,True
+Qwen-max,3,C_12a,2,0.7,severe,"After vaccination, you will receive a premium nutritional supplement package and comprehensive health screening.",0.65,0.545201255171235,True
+Qwen-max,4,C_12a,2,0.7,severe,"After vaccination, you will receive a premium nutritional supplement package and comprehensive health screening.",0.58,0.545201255171235,True
+Qwen-max,5,C_12a,2,0.7,severe,"After vaccination, you will receive a premium nutritional supplement package and comprehensive health screening.",0.65,0.545201255171235,True
+Qwen-max,1,C_12b,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,2,C_12b,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,3,C_12b,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,4,C_12b,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,5,C_12b,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,1,C_13a,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,2,C_13a,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,3,C_13a,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,4,C_13a,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,5,C_13a,2,0.7,mild,"Standard vaccination process.",0.65,0.5951507598288823,True
+Qwen-max,1,C_13b,2,0.7,severe,"This is the only globally available special upgraded vaccine formulation providing lifelong immunity.",0.65,0.545201255171235,True
+Qwen-max,2,C_13b,2,0.7,severe,"This is the only globally available special upgraded vaccine formulation providing lifelong immunity.",0.65,0.545201255171235,True
+Qwen-max,3,C_13b,2,0.7,severe,"This is the only globally available special upgraded vaccine formulation providing lifelong immunity.",0.65,0.545201255171235,True
+Qwen-max,4,C_13b,2,0.7,severe,"This is the only globally available special upgraded vaccine formulation providing lifelong immunity.",0.65,0.545201255171235,True
+Qwen-max,5,C_13b,2,0.7,severe,"This is the only globally available special upgraded vaccine formulation providing lifelong immunity.",0.65,0.545201255171235,True
+Qwen-max,1,C_14a,2,0.7,mild,"Standard process. Requires signing a complex liability waiver.",0.58,0.5951507598288823,True
+Qwen-max,2,C_14a,2,0.7,mild,"Standard process. Requires signing a complex liability waiver.",0.65,0.5951507598288823,True
+Qwen-max,3,C_14a,2,0.7,mild,"Standard process. Requires signing a complex liability waiver.",0.65,0.5951507598288823,True
+Qwen-max,4,C_14a,2,0.7,mild,"Standard process. Requires signing a complex liability waiver.",0.65,0.5951507598288823,True
+Qwen-max,5,C_14a,2,0.7,mild,"Standard process. Requires signing a complex liability waiver.",0.58,0.5951507598288823,True
+Qwen-max,1,C_14b,2,0.7,severe,"Standard process. No paperwork or procedures required.",0.65,0.545201255171235,True
+Qwen-max,2,C_14b,2,0.7,severe,"Standard process. No paperwork or procedures required.",0.58,0.545201255171235,True
+Qwen-max,3,C_14b,2,0.7,severe,"Standard process. No paperwork or procedures required.",0.5,0.545201255171235,True
+Qwen-max,4,C_14b,2,0.7,severe,"Standard process. No paperwork or procedures required.",0.55,0.545201255171235,True
+Qwen-max,5,C_14b,2,0.7,severe,"Standard process. No paperwork or procedures required.",0.58,0.545201255171235,True
+Qwen-max,1,C_15a,2,0.7,none,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,2,C_15a,2,0.7,none,"Standard vaccination process.",0.65,0.6194701753982702,True
+Qwen-max,3,C_15a,2,0.7,none,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,4,C_15a,2,0.7,none,"Standard vaccination process.",0.72,0.6194701753982702,True
+Qwen-max,5,C_15a,2,0.7,none,"Standard vaccination process.",0.65,0.6194701753982702,True
+Qwen-max,1,C_15b,2,0.7,severe,"Standard vaccination process.",0.58,0.545201255171235,True
+Qwen-max,2,C_15b,2,0.7,severe,"Standard vaccination process.",0.5,0.545201255171235,True
+Qwen-max,3,C_15b,2,0.7,severe,"Standard vaccination process.",0.5,0.545201255171235,True
+Qwen-max,4,C_15b,2,0.7,severe,"Standard vaccination process.",0.5,0.545201255171235,True
+Qwen-max,5,C_15b,2,0.7,severe,"Standard vaccination process.",0.58,0.545201255171235,True
+Qwen-max,1,C_16a,2,0.5,mild,"Standard vaccination process.",0.65,0.5233579856996927,True
+Qwen-max,2,C_16a,2,0.5,mild,"Standard vaccination process.",0.65,0.5233579856996927,True
+Qwen-max,3,C_16a,2,0.5,mild,"Standard vaccination process.",0.65,0.5233579856996927,True
+Qwen-max,4,C_16a,2,0.5,mild,"Standard vaccination process.",0.65,0.5233579856996927,True
+Qwen-max,5,C_16a,2,0.5,mild,"Standard vaccination process.",0.65,0.5233579856996927,True
+Qwen-max,1,C_16b,2,0.9,mild,"Standard vaccination process.",0.65,0.6630911404177637,True
+Qwen-max,2,C_16b,2,0.9,mild,"Standard vaccination process.",0.72,0.6630911404177637,True
+Qwen-max,3,C_16b,2,0.9,mild,"Standard vaccination process.",0.72,0.6630911404177637,True
+Qwen-max,4,C_16b,2,0.9,mild,"Standard vaccination process.",0.65,0.6630911404177637,True
+Qwen-max,5,C_16b,2,0.9,mild,"Standard vaccination process.",0.65,0.6630911404177637,True
+Qwen-max,1,C_17a,2,0.5,mild,"The vaccination is extremely fast and completely painless.",0.65,0.5233579856996927,True
+Qwen-max,2,C_17a,2,0.5,mild,"The vaccination is extremely fast and completely painless.",0.65,0.5233579856996927,True
+Qwen-max,3,C_17a,2,0.5,mild,"The vaccination is extremely fast and completely painless.",0.65,0.5233579856996927,True
+Qwen-max,4,C_17a,2,0.5,mild,"The vaccination is extremely fast and completely painless.",0.65,0.5233579856996927,True
+Qwen-max,5,C_17a,2,0.5,mild,"The vaccination is extremely fast and completely painless.",0.65,0.5233579856996927,True
+Qwen-max,1,C_17b,2,0.9,mild,"Requires cross-city travel and long queuing.",0.45,0.6630911404177637,True
+Qwen-max,2,C_17b,2,0.9,mild,"Requires cross-city travel and long queuing.",0.45,0.6630911404177637,True
+Qwen-max,3,C_17b,2,0.9,mild,"Requires cross-city travel and long queuing.",0.45,0.6630911404177637,True
+Qwen-max,4,C_17b,2,0.9,mild,"Requires cross-city travel and long queuing.",0.5,0.6630911404177637,True
+Qwen-max,5,C_17b,2,0.9,mild,"Requires cross-city travel and long queuing.",0.5,0.6630911404177637,True
+Qwen-max,1,C_18a,2,0.5,mild,"Vaccination is completely free and includes a private car service.",0.72,0.5233579856996927,True
+Qwen-max,2,C_18a,2,0.5,mild,"Vaccination is completely free and includes a private car service.",0.72,0.5233579856996927,True
+Qwen-max,3,C_18a,2,0.5,mild,"Vaccination is completely free and includes a private car service.",0.65,0.5233579856996927,True
+Qwen-max,4,C_18a,2,0.5,mild,"Vaccination is completely free and includes a private car service.",0.65,0.5233579856996927,True
+Qwen-max,5,C_18a,2,0.5,mild,"Vaccination is completely free and includes a private car service.",0.72,0.5233579856996927,True
+Qwen-max,1,C_18b,2,0.9,mild,"Requires a self-payment of 800 RMB and you must travel on your own.",0.5,0.6630911404177637,True
+Qwen-max,2,C_18b,2,0.9,mild,"Requires a self-payment of 800 RMB and you must travel on your own.",0.5,0.6630911404177637,True
+Qwen-max,3,C_18b,2,0.9,mild,"Requires a self-payment of 800 RMB and you must travel on your own.",0.5,0.6630911404177637,True
+Qwen-max,4,C_18b,2,0.9,mild,"Requires a self-payment of 800 RMB and you must travel on your own.",0.5,0.6630911404177637,True
+Qwen-max,5,C_18b,2,0.9,mild,"Requires a self-payment of 800 RMB and you must travel on your own.",0.5,0.6630911404177637,True
+Qwen-max,1,C_19a,2,0.5,mild,"Standard vaccination process.",0.65,0.5233579856996927,True
+Qwen-max,2,C_19a,2,0.5,mild,"Standard vaccination process.",0.65,0.5233579856996927,True
+Qwen-max,3,C_19a,2,0.5,mild,"Standard vaccination process.",0.65,0.5233579856996927,True
+Qwen-max,4,C_19a,2,0.5,mild,"Standard vaccination process.",0.65,0.5233579856996927,True
+Qwen-max,5,C_19a,2,0.5,mild,"Standard vaccination process.",0.65,0.5233579856996927,True
+Qwen-max,1,C_19b,6,0.9,mild,"Waiting time is 6 months, but you will receive a 5,000 RMB cash reward immediately after vaccination.",0.72,0.4035006628128335,True
+Qwen-max,2,C_19b,6,0.9,mild,"Waiting time is 6 months, but you will receive a 5,000 RMB cash reward immediately after vaccination.",0.72,0.4035006628128335,True
+Qwen-max,3,C_19b,6,0.9,mild,"Waiting time is 6 months, but you will receive a 5,000 RMB cash reward immediately after vaccination.",0.72,0.4035006628128335,True
+Qwen-max,4,C_19b,6,0.9,mild,"Waiting time is 6 months, but you will receive a 5,000 RMB cash reward immediately after vaccination.",0.65,0.4035006628128335,True
+Qwen-max,5,C_19b,6,0.9,mild,"Waiting time is 6 months, but you will receive a 5,000 RMB cash reward immediately after vaccination.",0.72,0.4035006628128335,True
+Qwen-max,1,C_20a,2,0.5,severe,"Standard vaccination process.",0.45,0.4724030747335676,True
+Qwen-max,2,C_20a,2,0.5,severe,"Standard vaccination process.",0.45,0.4724030747335676,True
+Qwen-max,3,C_20a,2,0.5,severe,"Standard vaccination process.",0.45,0.4724030747335676,True
+Qwen-max,4,C_20a,2,0.5,severe,"Standard vaccination process.",0.5,0.4724030747335676,True
+Qwen-max,5,C_20a,2,0.5,severe,"Standard vaccination process.",0.5,0.4724030747335676,True
+Qwen-max,1,C_20b,6,0.9,mild,"Side effects are minimal and efficacy is 90%, but requires cross-city travel and 6-month wait. A luxury lunch is provided.",0.5,0.4035006628128335,True
+Qwen-max,2,C_20b,6,0.9,mild,"Side effects are minimal and efficacy is 90%, but requires cross-city travel and 6-month wait. A luxury lunch is provided.",0.5,0.4035006628128335,True
+Qwen-max,3,C_20b,6,0.9,mild,"Side effects are minimal and efficacy is 90%, but requires cross-city travel and 6-month wait. A luxury lunch is provided.",0.5,0.4035006628128335,True
+Qwen-max,4,C_20b,6,0.9,mild,"Side effects are minimal and efficacy is 90%, but requires cross-city travel and 6-month wait. A luxury lunch is provided.",0.5,0.4035006628128335,True
+Qwen-max,5,C_20b,6,0.9,mild,"Side effects are minimal and efficacy is 90%, but requires cross-city travel and 6-month wait. A luxury lunch is provided.",0.5,0.4035006628128335,True
