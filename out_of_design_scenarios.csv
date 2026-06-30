@@ -11,3 +11,11 @@ E1,2,0.7,low,appointment reminder and flexible scheduling,group_E
 E2,6,0.7,low,appointment reminder and flexible scheduling,group_E
 F1,2,0.7,low,uncertain queue length and administrative paperwork,group_F
 F2,6,0.7,low,uncertain queue length and administrative paperwork,group_F
+G1,2,0.7,severe,虽然副作用较严重但接种点免费提供全面高端体检和高级营养品且医护人员态度极其温柔,group_G
+G2,2,0.7,low,标准接种流程无需特殊安排,group_G
+H1,6,0.7,severe,虽然副作用较严重但接种点免费提供全面高端体检和高级营养品且医护人员态度极其温柔,group_H
+H2,6,0.7,low,标准接种流程无需特殊安排,group_H
+I1,2,0.7,low,标准接种流程无需特殊安排,group_I
+I2,6,0.7,low,虽然等待时间较长但该批次疫苗是最新研发的特效升级版且走VIP通道免除排队,group_I
+J1,2,0.7,low,标准接种流程无需特殊安排,group_J
+J2,6,0.7,low,虽然等待时间较长但该批次疫苗是最新研发的特效升级版且走VIP通道免除排队,group_J
