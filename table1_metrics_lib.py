@@ -78,6 +78,25 @@ def pi_bdt(p_llm: dict[str, float], p_static: dict[str, float], lam: float) -> d
     return {s: lam * p_llm[s] + (1.0 - lam) * p_static[s] for s in p_llm}
 
 
+def pi_uniform(p_global: float, p_static: dict[str, float], lam: float) -> dict[str, float]:
+    """Uniform-shrinkage baseline: lambda * p_global + (1-lambda) * P_static."""
+    return {s: lam * p_global + (1.0 - lam) * p_static[s] for s in p_static}
+
+
+def compute_uniform_metrics(
+    *,
+    model_label: str,
+    p_static: dict[str, float],
+    p_global: float,
+    state_meta: dict[str, dict],
+    lam: float = 0.25,
+    parse_rate: float = 1.0,
+) -> dict:
+    """Compute metrics row for the uniform-shrinkage baseline."""
+    preds = pi_uniform(p_global, p_static, lam)
+    return row_metrics(model_label, f"Uniform Shrinkage (λ={lam:.2f})", preds, p_static, state_meta, f"{lam:.2f}", parse_rate)
+
+
 def select_lambda_constrained(
     p_llm: dict[str, float], p_static: dict[str, float]
 ) -> tuple[float, dict[str, float]]:
