@@ -193,7 +193,8 @@ MT-1.7-mini
 
 Table~\ref{tab:behavioral_alignment} summarizes behavioral consistency. EFR reduced MSE by 94\% (Qwen2.5-72B: 0.0482 $\to$ 0.0030), MAE by 75\% (0.188 $\to$ 0.047), and waiting-time MVR from 62.5\% to 4.2\% on the 64-state grid. On a 200-scenario held-out set, EFR log loss (0.703) was lower than unconstrained LLM (0.756) and Brier score (0.255 vs.\ 0.296), with the largest gains at high-confidence LLM signals.
 
-\clearpageOut-of-Design Policy Scenario Evaluation}
+\clearpage
+\section{Out-of-Design Policy Scenario Evaluation}
 \label{sec:out_of_design}
 
 The evaluations in Sections~\ref{sec:behavioral_consistency} and \ref{sec:heldout_validation} were conducted within the structured DCE attribute space. We next examine whether empirical-frontier regularization preserves behavioral consistency when LLMs are applied to richer policy narratives that extend beyond the original DCE design. Unlike the previous experiments, these scenarios require the LLM to interpret unstructured textual descriptions while maintaining the waiting-time monotonicity implied by the empirical behavioral reference.
@@ -313,14 +314,12 @@ EFR is a cost-ratio framework (Appendix~\ref{app:voi}): at US\$\,10,000 LLM marg
 \subsection{Why Not Use the Discrete Choice Model Alone?}
 \label{sec:why_not_dce}
 
-EFR trades a small within-design accuracy loss (pure-DCE log loss 0.620; EFR 0.703) for narrative-policy evaluation. The NDS pilot ($n=2$) corroborates: isotonic NDS $\rho = -0.943$ vs.\ BDT $\rho = +0.894$ for DeepSeek V3.
-
-
-
+EFR trades a small within-design accuracy loss (pure-DCE log loss 0.620; EFR 0.703) for narrative-policy evaluation. The NDS pilot ($n=2$) corroborates: isotonic NDS $\rho = -0.943$ vs.\ BDT $\rho = +0.894$ for DeepSeek V3. \textbf{Figure~\ref{fig:ood_performance}} consolidates the four OOD metrics (MVR-Wait, Spearman $\rho$, subgroup heterogeneity, PRC) for Qwen-max and DeepSeek V3, showing that BDT dominates both the unconstrained LLM and the non-anchored NDS baseline on every reported dimension.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/figure_1_ood_performance.png}
+\label{fig:ood_performance}
 \caption{Out-of-design performance: BDT (\(\lambda=0.25\)) vs.\ NDS (isotonic) vs.\ unconstrained LLM. \textbf{(a)} MVR-Wait on 6 paired groups. \textbf{(b)} Spearman \(\rho\) with 95\% CI. \textbf{(c)} BDT \(\rho\) by subgroup. \textbf{(d)} PRC across 20 OOD scenarios. BDT achieves highest \(\rho\) and lowest MVR; subgroup \(\rho \geq 0.949\) (anchoring transfers across demographics).}
 \label{fig:ood_performance}
 \end{figure}
