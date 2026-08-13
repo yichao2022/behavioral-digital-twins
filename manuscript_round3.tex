@@ -89,7 +89,7 @@ This study integrated two methodological components: (1) a discrete choice exper
 
 \subsection{Overview}
 
-Section~\ref{sec:stage1} describes the DCE design and empirical frontier. Section~\ref{sec:stage2} introduces the EFR framework. Section~\ref{sec:stage3} reports results across 64-state grid and out-of-design evaluation. Section~\ref{sec:limitations} discusses implications for health policy analysis.
+Section~\ref{sec:stage1} describes the DCE design and empirical frontier; Section~\ref{sec:methods} presents the EFR framework. Section~\ref{sec:setup} reports results across 64-state grid and out-of-design evaluation; Section~\ref{sec:conclusion} concludes.
 
 \subsection{Stage 1: Empirical Behavioral Knowledge Extraction}
 \label{sec:stage1}
@@ -194,10 +194,10 @@ MT-1.7-mini
 Table~\ref{tab:behavioral_alignment} summarizes behavioral consistency. EFR reduced MSE by 94\% (Qwen2.5-72B: 0.0482 $\to$ 0.0030), MAE by 75\% (0.188 $\to$ 0.047), and waiting-time MVR from 62.5\% to 4.2\% on the 64-state grid. On a 200-scenario held-out set, EFR log loss (0.703) was lower than unconstrained LLM (0.756) and Brier score (0.255 vs.\ 0.296), with the largest gains at high-confidence LLM signals.
 
 \clearpage
-\section{Out-of-Design Policy Scenario Evaluation}
+\subsection{Out-of-Design Policy Scenario Evaluation}
 \label{sec:out_of_design}
 
-The evaluations in Sections~\ref{sec:behavioral_consistency} and \ref{sec:heldout_validation} were conducted within the structured DCE attribute space. We next examine whether empirical-frontier regularization preserves behavioral consistency when LLMs are applied to richer policy narratives that extend beyond the original DCE design. Unlike the previous experiments, these scenarios require the LLM to interpret unstructured textual descriptions while maintaining the waiting-time monotonicity implied by the empirical behavioral reference.
+The evaluations in Section~\ref{sec:behavioral_consistency} were conducted within the structured DCE attribute space. We next examine whether empirical-frontier regularization preserves behavioral consistency when LLMs are applied to richer policy narratives that extend beyond the original DCE design. Unlike the previous experiments, these scenarios require the LLM to interpret unstructured textual descriptions while maintaining the waiting-time monotonicity implied by the empirical behavioral reference.
 
 Twenty paired policy scenarios were constructed. Panel A (six pairs, A--F) varies waiting time (2 vs.\ 6 weeks) and includes access-related descriptions (walk-in, online registration, paperwork). Panel B (fourteen pairs, G--T) varies waiting time in only two pairs (I, J); the other twelve hold waiting time constant and vary side-effect, efficacy, or fictional narrative content (VIP access, cash rewards). The MVR-Wait metric is therefore defined only for the eight wait-varying pairs; the twelve narrative-only pairs test LLM sensitivity to non-wait attribute text.
 
