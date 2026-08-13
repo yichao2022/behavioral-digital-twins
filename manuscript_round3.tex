@@ -320,7 +320,7 @@ EFR trades a small within-design accuracy loss (pure-DCE log loss 0.620; EFR 0.7
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.85\textwidth]{figure_1_ood_performance.png}
+\includegraphics[width=0.85\textwidth]{figures/figure_1_ood_performance.png}
 \caption{Out-of-design performance: BDT (\(\lambda=0.25\)) vs.\ NDS (isotonic) vs.\ unconstrained LLM. \textbf{(a)} MVR-Wait on 6 paired groups. \textbf{(b)} Spearman \(\rho\) with 95\% CI. \textbf{(c)} BDT \(\rho\) by subgroup. \textbf{(d)} PRC across 20 OOD scenarios. BDT achieves highest \(\rho\) and lowest MVR; subgroup \(\rho \geq 0.949\) (anchoring transfers across demographics).}
 \label{fig:ood_performance}
 \end{figure}
@@ -849,7 +849,7 @@ These results indicate that EFR degrades gracefully when the empirical behaviora
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{figure_S1_data_scaling.png}
+\includegraphics[width=\textwidth]{figures/figure_S1_data_scaling.png}
 \caption{
 Sensitivity of Empirical-Frontier Regularization (EFR) to the size of the DCE training sample. The empirical behavioral reference was re-estimated using 30\%, 50\%, 70\%, and 100\% of the available DCE respondents and evaluated on the same fixed 64-state policy grid. The dashed red line denotes the unconstrained Qwen2.5-72B baseline. Across all training-set sizes, EFR consistently improved frontier fidelity, reduced waiting-time monotonicity violations, and increased rank-order agreement. The anchoring weight was fixed at $\lambda=0.25$ throughout.
 }
