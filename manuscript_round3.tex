@@ -37,6 +37,12 @@
 \textbf{Conclusion:} EFR extends an existing DCE to narrative policy scenarios with graceful degradation when LLM outputs are unreliable. The honest framing is a DCE model with narrative-policy extension via inference-time regularization, not a stand-alone LLM behavioral simulator.
 \end{abstract}
 
+\begin{itemize}
+\item \textbf{Novel framework} for anchoring LLM-based policy simulation to a DCE-derived empirical choice frontier through inference-time convex combination ($\pi_{\mathrm{EFR}} = \lambda\,\pi_{\mathrm{LLM}} + (1-\lambda)\,P_{\mathrm{emp}}$; $\lambda = 0.25$).
+\item \textbf{Behavioral reliability without retraining}: unconstrained LLMs violated waiting-time monotonicity in 39.6--62.5\% of scenarios; EFR reduced violations to 0--4.2\% across three LLMs and transferred consistently to 20 out-of-design policy narratives.
+\item \textbf{Honest framing}: a pure-noise LLM null attains $\rho \approx 0.83$ (Appendix~\ref{sec:null_distribution}), placing the reported $\rho \in [0.87, 0.93]$ within the structural noise floor; EFR's value is out-of-design extension, not in-design fit improvement.
+\item \textbf{Practitioner pipeline}: a recent DCE (US\$500{,}000) combined with a one-time LLM API (US\$10{,}000) yields a low-marginal-cost path from evidence to narrative policy simulation---most valuable for early-stage policy screening.
+\end{itemize}
 
 \keywords{empirical-frontier regularization; large language models; discrete choice experiment; health technology assessment; behavioral simulation}
 
@@ -326,7 +332,7 @@ EFR trades a small within-design accuracy loss (pure-DCE log loss 0.620; EFR 0.7
 
 \subsection{Implementation and Policy Recommendations}\nopagebreak\label{sec:policy_impl}
 
-Implementation requires no model retraining: an analyst estimates a mixed-logit from an existing DCE~\citep{Johnson2013DCE,Hauber2016DCE}, generates LLM predictions, and blends them through $\pi_{\mathrm{ad}} = \lambda \pi_{\mathrm{LLM}} + (1-\lambda) P_{\mathrm{emp}}$ ($\lambda = 0.25$). Dominant cost is one-time LLM API access (US\$\$10,000 open-source; US\$\$100,000 commercial), negligible relative to a new US\$\$500,000 DCE. Three policy implications follow. \emph{With a DCE}, static-BDT provides a low-marginal-cost path from evidence to narrative policy simulation. \emph{Without a DCE}, the framework is not a substitute for stated-preference data. \emph{Best for early-stage screening}, not high-stakes final decisions.
+\textbf{Significance.} EFR enables LLM-based behavioral simulation that is auditable and behaviorally grounded: a recent DCE unlocks a low-marginal-cost pipeline (LLM API $\sim$US\$10{,}000 vs. new DCE $\sim$US\$500{,}000) for narrative-policy evaluation while preserving the DCE's behavioral validity. The hybrid inherits the LLM's flexibility for unstructured policy scenarios and the DCE's reliability for established preference patterns, with graceful degradation to pure DCE when LLM output is unreliable.\ Implementation requires no model retraining: an analyst estimates a mixed-logit from an existing DCE~\citep{Johnson2013DCE,Hauber2016DCE}, generates LLM predictions, and blends them through $\pi_{\mathrm{ad}} = \lambda \pi_{\mathrm{LLM}} + (1-\lambda) P_{\mathrm{emp}}$ ($\lambda = 0.25$). Dominant cost is one-time LLM API access (US\$\$10,000 open-source; US\$\$100,000 commercial), negligible relative to a new US\$\$500,000 DCE. Three policy implications follow. \emph{With a DCE}, static-BDT provides a low-marginal-cost path from evidence to narrative policy simulation. \emph{Without a DCE}, the framework is not a substitute for stated-preference data. \emph{Best for early-stage screening}, not high-stakes final decisions.
 
 \subsection{Conclusion}\nopagebreak\label{sec:conclusion}
 
