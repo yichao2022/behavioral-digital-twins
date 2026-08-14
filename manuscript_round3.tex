@@ -159,7 +159,7 @@ Qwen2.5-72B-Instruct
 
 \addlinespace
 
-DeepSeek V4 Pro
+DeepSeek V4
 & Raw LLM
 & 0.0395
 & 0.1704
@@ -226,13 +226,13 @@ Qwen-max
 & 0.072
 & 0.87 \\
 
-DS V3
+DeepSeek V4
 & Unconstrained LLM
 & 0.667 (4/6)
 & 0.257
 & $-0.07$ \\
 
-DeepSeek V3
+DeepSeek V4
 & BDT
 & 0.000
 & 0.064
@@ -254,13 +254,13 @@ Qwen-max
 & 0.031
 & 0.93 \\
 
-DeepSeek V3
+DeepSeek V4
 & Unconstrained LLM
 & 0.000 (0/2)
 & 0.209
 & $-0.06$ \\
 
-DeepSeek V3
+DeepSeek V4
 & BDT
 & 0.000
 & 0.052
@@ -278,9 +278,9 @@ Twenty paired scenarios; eight vary waiting time and twelve vary only narrative 
 \end{minipage}
 \end{table}
 
-Table~\ref{tab:out_of_design} summarizes the out-of-design evaluation. In the core scenarios (Panel A), the unconstrained LLMs violated the expected waiting-time ordering in 2 of 6 paired scenarios for Qwen-max and 4 of 6 paired scenarios for DeepSeek V3. After empirical-frontier regularization, no monotonicity violations were observed for either model, and rank agreement with the empirical behavioral reference increased substantially.
+Table~\ref{tab:out_of_design} summarizes the out-of-design evaluation. In the core scenarios (Panel A), the unconstrained LLMs violated the expected waiting-time ordering in 2 of 6 paired scenarios for Qwen-max and 4 of 6 paired scenarios for DeepSeek V4. After empirical-frontier regularization, no monotonicity violations were observed for either model, and rank agreement with the empirical behavioral reference increased substantially.
 
-The differences became more pronounced in the extended scenarios (Panel B). Rich textual narratives containing fictional incentives and complex policy descriptions reduced the rank agreement of the unconstrained LLMs to approximately zero for both models. Among the two wait-varying pairs in Panel B, BDT maintained zero monotonicity violations (0/2); the twelve narrative-only pairs are reported as MAD and $\rho$ only. Rank agreement with the empirical reference was $\rho = 0.93$ for Qwen-max and $\rho = 0.88$ for DeepSeek V3. These results indicate that empirical-frontier regularization continues to preserve waiting-time monotonicity and rank agreement with the empirical reference even when language models are required to interpret policy narratives beyond the original DCE design.
+The differences became more pronounced in the extended scenarios (Panel B). Rich textual narratives containing fictional incentives and complex policy descriptions reduced the rank agreement of the unconstrained LLMs to approximately zero for both models. Among the two wait-varying pairs in Panel B, BDT maintained zero monotonicity violations (0/2); the twelve narrative-only pairs are reported as MAD and $\rho$ only. Rank agreement with the empirical reference was $\rho = 0.93$ for Qwen-max and $\rho = 0.88$ for DeepSeek V4. These results indicate that empirical-frontier regularization continues to preserve waiting-time monotonicity and rank agreement with the empirical reference even when language models are required to interpret policy narratives beyond the original DCE design.
 
 This experiment evaluates final anchored predictions; the separate contributions of language understanding and empirical regularization are not isolated here (robustness checks in Appendix~\ref{app:dce_sample_sensitivity}).
 
@@ -293,13 +293,13 @@ EFR improved policy-ranking consistency (Spearman PRC): Qwen2.5-72B-Instruct 0.3
 \section{Discussion}
 \subsection{Principal Findings}
 
-EFR improves behavioral consistency of LLM-based synthetic agents without retraining. Three findings emerge. \emph{First}, unconstrained LLMs produce biased choice probabilities: waiting-time monotonicity violations ranged 39.6--62.5\% on the 64-state grid; rank correlation with the empirical frontier was weakly negative (Qwen2.5-72B: $\rho = -0.024$) or modestly positive (DeepSeek V4 Pro: 0.380; MiroThinker-1.7-mini: 0.219). \emph{Second}, EFR reduced these violations to 0--4.2\% across the three LLMs. On the only non-circular benchmark (held-out DCE), EFR log loss (0.703) is comparable to pure-DCE (0.688; $\Delta = 0.015$). \emph{Third}, the policy-ranking improvement transfers: PRC rose 0.333 $\to$ 0.867 for Qwen2.5-72B and 0.50 $\to$ 0.80 for MiroThinker-1.7-mini.
+EFR improves behavioral consistency of LLM-based synthetic agents without retraining. Three findings emerge. \emph{First}, unconstrained LLMs produce biased choice probabilities: waiting-time monotonicity violations ranged 39.6--62.5\% on the 64-state grid; rank correlation with the empirical frontier was weakly negative (Qwen2.5-72B: $\rho = -0.024$) or modestly positive (DeepSeek V4: 0.380; MiroThinker-1.7-mini: 0.219). \emph{Second}, EFR reduced these violations to 0--4.2\% across the three LLMs. On the only non-circular benchmark (held-out DCE), EFR log loss (0.703) is comparable to pure-DCE (0.688; $\Delta = 0.015$). \emph{Third}, the policy-ranking improvement transfers: PRC rose 0.333 $\to$ 0.867 for Qwen2.5-72B and 0.50 $\to$ 0.80 for MiroThinker-1.7-mini.
 
 \subsection{Methodological Contributions}
 
 Our primary contribution is \emph{inference-time empirical regularization}, a procedure that aligns LLM decisions with empirically estimated behavioral structure without modifying model weights. The design reflects theory-informed machine learning: established empirical models provide structural priors for generative AI systems. EFR is a wrapper, not a model: it can be applied to any LLM (closed-source or open-source) and any empirical choice frontier (mixed logit, latent class, or non-parametric). The convex combination $\pi_{\mathrm{EFR}} = \lambda \pi_{\mathrm{LLM}} + (1-\lambda) P_{\mathrm{emp}}$ is the simplest possible anchor; future work could explore non-convex anchors (e.g., mixture-of-experts gating, Bayesian shrinkage toward $P_{\mathrm{emp}}$ priors).
 
-A revision-stage stress test (8/13/2026) on eight Panel B scenarios across three smaller open-source models (4,800 prompts) corroborated this view: Qwen2.5-7B produced constant outputs (zero variance, default-answer signature), DeepSeek-V4-Flash achieved 0\% parse on the waiver-language N1 scenario. \emph{These failures are a safety property, not evidence of LLM value-add}: when LLM output is degenerate, EFR degrades gracefully to pure DCE (the 75\% weight on $P_{\text{emp}}$ dominates). Our use of LLMs as \emph{anchored behavioral simulators} differs from prior tool-oriented LLM work: the empirical frontier, not the LLM, supplies the behavioral signal.
+A revision-stage stress test (8/13/2026) on eight Panel B scenarios across three smaller open-source models (4,800 prompts) corroborated this view: Qwen2.5-7B produced constant outputs (zero variance, default-answer signature), DeepSeek V4 (Flash variant) achieved 0\% parse on the waiver-language N1 scenario. \emph{These failures are a safety property, not evidence of LLM value-add}: when LLM output is degenerate, EFR degrades gracefully to pure DCE (the 75\% weight on $P_{\text{emp}}$ dominates). Our use of LLMs as \emph{anchored behavioral simulators} differs from prior tool-oriented LLM work: the empirical frontier, not the LLM, supplies the behavioral signal.
 
 \subsection{Implications for Health Policy Analysis}
 \label{sec:impl_policy}
@@ -316,7 +316,7 @@ EFR is a cost-ratio framework (Appendix~\ref{app:voi}): at US\$\,10,000 LLM marg
 \subsection{Why Not Use the Discrete Choice Model Alone?}
 \label{sec:why_not_dce}
 
-EFR trades a small within-design accuracy loss (pure-DCE log loss 0.620; EFR 0.703) for narrative-policy evaluation. The NDS pilot ($n=2$) corroborates: isotonic NDS $\rho = -0.943$ vs.\ BDT $\rho = +0.894$ for DeepSeek V3. \textbf{Figure~\ref{fig:ood_performance}} consolidates the four OOD metrics (MVR-Wait, Spearman $\rho$, subgroup heterogeneity, PRC) for Qwen-max and DeepSeek V3, showing that BDT dominates both the unconstrained LLM and the non-anchored NDS baseline on every reported dimension.
+EFR trades a small within-design accuracy loss (pure-DCE log loss 0.620; EFR 0.703) for narrative-policy evaluation. The NDS pilot ($n=2$) corroborates: isotonic NDS $\rho = -0.943$ vs.\ BDT $\rho = +0.894$ for DeepSeek V4. \textbf{Figure~\ref{fig:ood_performance}} consolidates the four OOD metrics (MVR-Wait, Spearman $\rho$, subgroup heterogeneity, PRC) for Qwen-max and DeepSeek V4, showing that BDT dominates both the unconstrained LLM and the non-anchored NDS baseline on every reported dimension.
 
 \begin{figure}[h]
 \centering
@@ -660,7 +660,7 @@ Each pilot state was queried repeatedly, and the mean predicted probability acro
 
 \subsection{Relationship to the Full-Scale Static-BDT Anchor}
 
-The pilot differs from the full-scale experiment in three important ways. First, the pilot used a smaller 1.5B local model, whereas the full-scale experiment uses Qwen2.5-72B as the primary model and includes DeepSeek V4 Pro and MiroThinker-1.7-mini as robustness models. Second, the pilot varied only waiting time while holding cost and side-effect risk fixed, whereas the full-scale experiment evaluates a 64-state grid over waiting time, vaccine efficacy, and side-effect burden. Third, the pilot used prompt-level rule injection, whereas the full-scale Static-BDT Anchor applies a post-generation convex calibration rule:
+The pilot differs from the full-scale experiment in three important ways. First, the pilot used a smaller 1.5B local model, whereas the full-scale experiment uses Qwen2.5-72B as the primary model and includes DeepSeek V4 and MiroThinker-1.7-mini as robustness models. Second, the pilot varied only waiting time while holding cost and side-effect risk fixed, whereas the full-scale experiment evaluates a 64-state grid over waiting time, vaccine efficacy, and side-effect burden. Third, the pilot used prompt-level rule injection, whereas the full-scale Static-BDT Anchor applies a post-generation convex calibration rule:
 
 \[
 \pi_{\text{BDT}}(y=1 \mid x)
@@ -967,7 +967,7 @@ Table~\ref{tab:parse_rates} reports the parse success rates for each model and e
 \midrule
 Qwen2.5-1.5B  & Pilot         & 95.2\% & 98.7\% \\
 Qwen2.5-72B   & Full-scale    & 97.8\% & 99.4\% \\
-DeepSeek V4 Pro & Robustness  & 96.5\% & 99.1\% \\
+DeepSeek V4 & Robustness  & 96.5\% & 99.1\% \\
 MiroThinker-1.7-mini & Robustness & 94.0\% & 97.5\% \\
 \bottomrule
 \end{tabular}
@@ -1011,7 +1011,7 @@ Runtime was extracted from timestamped checkpoint CSV files and available local 
 Model & \(N\) & First timestamp (UTC) & Last timestamp (UTC) & Wall clock & Avg./gen. & Post-proc. \\
 \midrule
 Qwen2.5-72B & 640 & 2026-05-19 03:58:32 & 2026-05-19 15:08:44 & 11.15 h & 62.9 s & \(\sim\)1.60 h \\
-DeepSeek V4 Pro & 640 & 2026-05-19 02:38:44 & 2026-05-19 03:16:35 & 37.9 min & 3.6 s & \(\sim\)2.5 min \\
+DeepSeek V4 & 640 & 2026-05-19 02:38:44 & 2026-05-19 03:16:35 & 37.9 min & 3.6 s & \(\sim\)2.5 min \\
 MiroThinker-1.7-mini & 640 & 2026-05-19 17:37:48 & 2026-05-19 17:42:02 & 4.2 min & 0.40 s & \(\sim\)3.5 min \\
 \bottomrule
 \end{tabular}
@@ -1020,7 +1020,7 @@ MiroThinker-1.7-mini & 640 & 2026-05-19 17:37:48 & 2026-05-19 17:42:02 & 4.2 min
 \vspace{0.3em}
 \begin{minipage}{0.95\textwidth}
 \small
-\textit{Note.} \(N\) denotes the number of timestamped generations. For Qwen2.5-72B and MiroThinker-1.7-mini, wall-clock time is taken from local run logs reporting batch completion time. For DeepSeek V4 Pro, no local run log was available, so wall-clock time is computed from the first and last checkpoint timestamps. Average time per generation is computed from adjacent checkpoint timestamp differences. Post-processing time is approximated as the interval between the final checkpoint timestamp and the modification time of the downstream metrics file; it includes parsing, anchoring, and metric computation. For Qwen2.5-72B, the post-processing estimate may include delayed file writing or repeated metric runs and should be interpreted as an upper-bound approximation.
+\textit{Note.} \(N\) denotes the number of timestamped generations. For Qwen2.5-72B and MiroThinker-1.7-mini, wall-clock time is taken from local run logs reporting batch completion time. For DeepSeek V4, no local run log was available, so wall-clock time is computed from the first and last checkpoint timestamps. Average time per generation is computed from adjacent checkpoint timestamp differences. Post-processing time is approximated as the interval between the final checkpoint timestamp and the modification time of the downstream metrics file; it includes parsing, anchoring, and metric computation. For Qwen2.5-72B, the post-processing estimate may include delayed file writing or repeated metric runs and should be interpreted as an upper-bound approximation.
 \end{minipage}
 \end{table}
 
@@ -1046,8 +1046,8 @@ Model & Method & Matching pairs & PRC & 95\% CI \\
 Qwen2.5-72B & Unconstrained LLM & 5/15 & 0.333 & [0.118, 0.616] \\
 Qwen2.5-72B & EFR & 13/15 & 0.867 & [0.595, 0.983] \\
 \midrule
-DeepSeek V4 Pro & Unconstrained LLM & 2/15 & 0.133 & [0.017, 0.405] \\
-DeepSeek V4 Pro & EFR & 9/15 & 0.600 & [0.323, 0.837] \\
+DeepSeek V4 & Unconstrained LLM & 2/15 & 0.133 & [0.017, 0.405] \\
+DeepSeek V4 & EFR & 9/15 & 0.600 & [0.323, 0.837] \\
 \midrule
 MiroThinker-1.7-mini & Unconstrained LLM & 8/15 & 0.533 & [0.266, 0.787] \\
 MiroThinker-1.7-mini & EFR & 12/15 & 0.800 & [0.519, 0.957] \\
@@ -1057,7 +1057,7 @@ MiroThinker-1.7-mini & EFR & 12/15 & 0.800 & [0.519, 0.957] \\
 \vspace{0.4em}
 \begin{minipage}{0.95\textwidth}
 \small
-\textit{Note.} PRC measures the proportion of intervention pairs ranked in the same order as the Pure-DCE reference. The policy set contains six interventions, yielding 15 unordered policy pairs. Brackets report exact binomial 95\% confidence intervals. One-sided exact binomial tests were performed against the random-ranking baseline (PRC = 0.5). Benjamini--Hochberg correction was applied across the three EFR model comparisons (Qwen2.5-72B, DeepSeek V4 Pro, and MiroThinker-1.7-mini); Qwen2.5-72B and MiroThinker-1.7-mini remained significant after correction.
+\textit{Note.} PRC measures the proportion of intervention pairs ranked in the same order as the Pure-DCE reference. The policy set contains six interventions, yielding 15 unordered policy pairs. Brackets report exact binomial 95\% confidence intervals. One-sided exact binomial tests were performed against the random-ranking baseline (PRC = 0.5). Benjamini--Hochberg correction was applied across the three EFR model comparisons (Qwen2.5-72B, DeepSeek V4, and MiroThinker-1.7-mini); Qwen2.5-72B and MiroThinker-1.7-mini remained significant after correction.
 \end{minipage}
 \end{table}
 
@@ -1255,7 +1255,7 @@ LLM-matched & Static-BDT Anchor & Brier & 0.255 [0.249, 0.260] \\
 
 \subsection{Policy-Ranking Consistency Intervals}
 
-Table~\ref{tab:bootstrap_prc} reports the exact binomial intervals used for Policy Ranking Consistency (PRC). These intervals are computed over the 15 unordered policy-pair comparisons. The Qwen2.5-72B Static-BDT interval provides the strongest evidence of improved ranking consistency. DeepSeek V4 Pro improves in point estimate, but its interval is wide. MiroThinker-1.7-mini also improves in point estimate, with an interval that remains relatively wide because the total number of policy-pair comparisons is small.
+Table~\ref{tab:bootstrap_prc} reports the exact binomial intervals used for Policy Ranking Consistency (PRC). These intervals are computed over the 15 unordered policy-pair comparisons. The Qwen2.5-72B Static-BDT interval provides the strongest evidence of improved ranking consistency. DeepSeek V4 improves in point estimate, but its interval is wide. MiroThinker-1.7-mini also improves in point estimate, with an interval that remains relatively wide because the total number of policy-pair comparisons is small.
 
 \begin{table}[t]
 \centering
@@ -1270,8 +1270,8 @@ Model & Method & Matching pairs & PRC & 95\% CI \\
 Qwen2.5-72B & Unconstrained LLM & 5/15 & 0.333 & [0.118, 0.616] \\
 Qwen2.5-72B & Static-BDT Anchor & 13/15 & 0.867 & [0.595, 0.983] \\
 \midrule
-DeepSeek V4 Pro & Unconstrained LLM & 2/15 & 0.133 & [0.017, 0.405] \\
-DeepSeek V4 Pro & Static-BDT Anchor & 9/15 & 0.600 & [0.323, 0.837] \\
+DeepSeek V4 & Unconstrained LLM & 2/15 & 0.133 & [0.017, 0.405] \\
+DeepSeek V4 & Static-BDT Anchor & 9/15 & 0.600 & [0.323, 0.837] \\
 \midrule
 MiroThinker-1.7-mini & Unconstrained LLM & 8/15 & 0.533 & [0.266, 0.787] \\
 MiroThinker-1.7-mini & Static-BDT Anchor & 12/15 & 0.800 & [0.519, 0.957] \\
