@@ -37,12 +37,6 @@
 \textbf{Conclusion:} EFR extends an existing DCE to narrative policy scenarios with graceful degradation when LLM outputs are unreliable. The honest framing is a DCE model with narrative-policy extension via inference-time regularization, not a stand-alone LLM behavioral simulator.
 \end{abstract}
 
-\begin{itemize}
-\item \textbf{Novel framework} for anchoring LLM-based policy simulation to a DCE-derived empirical choice frontier through inference-time convex combination ($\pi_{\mathrm{EFR}} = \lambda\,\pi_{\mathrm{LLM}} + (1-\lambda)\,P_{\mathrm{emp}}$; $\lambda = 0.25$).
-\item \textbf{Behavioral reliability without retraining}: unconstrained LLMs violated waiting-time monotonicity in 39.6--62.5\% of scenarios; EFR reduced violations to 0--4.2\% across three LLMs and transferred consistently to 20 out-of-design policy narratives.
-\item \textbf{Honest framing}: a pure-noise LLM null attains $\rho \approx 0.83$ (Appendix~\ref{sec:null_distribution}), placing the reported $\rho \in [0.87, 0.93]$ within the structural noise floor; EFR's value is out-of-design extension, not in-design fit improvement.
-\item \textbf{Practitioner pipeline}: a recent DCE (US\$500{,}000) combined with a one-time LLM API (US\$10{,}000) yields a low-marginal-cost path from evidence to narrative policy simulation---most valuable for early-stage policy screening.
-\end{itemize}
 
 \keywords{empirical-frontier regularization; large language models; discrete choice experiment; health technology assessment; behavioral simulation}
 
