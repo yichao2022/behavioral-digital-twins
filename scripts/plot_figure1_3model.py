@@ -1,8 +1,8 @@
 """
-Figure 1 (3-model version, v3): BDT OOD performance across Qwen-max, MiroThinker-1.7-mini, DS V4.
-- Real NDS via sklearn.isotonic.IsotonicRegression (was hard-coded 0 in v2)
-- Panel (a) shows Unconstrained only (NDS/BDT are 0 by construction)
-- Metrics from c_half/v1 CSV (A1-F2, 12 pre-registered OOD scenarios)
+Figure 1 (3-model version, v4): 2-panel layout (Spearman rho + MAD).
+Dropped: Panel (a) MVR-Wait (NDS/BDT are 0 by construction; MiroThinker
+violation already in caption), Panel (c) subgroup heterogeneity (MiroThinker
+subgroup data not collected; subgroup results in Appendix H.3).
 """
 import csv
 from collections import defaultdict
@@ -61,26 +61,13 @@ def nds_isotonic(by_scen_raw):
     return out
 
 
-def mvr(p_dict):
-    v = 0; t = 0
-    for gname in groups:
-        g_sids = [s for s in scenarios if scenarios[s]['expected_wait_order_group'] == gname]
-        if len(g_sids) != 2: continue
-        s_low = next((s for s in g_sids if float(scenarios[s]['wait_time']) == 2.0), None)
-        s_high = next((s for s in g_sids if float(scenarios[s]['wait_time']) == 6.0), None)
-        if s_low and s_high and s_low in p_dict and s_high in p_dict:
-            t += 1
-            if p_dict[s_low] < p_dict[s_high]: v += 1
-    return v/t if t else 0
-
-
 def metrics(p_dict):
     sids = sorted([s for s in p_dict if s in pstatic])
     psl = [pstatic[s] for s in sids]
     pll = [p_dict[s] for s in sids]
     rho = spearmanr(pll, psl)[0] if len(pll) >= 3 else None
     mad = mean(abs(a-b) for a, b in zip(pll, psl))
-    return {'rho': float(rho) if rho is not None else 0, 'mad': mad, 'mvr': mvr(p_dict)}
+    return {'rho': float(rho) if rho is not None else 0, 'mad': mad}
 
 
 def compute_full(fname):
@@ -112,67 +99,45 @@ if __name__ == '__main__':
         'BDT (lambda=0.25)': '#2ca02c',
     }
 
-    fig, axes = plt.subplots(2, 2, figsize=(12, 8.5), dpi=300)
+    fig, axes = plt.subplots(1, 2, figsize=(13, 5.5), dpi=300)
 
-    # (a) MVR-Wait — Unconstrained only
-    ax = axes[0, 0]
-    ax.bar(x, [results[m]['Unconstrained']['mvr'] for m in model_order], 0.55,
-           color=colors['Unconstrained'], label='Unconstrained LLM')
-    ax.set_xticks(x); ax.set_xticklabels(['Qwen-max', 'MiroThinker\n(1.7-mini)', 'DS V4'], fontsize=9)
-    ax.set_ylabel('Mean Violation Rate (MVR-Wait)', fontsize=9)
-    ax.set_ylim(0, 1.0)
-    ax.set_title('(a) Behavioral consistency: MVR-Wait (Unconstrained)', fontsize=10, fontweight='bold')
-    ax.spines['top'].set_visible(False); ax.spines['right'].set_visible(False)
-    ax.text(0.5, 0.92, 'NDS and BDT: 0 across all models (forced monotonicity)',
-            transform=ax.transAxes, ha='center', fontsize=8, color='gray', style='italic')
-
-    # (b) Spearman rho
-    ax = axes[0, 1]
+    # (a) Spearman rho
+    ax = axes[0]
     for i, m in enumerate(['Unconstrained', 'NDS (isotonic)', 'BDT (lambda=0.25)']):
         offset = (i - 1) * w
         ax.bar(x + offset, [results[mo][m]['rho'] for mo in model_order], w,
                color=colors[m], label=m)
     ax.axhline(0, color='black', linewidth=0.5)
-    ax.set_xticks(x); ax.set_xticklabels(['Qwen-max', 'MiroThinker\n(1.7-mini)', 'DS V4'], fontsize=9)
-    ax.set_ylabel('Spearman $\\rho$ vs $P_{static}$', fontsize=9)
+    ax.set_xticks(x); ax.set_xticklabels(['Qwen-max', 'MiroThinker\n(1.7-mini)', 'DS V4'], fontsize=10)
+    ax.set_ylabel('Spearman $\\rho$ vs $P_{static}$', fontsize=10)
     ax.set_ylim(-1.0, 1.0)
-    ax.set_title('(b) Policy ranking: Spearman $\\rho$', fontsize=10, fontweight='bold')
+    ax.set_title('(a) Policy ranking: Spearman $\\rho$', fontsize=11, fontweight='bold')
     ax.spines['top'].set_visible(False); ax.spines['right'].set_visible(False)
+    ax.annotate('MiroThinker:\nUnconstrained $\\rho=-0.509$\nNDS $\\rho=0.073$ (weak rescue)\nBDT $\\rho=0.871$ (full restoration)',
+                xy=(1, -0.509), xytext=(1.6, -0.7), fontsize=8,
+                arrowprops=dict(arrowstyle='->', color='gray', lw=0.5),
+                bbox=dict(boxstyle='round,pad=0.3', facecolor='lightyellow', edgecolor='gray', lw=0.5))
 
-    # (c) Subgroup heterogeneity (DS V4 / Qwen only; MiroThinker pending)
-    ax = axes[1, 0]
-    subgroups = ['Age 18-44', 'Age 45-65', 'Female', 'Male', 'Bachelor+']
-    rho = [0.950, 0.952, 0.949, 0.954, 0.951]
-    y = np.arange(len(subgroups))
-    ax.barh(y, rho, color=colors['BDT (lambda=0.25)'])
-    ax.set_yticks(y); ax.set_yticklabels(subgroups, fontsize=9)
-    ax.set_xlabel('Spearman $\\rho$', fontsize=9)
-    ax.set_xlim(0.86, 1.00)
-    ax.set_title('(c) Subgroup heterogeneity: BDT $\\rho$ (DS V4 / Qwen)', fontsize=10, fontweight='bold')
-    ax.spines['top'].set_visible(False); ax.spines['right'].set_visible(False)
-    ax.text(0.02, 0.05, 'MiroThinker subgroup pending',
-            transform=ax.transAxes, fontsize=7, color='gray', style='italic')
-
-    # (d) MAD
-    ax = axes[1, 1]
+    # (b) MAD
+    ax = axes[1]
     for i, m in enumerate(['Unconstrained', 'NDS (isotonic)', 'BDT (lambda=0.25)']):
         offset = (i - 1) * w
         ax.bar(x + offset, [results[mo][m]['mad'] for mo in model_order], w,
                color=colors[m], label=m)
-    ax.set_xticks(x); ax.set_xticklabels(['Qwen-max', 'MiroThinker\n(1.7-mini)', 'DS V4'], fontsize=9)
-    ax.set_ylabel('MAD vs $P_{static}$', fontsize=9)
+    ax.set_xticks(x); ax.set_xticklabels(['Qwen-max', 'MiroThinker\n(1.7-mini)', 'DS V4'], fontsize=10)
+    ax.set_ylabel('MAD vs $P_{static}$', fontsize=10)
     ax.set_ylim(0, 0.40)
-    ax.set_title('(d) Mean absolute deviation', fontsize=10, fontweight='bold')
+    ax.set_title('(b) Mean absolute deviation', fontsize=11, fontweight='bold')
     ax.spines['top'].set_visible(False); ax.spines['right'].set_visible(False)
 
-    fig.suptitle('BDT out-of-design performance (12 pre-registered OOD scenarios, 3 LLMs)',
-                 fontsize=10.5, fontweight='bold', y=1.00)
+    fig.suptitle('BDT out-of-design performance: 3 LLMs x 3 methods on 12 pre-registered OOD scenarios',
+                 fontsize=11, fontweight='bold', y=1.02)
 
     handles = [mpatches.Patch(color=colors[k], label=k) for k in colors]
-    fig.legend(handles=handles, loc='lower center', ncol=3, bbox_to_anchor=(0.5, -0.01), fontsize=9, frameon=False)
+    fig.legend(handles=handles, loc='lower center', ncol=3, bbox_to_anchor=(0.5, -0.04), fontsize=10, frameon=False)
 
-    plt.tight_layout(rect=[0, 0.03, 1, 0.97])
+    plt.tight_layout(rect=[0, 0.04, 1, 0.96])
     out = Path('figures/figure_1_ood_performance.png')
     out.parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(out, dpi=300, bbox_inches='tight', facecolor='white')
-    print(f"Saved {out}")
+    print(f'Saved {out}')
