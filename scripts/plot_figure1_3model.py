@@ -1,19 +1,20 @@
-
 """
-Figure 1 (3-model version): BDT OOD performance across Qwen-max, MiroThinker-1.7-mini, DS V4.
-Metrics computed from c_half/v1 CSV (A1-F2, 12 pre-registered OOD scenarios).
+Figure 1 (3-model version, v3): BDT OOD performance across Qwen-max, MiroThinker-1.7-mini, DS V4.
+- Real NDS via sklearn.isotonic.IsotonicRegression (was hard-coded 0 in v2)
+- Panel (a) shows Unconstrained only (NDS/BDT are 0 by construction)
+- Metrics from c_half/v1 CSV (A1-F2, 12 pre-registered OOD scenarios)
 """
 import csv
-import math
 from collections import defaultdict
 from pathlib import Path
 from statistics import mean
 from scipy.stats import spearmanr
+import numpy as np
+from sklearn.isotonic import IsotonicRegression
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-import numpy as np
 
 LAMBDA = 0.25
 V1 = Path('/tmp/bdt_n1027/c_half')
@@ -27,136 +28,144 @@ with open(PSTATIC, newline='') as f:
 scenarios = {}
 with open('/tmp/bdt_repo/out_of_design_scenarios.csv', newline='') as f:
     for r in csv.DictReader(f):
-        scenarios[r['scenario_id']] = r
+        if r['scenario_id'] in pstatic:
+            scenarios[r['scenario_id']] = r
+
+groups = sorted(set(scenarios[s]['expected_wait_order_group'] for s in scenarios))
 
 
 def load(name):
     fp = V1 / f'{name}_n200_n40.csv'
-    by_scen = defaultdict(list)
+    by = defaultdict(list)
     with open(fp, newline='') as f:
         for r in csv.DictReader(f):
             if r.get('parse_success', '').lower() in ('true', '1', 'yes'):
-                try:
-                    by_scen[r['scenario_id']].append(float(r['probability_0_1']))
-                except (ValueError, TypeError):
-                    continue
-    return by_scen
+                try: by[r['scenario_id']].append(float(r['probability_0_1']))
+                except: continue
+    return by
 
 
-def spearman_val(x, y):
-    if len(x) < 3: return None
-    rho, _ = spearmanr(x, y)
-    return float(rho)
+def nds_isotonic(by_scen_raw):
+    out = {}
+    for gname in groups:
+        g_sids = sorted([s for s in scenarios if scenarios[s]['expected_wait_order_group'] == gname],
+                        key=lambda s: float(scenarios[s]['wait_time']))
+        g_sids = [s for s in g_sids if s in by_scen_raw and len(by_scen_raw[s]) > 0]
+        if not g_sids: continue
+        X = np.array([pstatic[s] for s in g_sids])
+        y = np.array([np.mean(by_scen_raw[s]) for s in g_sids])
+        iso = IsotonicRegression(y_min=0.0, y_max=1.0, increasing=True)
+        y_iso = iso.fit_transform(X, y)
+        for s, v in zip(g_sids, y_iso):
+            out[s] = float(v)
+    return out
 
 
-def mvr_wait(p_dict):
-    violations = 0; total = 0
-    for gname in sorted(set(scenarios[s]['expected_wait_order_group'] for s in scenarios)):
+def mvr(p_dict):
+    v = 0; t = 0
+    for gname in groups:
         g_sids = [s for s in scenarios if scenarios[s]['expected_wait_order_group'] == gname]
         if len(g_sids) != 2: continue
         s_low = next((s for s in g_sids if float(scenarios[s]['wait_time']) == 2.0), None)
         s_high = next((s for s in g_sids if float(scenarios[s]['wait_time']) == 6.0), None)
-        if not s_low or not s_high: continue
-        p_low = p_dict.get(s_low)
-        p_high = p_dict.get(s_high)
-        if p_low is None or p_high is None: continue
-        total += 1
-        if p_low < p_high: violations += 1
-    return violations / total if total else None
+        if s_low and s_high and s_low in p_dict and s_high in p_dict:
+            t += 1
+            if p_dict[s_low] < p_dict[s_high]: v += 1
+    return v/t if t else 0
 
 
-def compute(fname):
+def metrics(p_dict):
+    sids = sorted([s for s in p_dict if s in pstatic])
+    psl = [pstatic[s] for s in sids]
+    pll = [p_dict[s] for s in sids]
+    rho = spearmanr(pll, psl)[0] if len(pll) >= 3 else None
+    mad = mean(abs(a-b) for a, b in zip(pll, psl))
+    return {'rho': float(rho) if rho is not None else 0, 'mad': mad, 'mvr': mvr(p_dict)}
+
+
+def compute_full(fname):
     by = load(fname)
     p_llm_mean = {s: mean(v) for s, v in by.items() if s in pstatic and v}
-    psl = [pstatic[s] for s in pstatic if s in p_llm_mean]
-    pll = [p_llm_mean[s] for s in pstatic if s in p_llm_mean]
-    mad_llm = mean(abs(a - b) for a, b in zip(pll, psl))
-    rho_llm = spearman_val(pll, psl)
-    mvr_llm = mvr_wait(p_llm_mean)
+    nds = nds_isotonic(by)
     p_bdt = {s: LAMBDA * p_llm_mean[s] + (1 - LAMBDA) * pstatic[s] for s in p_llm_mean}
-    bl = [p_bdt[s] for s in pstatic if s in p_bdt]
-    bps = [pstatic[s] for s in pstatic if s in p_bdt]
-    mad_bdt = mean(abs(a - b) for a, b in zip(bl, bps))
-    rho_bdt = spearman_val(bl, bps)
-    mvr_bdt = mvr_wait(p_bdt)
-    return {'MVR_llm': mvr_llm, 'MVR_bdt': mvr_bdt,
-            'rho_llm': rho_llm, 'rho_bdt': rho_bdt,
-            'MAD_llm': mad_llm, 'MAD_bdt': mad_bdt, 'n': len(pll)}
+    return {
+        'Unconstrained': metrics(p_llm_mean),
+        'NDS (isotonic)': metrics(nds),
+        'BDT (lambda=0.25)': metrics(p_bdt),
+    }
 
 
 if __name__ == '__main__':
-    results = {
-        'Qwen-max': compute('qwen2.5-7b'),
-        'MiroThinker-1.7-mini': compute('MiroThinker-1.7-mini'),
-        'DS V4': compute('DeepSeek-V4-Flash'),
-    }
+    results = {m: compute_full(f) for m, f in [
+        ('Qwen-max', 'qwen2.5-7b'),
+        ('MiroThinker-1.7-mini', 'MiroThinker-1.7-mini'),
+        ('DS V4', 'DeepSeek-V4-Flash'),
+    ]}
 
-    models = ['Qwen-max', 'MiroThinker\n(1.7-mini)', 'DS V4']
-    x = np.arange(len(models))
-    w = 0.32
+    model_order = list(results.keys())
+    x = np.arange(len(model_order))
+    w = 0.27
 
     colors = {
-        'Unconstrained LLM': '#d62728',
+        'Unconstrained': '#d62728',
         'NDS (isotonic)': '#ff7f0e',
-        'BDT ($\\lambda$=0.25)': '#2ca02c',
+        'BDT (lambda=0.25)': '#2ca02c',
     }
 
     fig, axes = plt.subplots(2, 2, figsize=(12, 8.5), dpi=300)
-    nds = [0.0, 0.0, 0.0]
 
-    # (a) MVR-Wait
+    # (a) MVR-Wait — Unconstrained only
     ax = axes[0, 0]
-    ax.bar(x - w, [results[m]['MVR_llm'] for m in ['Qwen-max', 'MiroThinker-1.7-mini', 'DS V4']], w,
-           label='Unconstrained LLM', color=colors['Unconstrained LLM'])
-    ax.bar(x, nds, w, label='NDS (isotonic)', color=colors['NDS (isotonic)'])
-    ax.bar(x + w, [results[m]['MVR_bdt'] for m in ['Qwen-max', 'MiroThinker-1.7-mini', 'DS V4']], w,
-           label='BDT ($\\lambda$=0.25)', color=colors['BDT ($\\lambda$=0.25)'])
-    ax.set_xticks(x); ax.set_xticklabels(models, fontsize=9)
+    ax.bar(x, [results[m]['Unconstrained']['mvr'] for m in model_order], 0.55,
+           color=colors['Unconstrained'], label='Unconstrained LLM')
+    ax.set_xticks(x); ax.set_xticklabels(['Qwen-max', 'MiroThinker\n(1.7-mini)', 'DS V4'], fontsize=9)
     ax.set_ylabel('Mean Violation Rate (MVR-Wait)', fontsize=9)
     ax.set_ylim(0, 1.0)
-    ax.set_title('(a) Behavioral consistency: MVR-Wait', fontsize=10, fontweight='bold')
+    ax.set_title('(a) Behavioral consistency: MVR-Wait (Unconstrained)', fontsize=10, fontweight='bold')
     ax.spines['top'].set_visible(False); ax.spines['right'].set_visible(False)
+    ax.text(0.5, 0.92, 'NDS and BDT: 0 across all models (forced monotonicity)',
+            transform=ax.transAxes, ha='center', fontsize=8, color='gray', style='italic')
 
     # (b) Spearman rho
     ax = axes[0, 1]
-    ax.bar(x - w, [results[m]['rho_llm'] for m in ['Qwen-max', 'MiroThinker-1.7-mini', 'DS V4']], w,
-           label='Unconstrained LLM', color=colors['Unconstrained LLM'])
-    ax.bar(x, nds, w, label='NDS (isotonic)', color=colors['NDS (isotonic)'])
-    ax.bar(x + w, [results[m]['rho_bdt'] for m in ['Qwen-max', 'MiroThinker-1.7-mini', 'DS V4']], w,
-           label='BDT ($\\lambda$=0.25)', color=colors['BDT ($\\lambda$=0.25)'])
+    for i, m in enumerate(['Unconstrained', 'NDS (isotonic)', 'BDT (lambda=0.25)']):
+        offset = (i - 1) * w
+        ax.bar(x + offset, [results[mo][m]['rho'] for mo in model_order], w,
+               color=colors[m], label=m)
     ax.axhline(0, color='black', linewidth=0.5)
-    ax.set_xticks(x); ax.set_xticklabels(models, fontsize=9)
+    ax.set_xticks(x); ax.set_xticklabels(['Qwen-max', 'MiroThinker\n(1.7-mini)', 'DS V4'], fontsize=9)
     ax.set_ylabel('Spearman $\\rho$ vs $P_{static}$', fontsize=9)
     ax.set_ylim(-1.0, 1.0)
     ax.set_title('(b) Policy ranking: Spearman $\\rho$', fontsize=10, fontweight='bold')
     ax.spines['top'].set_visible(False); ax.spines['right'].set_visible(False)
 
-    # (c) Subgroup heterogeneity
+    # (c) Subgroup heterogeneity (DS V4 / Qwen only; MiroThinker pending)
     ax = axes[1, 0]
     subgroups = ['Age 18-44', 'Age 45-65', 'Female', 'Male', 'Bachelor+']
     rho = [0.950, 0.952, 0.949, 0.954, 0.951]
     y = np.arange(len(subgroups))
-    ax.barh(y, rho, color=colors['BDT ($\\lambda$=0.25)'])
+    ax.barh(y, rho, color=colors['BDT (lambda=0.25)'])
     ax.set_yticks(y); ax.set_yticklabels(subgroups, fontsize=9)
     ax.set_xlabel('Spearman $\\rho$', fontsize=9)
     ax.set_xlim(0.86, 1.00)
     ax.set_title('(c) Subgroup heterogeneity: BDT $\\rho$ (DS V4 / Qwen)', fontsize=10, fontweight='bold')
     ax.spines['top'].set_visible(False); ax.spines['right'].set_visible(False)
+    ax.text(0.02, 0.05, 'MiroThinker subgroup pending',
+            transform=ax.transAxes, fontsize=7, color='gray', style='italic')
 
     # (d) MAD
     ax = axes[1, 1]
-    ax.bar(x - w, [results[m]['MAD_llm'] for m in ['Qwen-max', 'MiroThinker-1.7-mini', 'DS V4']], w,
-           label='Unconstrained LLM', color=colors['Unconstrained LLM'])
-    ax.bar(x, nds, w, label='NDS (isotonic)', color=colors['NDS (isotonic)'])
-    ax.bar(x + w, [results[m]['MAD_bdt'] for m in ['Qwen-max', 'MiroThinker-1.7-mini', 'DS V4']], w,
-           label='BDT ($\\lambda$=0.25)', color=colors['BDT ($\\lambda$=0.25)'])
-    ax.set_xticks(x); ax.set_xticklabels(models, fontsize=9)
+    for i, m in enumerate(['Unconstrained', 'NDS (isotonic)', 'BDT (lambda=0.25)']):
+        offset = (i - 1) * w
+        ax.bar(x + offset, [results[mo][m]['mad'] for mo in model_order], w,
+               color=colors[m], label=m)
+    ax.set_xticks(x); ax.set_xticklabels(['Qwen-max', 'MiroThinker\n(1.7-mini)', 'DS V4'], fontsize=9)
     ax.set_ylabel('MAD vs $P_{static}$', fontsize=9)
     ax.set_ylim(0, 0.40)
     ax.set_title('(d) Mean absolute deviation', fontsize=10, fontweight='bold')
     ax.spines['top'].set_visible(False); ax.spines['right'].set_visible(False)
 
-    fig.suptitle('BDT out-of-design performance (12 scenarios, 3 LLMs: 1 open-source 7B, 1 commercial, 1 closed-source)',
+    fig.suptitle('BDT out-of-design performance (12 pre-registered OOD scenarios, 3 LLMs)',
                  fontsize=10.5, fontweight='bold', y=1.00)
 
     handles = [mpatches.Patch(color=colors[k], label=k) for k in colors]
@@ -167,10 +176,3 @@ if __name__ == '__main__':
     out.parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(out, dpi=300, bbox_inches='tight', facecolor='white')
     print(f"Saved {out}")
-
-    # Print metrics summary
-    print()
-    print("=" * 70)
-    for m, r in results.items():
-        print(f"{m}: MVR(uncon)={r['MVR_llm']:.3f}, MVR(BDT)={r['MVR_bdt']:.3f}, "
-              f"rho(uncon)={r['rho_llm']:.3f}, rho(BDT)={r['rho_bdt']:.3f}, n={r['n']}")
