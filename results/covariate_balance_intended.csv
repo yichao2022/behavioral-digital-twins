@@ -1,0 +1,7 @@
+attribute,matched_mean,unmatched_mean,SMD,matched_N,unmatched_N
+WaitTime,2.7675,1.3255,0.5836,813,2876
+VaccineEfficacy,0.5930,0.4454,0.4948,813,2876
+SideEffects,1.9545,1.1554,0.7859,813,2876
+CashIncentives,324.9077,206.5195,0.3786,813,2876
+VaccineOrigin,0.4982,0.2844,0.4486,813,2876
+Choice,0.5277,0.2782,0.5258,813,2876

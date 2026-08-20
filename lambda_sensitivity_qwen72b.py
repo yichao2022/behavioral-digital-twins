@@ -1,7 +1,7 @@
-from pathlib import Path
 #!/usr/bin/env python3
 """Qwen2.5-72B λ-sensitivity table vs P_static (no API)."""
 from __future__ import annotations
+from pathlib import Path
 
 import csv
 import os
