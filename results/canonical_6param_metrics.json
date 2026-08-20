@@ -1,0 +1,18 @@
+{
+  "model": "6-param with ASC (corrected)",
+  "ASC": -0.213815,
+  "P_static_range": {
+    "min": 0.4682961167540611,
+    "max": 0.642378217596288,
+    "mean": 0.5567026153348226
+  },
+  "spearman_rho": 0.06158424908424909,
+  "chr_wait": {
+    "violations": 0,
+    "total": 96
+  },
+  "chr_se": {
+    "violations": 0,
+    "total": 96
+  }
+}

@@ -9,3 +9,40 @@ table1_*_resume.lock
 .deepseek_key
 *.log
 node_modules/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.out
+# Audit/diagnostic (round 3 cascade)
+_audit_main_refs.json
+asc_model_audit.py
+bootstrap_diagnostic.py
+# 5-param stale scripts (Type A era)
+data_scaling_5param.py
+frontier_bootstrap_5param.py
+qwen_canonical_5param.py
+bdt_eval_grid_static_5param.csv
+canonical_5param_fit.csv
+data_scaling_5param.json
+heldout_5vs6_comparison.py
+heldout_5vs6_comparison.json
+results/asc_model_audit.json
+# Unrelated ancillary
+owner_od_form.html
+owner_od_survey.py
+perspective_review.md
+
+
+# Stale task-level multinomial (ad-hoc 81/992, replaced by 325-matched audit)
+results/task_level_multinom_heldout.csv
+results/task_level_multinom_heldout_v2.csv
+
+
+# Stale combined PDF (pre-cascade, regenerated in /private/tmp/bdt_paper/)
+manuscript_plus_supplement.pdf
+
+
+# Duplicate of fig3_data_scaling_learning_curve.png
+figures/figure_S1_data_scaling.png

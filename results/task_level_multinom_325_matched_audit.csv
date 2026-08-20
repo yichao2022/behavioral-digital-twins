@@ -1,0 +1,4 @@
+method,log_loss_2alt,log_loss_3alt,N_2alt,N_3alt
+Pure-DCE,0.6321,0.9713,325,381
+Raw LLM,0.9131,0.9131,325,325
+Static-BDT (λ=0.25),0.6844,1.0093,325,381

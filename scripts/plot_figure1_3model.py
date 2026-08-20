@@ -145,6 +145,7 @@ if __name__ == '__main__':
     fig, axes = plt.subplots(1, 2, figsize=(12, 5), dpi=150)
 
     # Panel (a): Spearman rho
+    # legend 放右下外侧 + bbox_to_anchor，避开 MiroThinker 中间组的负值数据
     ax = axes[0]
     for i, m in enumerate(methods):
         offset = (i - 1) * w
@@ -154,6 +155,9 @@ if __name__ == '__main__':
             h = b.get_height()
             ax.text(b.get_x() + b.get_width() / 2, h + (0.02 if h >= 0 else -0.04),
                     f"{h:.2f}", ha='center', va='bottom' if h >= 0 else 'top', fontsize=8)
+    # Construction-only null band (8-pair OOD narrative; ρ ≈ 0.89 ± 0.06, see Table 2)
+    ax.axhspan(0.83, 0.95, color='gray', alpha=0.18, zorder=0,
+               label='Construction-only null (8-pair OOD, ρ ≈ 0.89 ± 0.06)')
     ax.axhline(0, color='black', linewidth=0.5)
     ax.set_xticks(x)
     ax.set_xticklabels([f"{m}\n({'repo' if m != 'MiroThinker-1.7-mini' else 'c-half'})"
@@ -161,7 +165,9 @@ if __name__ == '__main__':
     ax.set_ylabel(r"Spearman $\rho$ with $P_{\mathrm{static}}$")
     ax.set_title("(a) Spearman ρ: 12 narrative OOD scenarios", fontsize=10)
     ax.set_ylim(-0.7, 1.05)
-    ax.legend(loc='lower right', fontsize=8)
+    # ponytail: legend 放图外右下，避免遮挡 MiroThinker 中间组的负值 NDS bar
+    ax.legend(loc='center left', bbox_to_anchor=(1.02, 0.5),
+              fontsize=7, frameon=True, framealpha=0.9)
     ax.grid(axis='y', alpha=0.3)
 
     # Panel (b): MAD

@@ -18,7 +18,7 @@ Examples of unmatched DCE rows: `eff=0` or `0.95`, `wait=1` or `3`, or combinati
 
 ## Files used
 
-- `/Users/cary/.openclaw/workspace/results/heldout_dce_predictions.csv`
+- `/Users/cary/bdt_repo/results/heldout_dce_predictions.csv`
 - `analysis_output/dce_encoded.csv` (source DCE, via prior run)
 - `llm_parsed_outputs_qwen72b_unconstrained.csv` (LLM merge)
 

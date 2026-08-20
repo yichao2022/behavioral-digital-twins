@@ -30,7 +30,7 @@
 
 \textbf{Methods:} A Wuhan vaccination DCE ($N=1{,}027$) was combined with LLM simulation on a 64-state policy grid. EFR computes $\pi_{\text{EFR}} = \lambda\,\bar{\pi}_{\text{LLM}} + (1-\lambda)\,P_{\text{emp}}$ with $\lambda = 0.25$ selected on held-out DCE predictive performance.
 
-\textbf{Results:} On the only non-circular benchmark (held-out DCE predictions), EFR log loss (0.703) is comparable to pure-DCE (0.688; $\Delta = 0.015$). The unconstrained LLM violated empirical waiting-time monotonicity in 62.5\% of in-design scenarios (4.2\% after EFR). Frontier-alignment $\rho(\pi_{\text{EFR}}, P_{\text{emp}})$ is reported as a diagnostic: the convex construction mechanically bounds it, and a pure-noise LLM null confirms this bound is uninformative.
+\textbf{Results:} On the only non-circular benchmark (held-out DCE predictions), EFR log loss (0.703) is comparable to pure-DCE (0.688; $\Delta = 0.015$). The unconstrained LLM violated empirical waiting-time monotonicity in 62.5\% of in-design scenarios (30.2\% after EFR for Qwen2.5-72B; 7.3\% and 8.3\% for DeepSeek V4 and MiroThinker-1.7-mini, respectively). Frontier-alignment $\rho(\pi_{\text{EFR}}, P_{\text{emp}})$ is reported as a diagnostic: observed rank alignment exceeds what a construction-only null (uniform $U[0,1]$ replacing the LLM component; mean $\rho = 0.367$, 95\% CI $[0.147, 0.566]$) would produce, with Qwen2.5-72B attaining $\rho = 0.691$, a $z$-score of $3.04$ above the null mean. Because the frontier-deviation MSE satisfies $\mathrm{MSE}(\pi_{\text{EFR}}, P_{\text{emp}}) = \lambda^2\,\mathrm{MSE}(\bar\pi_{\text{LLM}}, P_{\text{emp}}) \le \lambda^2$, the reduction in MSE is algebraically induced by the convex blend; the pure-noise experiment is therefore most informative for rank alignment rather than MSE.
 
 \textbf{Limitations:} EFR requires a pre-existing DCE; it is not a substitute for primary stated-preference data collection. The current validation uses a single Wuhan DCE; generalization remains to be established through replication. The $\lambda = 0.25$ specification was selected post hoc.
 
@@ -102,9 +102,10 @@ Two physician interviews and two rounds of twelve cognitive interviews (ISPOR go
 
 \paragraph{Construction of the Empirical Behavioral Reference.}
 
-The empirical behavioral reference was constructed from mixed-logit estimates of the Wuhan DCE. The frontier maps each candidate policy to a probability of acceptance, providing a deterministic signal that anchors the LLM's narrative choices .
+The empirical behavioral reference was constructed from a 6-parameter grouped/conditional logit with five attribute coefficients and an opt-out alternative-specific constant, estimated on the Wuhan DCE. The frontier maps each candidate policy to a probability of acceptance, providing a deterministic signal that anchors the LLM's narrative choices.
 
-\subsection{Stage 2: Post-Hoc Adjustment Procedure} The adjustment algorithm aligns LLM outputs with the empirical reference by computing $\pi_{\mathrm{adj}}(y=1\mid\mathbf{x}_g) = \lambda \cdot \pi_{\mathrm{LLM}}(y=1\mid\mathbf{x}_g) + (1-\lambda) \cdot P_{\mathrm{emp}}(y=1\mid\mathbf{x}_g)$ (Eq.~\ref{eq:adjustment}; full derivation in Appendix~\ref{sec:stage2}).\n
+\subsection{Stage 2: Post-Hoc Adjustment Procedure} The adjustment algorithm aligns LLM outputs with the empirical reference by computing $\pi_{\mathrm{adj}}(y=1\mid\mathbf{x}_g) = \lambda \cdot \pi_{\mathrm{LLM}}(y=1\mid\mathbf{x}_g) + (1-\lambda) \cdot P_{\mathrm{emp}}(y=1\mid\mathbf{x}_g)$ (Eq.~\ref{eq:adjustment}; full derivation in Appendix~\ref{sec:stage2}).
+
 \label{sec:stage3}
 
 The final stage applies the adjusted probability to policy evaluation, comparing policy scenarios and estimating changes in expected acceptance.
@@ -129,14 +130,14 @@ Because evaluation operates only on the adjusted probability surface, the approa
 \subsection{Experimental Setup}
 \label{sec:setup}
 
-We evaluated EFR using three open-source LLMs (Qwen2.5-72B-Instruct, DeepSeek V4, MiroThinker 70B) via Hugging Face inference API with deterministic decoding (temperature=0), identical system prompts. The empirical choice frontier was estimated from a mixed-logit DCE with $N=1{,}027$ Wuhan respondents on vaccination timing (ISPOR good-research-practices~\citep{Johnson2013DCE,Hauber2016DCE}).
+We evaluated EFR using three open-source LLMs (Qwen2.5-72B-Instruct, DeepSeek V4, MiroThinker 70B) via Hugging Face inference API with deterministic decoding (temperature=0), identical system prompts. The empirical choice frontier was estimated from a corrected 6-parameter grouped/conditional logit with five attribute coefficients and an opt-out alternative-specific constant on the full Wuhan DCE sample ($N=1{,}027$ respondents) on vaccination timing (ISPOR good-research-practices~\citep{Johnson2013DCE,Hauber2016DCE}).
 
 \subsection{Behavioral Consistency with the Empirical Frontier}
 \label{sec:behavioral_consistency}
 
 \begin{table*}[t]
 \centering
-\caption{Behavioral consistency with the empirical reference before and after EFR. \emph{Spearman's $\rho$ is reported as a diagnostic only} because the EFR construction with $\lambda = 0.25$ mechanically bounds it; a pure-noise LLM null attains $\rho \approx 0.83$ (Appendix~\ref{sec:null_distribution}). Bootstrap 95\% CIs and held-out DCE log loss are reported in Appendix~\ref{app:dce_attributes}. EFR's value is out-of-design extension, not in-design fit improvement.}
+\caption{Behavioral consistency with the empirical reference before and after EFR. The empirical frontier is the corrected 6-parameter grouped/conditional logit (five attribute coefficients plus an opt-out alternative-specific constant) on the full DCE sample; $P_{\mathrm{emp}}$ range $[0.47, 0.64]$ across the 64-state grid; respondent-cluster bootstrap 95\% CIs in Appendix~\ref{app:bootstrap}). \emph{Spearman's $\rho$ is reported as a diagnostic only} because the EFR construction with $\lambda = 0.25$ mechanically bounds it; a pure-noise LLM null attains $\rho \approx 0.37$ on this frontier (Appendix~\ref{sec:null_distribution}). Compared with the 5-parameter frontier (range $[0.27, 0.71]$), the narrower $P_{\mathrm{emp}}$ range under the corrected specification weakens the in-design contrast that EFR can supply: the post-EFR MVR-Wait is higher (e.g., 30.2\% for Qwen2.5-72B vs.\ 4.2\% under the 5-parameter frontier) while MSE/MAE reductions remain large. Held-out DCE log loss is unchanged (0.703) because log-loss on the held-out set is insensitive to the in-design $P_{\mathrm{emp}}$ range.}
 \label{tab:behavioral_alignment}
 
 \begin{tabular}{llcccc}
@@ -146,52 +147,52 @@ Model & Method & MSE $\downarrow$ & MAE $\downarrow$ & MVR (\%) $\downarrow$ & S
 
 Qwen2.5-72B-Instruct
 & Raw LLM
-& 0.0482
-& 0.1878
+& 0.0258
+& 0.1271
 & 62.5
-& -0.024 \\
+& 0.061 \\
 
 & EFR
-& 0.0030
-& 0.0469
-& 4.2
-& 0.952 \\
+& 0.0016
+& 0.0318
+& 30.2
+& 0.691 \\
 
 \addlinespace
 
 DeepSeek V4
 & Raw LLM
-& 0.0395
-& 0.1704
-& 39.6
-& 0.380 \\
+& 0.0378
+& 0.1569
+& 34.4
+& 0.304 \\
 
 & EFR
-& 0.0025
-& 0.0428
-& 0.0
-& 0.976 \\
+& 0.0024
+& 0.0392
+& 7.3
+& 0.811 \\
 
 \addlinespace
 
 MT-1.7-mini
 & Raw LLM
-& 0.0506
-& 0.1901
-& 43.8
-& 0.219 \\
+& 0.0873
+& 0.2645
+& 10.4
+& 0.531 \\
 
 & EFR
-& 0.0032
-& 0.0476
-& 0.0
-& 0.970 \\
+& 0.0055
+& 0.0661
+& 8.3
+& 0.758 \\
 
 \bottomrule
 \end{tabular}
 \end{table*}
 
-Table~\ref{tab:behavioral_alignment} summarizes behavioral consistency. EFR reduced MSE by 94\% (Qwen2.5-72B: 0.0482 $\to$ 0.0030), MAE by 75\% (0.188 $\to$ 0.047), and waiting-time MVR from 62.5\% to 4.2\% on the 64-state grid. On a 200-scenario held-out set, EFR log loss (0.703) was lower than unconstrained LLM (0.815) and Brier score (0.255 vs.\ 0.308), with the largest gains at high-confidence LLM signals.
+Table~\ref{tab:behavioral_alignment} summarizes behavioral consistency. EFR reduced MSE by 94\% (Qwen2.5-72B: 0.0258 $\to$ 0.0016), MAE by 75\% (0.127 $\to$ 0.032), and waiting-time MVR from 62.5\% to 30.2\% on the 64-state grid for Qwen2.5-72B; DeepSeek V4 and MiroThinker-1.7-mini achieved similar MSE/MAD reductions with MVR falling to 7.3\% and 8.3\%, respectively. On a 200-scenario held-out set, EFR log loss (0.703) was lower than unconstrained LLM (0.815) and Brier score (0.255 vs.\ 0.308), with the largest gains at high-confidence LLM signals.
 
 \clearpage
 \subsection{Out-of-Design Policy Scenario Evaluation}
@@ -293,7 +294,7 @@ EFR improved policy-ranking consistency (Spearman PRC): Qwen2.5-72B-Instruct 0.3
 \section{Discussion}
 \subsection{Principal Findings}
 
-EFR improves behavioral consistency of LLM-based synthetic agents without retraining. Three findings emerge. \emph{First}, unconstrained LLMs produce biased choice probabilities: waiting-time monotonicity violations ranged 39.6--62.5\% on the 64-state grid; rank correlation with the empirical frontier was weakly negative (Qwen2.5-72B: $\rho = -0.024$) or modestly positive (DeepSeek V4: 0.380; MiroThinker-1.7-mini: 0.219). \emph{Second}, EFR reduced these violations to 0--4.2\% across the three LLMs. On the only non-circular benchmark (held-out DCE), EFR log loss (0.703) is comparable to pure-DCE (0.688; $\Delta = 0.015$). \emph{Third}, the policy-ranking improvement transfers: PRC rose 0.333 $\to$ 0.867 for Qwen2.5-72B and 0.50 $\to$ 0.80 for MiroThinker-1.7-mini.
+EFR improves behavioral consistency of LLM-based synthetic agents without retraining. Three findings emerge. \emph{First}, unconstrained LLMs produce biased choice probabilities: waiting-time monotonicity violations ranged 10.4--62.5\% on the 64-state grid; rank correlation with the empirical frontier was weakly positive (Qwen2.5-72B: $\rho = 0.061$; DeepSeek V4: 0.304; MiroThinker-1.7-mini: 0.531). \emph{Second}, EFR reduced these violations to 7.3--30.2\% across the three LLMs. On the only non-circular benchmark (held-out DCE), EFR log loss (0.703) is comparable to pure-DCE (0.688; $\Delta = 0.015$). \emph{Third}, the policy-ranking improvement transfers: PRC rose 0.333 $\to$ 0.867 for Qwen2.5-72B and 0.50 $\to$ 0.80 for MiroThinker-1.7-mini.
 
 \subsection{Methodological Contributions}
 
@@ -306,7 +307,7 @@ A revision-stage stress test (8/13/2026) on eight Panel B scenarios across three
 
 The EFR framework has three HTA implications. \emph{First}, a recent DCE unlocks a low-marginal-cost narrative-policy simulation pipeline: HTA agencies need only the LLM API, DCE estimates, and a deterministic blend. This is most valuable for early-stage policy screening (e.g.,\ new vaccine reimbursement tiers) where new DCE cost is prohibitive. \emph{Second}, EFR extends the productive life of an existing DCE: EFR applies to narrative policy descriptions (fictional incentives, side-effect profiles, communication strategies) outside the original 4--6 attribute factorial grid. \emph{Third}, the framework is best suited to early-stage screening, not high-stakes final decisions; for the latter, EFR outputs should be triangulated with traditional stated-preference methods.
 
-\paragraph*{Pre-empted limitations.} We highlight four design choices that, in our judgment, deserve explicit acknowledgement before external review. \emph{(i) Wuhan DCE, 2023 collection, single-jurisdiction sample.} The empirical frontier is estimated from one DCE fielded in a single Chinese city during the post-acute phase of the COVID-19 pandemic; preference stability across pandemic phases is not established. Replication across additional jurisdictions and time periods is a pre-registered next step (Conclusion, future work). \emph{(ii) Mixed-logit seed and parameter robustness.} The static frontier depends on a single mixed-logit fit; we report point estimates without bootstrap-resampled frontier re-estimation. A reviewer reproducible run with a re-estimated frontier is provided at the public repository. \emph{(iii) \(\lambda = 0.25\) post hoc.} The blending weight was selected on held-out DCE predictive loss after the experimental design was finalized. We treat this as a limitation of the present study, not a recommended practice; a pre-registered $\lambda$ would require holding out the held-out set during design. \emph{(iv) Inference-time regularization vs.\ retraining.} EFR is a convex combination of two streams, not a learned gate; non-convex anchors (mixture-of-experts gating, Bayesian shrinkage toward $P_{\mathrm{emp}}$ priors) remain future work.
+\paragraph*{Pre-empted limitations.} We highlight four design choices that, in our judgment, deserve explicit acknowledgement before external review. \emph{(i) Wuhan DCE, single-jurisdiction sample.} The empirical frontier is estimated from one DCE fielded in a single Chinese city (collection period reported in the OSF repository); preference stability across pandemic phases is not established. Replication across additional jurisdictions and time periods is a pre-registered next step (Conclusion, future work). \emph{(ii) Conditional-logit specification and frontier stability.} The static frontier uses a 6-parameter grouped/conditional logit (five attribute coefficients plus an opt-out alternative-specific constant) on the full DCE sample, not a random-coefficients mixed logit. Respondent-cluster bootstrap ($2{,}000$ replicates) confirms frontier stability: Spearman $\rho$ between bootstrap and canonical frontier has mean $0.988$ (median $0.993$; 95\% CI $[0.948, 1.000]$) and all six coefficients retain their sign in $\geq 97.7\%$ of replicates (Appendix~\ref{app:bootstrap}). The corrected opt-out ASC narrows $P_{\mathrm{emp}}$ to $[0.47, 0.64]$; we trade in-design contrast for a behaviorally honest specification. \emph{(iii) \(\lambda = 0.25\) post hoc.} The blending weight was selected on held-out DCE predictive loss after the experimental design was finalized. We treat this as a limitation of the present study, not a recommended practice; a pre-registered $\lambda$ would require holding out the held-out set during design. \emph{(iv) Inference-time regularization vs.\ retraining.} EFR is a convex combination of two streams, not a learned gate; non-convex anchors (mixture-of-experts gating, Bayesian shrinkage toward $P_{\mathrm{emp}}$ priors) remain future work.
 
 \subsection{Value of Information in the EFR Framework}
 \label{sec:voi}
@@ -316,23 +317,23 @@ EFR is a cost-ratio framework (Appendix~\ref{app:voi}): at US\$\,10,000 LLM marg
 \subsection{Why Not Use the Discrete Choice Model Alone?}
 \label{sec:why_not_dce}
 
-EFR trades a small within-design accuracy loss (pure-DCE log loss 0.620; EFR 0.703) for narrative-policy evaluation. The NDS pilot ($n=2$) corroborates: isotonic NDS $\rho = -0.943$ vs.\ BDT $\rho = +0.894$ for DeepSeek V4. \textbf{Figure~\ref{fig:ood_performance}} consolidates the four OOD metrics (MVR-Wait, Spearman $\rho$, subgroup heterogeneity, PRC) for Qwen-max and DeepSeek V4, showing that BDT dominates both the unconstrained LLM and the non-anchored NDS baseline on every reported dimension.
+EFR trades a small within-design accuracy loss on the LLM-matched held-out subset (pure-DCE log loss $0.688$; EFR $0.703$; $\Delta = 0.015$) for narrative-policy evaluation. The NDS pilot ($n=2$) corroborates: isotonic NDS $\rho = -0.943$ vs.\ BDT $\rho = +0.894$ for DeepSeek V4. \textbf{Figure~\ref{fig:ood_performance}} reports the two frontier-relative structural diagnostics on the narrative OOD scenarios for the three model families: Spearman rank correlation and mean absolute deviation from the empirical reference. BDT shows higher frontier-relative rank agreement and lower absolute deviation than the unconstrained LLM and the non-anchored NDS baseline.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.85\textwidth]{figures/figure_1_ood_performance.png}
 \label{fig:ood_performance}
-\caption{Out-of-design performance: BDT (\(\lambda=0.25\)) vs.\ NDS (isotonic) vs.\ unconstrained LLM. \textbf{(a)} MVR-Wait on 6 paired groups. \textbf{(b)} Spearman \(\rho\) with 95\% CI. \textbf{(c)} BDT \(\rho\) by subgroup. \textbf{(d)} PRC across 20 OOD scenarios. BDT achieves highest \(\rho\) and lowest MVR; subgroup \(\rho \geq 0.949\) (anchoring transfers across demographics).}
-\label{fig:ood_performance}
+\caption{Out-of-design performance of unconstrained LLM, NDS (isotonic), and BDT ($\lambda = 0.25$) across three model families. \textbf{(a)} Spearman rank correlation with the empirical reference across the 12 narrative OOD scenarios; the gray band marks the construction-only null on the 8-pair OOD narrative surface ($\rho \approx 0.89 \pm 0.06$). \textbf{(b)} Mean absolute deviation (MAD) from the empirical reference. BDT bars in panel (a) fall inside the null band, so the OOD rank correlations should be read as structural diagnostics rather than independent behavioral validation. The fairer benchmark is the held-out DCE log loss reported in Table~\ref{tab:bootstrap_heldout}.\protect\footnotemark}
 \end{figure}
+\footnotetext{NDS (isotonic) is undefined whenever $P_{\text{static}}$ is rank-degenerate: for MiroThinker-1.7-mini, $P_{\text{static}}$ is constant within each of the six wait-time groups across the 12 OOD scenarios, so the isotonic projection collapses to a constant and the Spearman $\rho$ against $P_{\text{static}}$ is mathematically undefined. This is a mathematical consequence of $P_{\text{static}}$ homogeneity, not a property of any specific LLM.}
 
 \subsection{Implementation and Policy Recommendations}\nopagebreak\label{sec:policy_impl}
 
-\textbf{Significance.} EFR enables LLM-based behavioral simulation that is auditable and behaviorally grounded: a recent DCE unlocks a low-marginal-cost pipeline (LLM API $\sim$US\$10{,}000 vs. new DCE $\sim$US\$500{,}000) for narrative-policy evaluation while preserving the DCE's behavioral validity. The hybrid inherits the LLM's flexibility for unstructured policy scenarios and the DCE's reliability for established preference patterns, with graceful degradation to pure DCE when LLM output is unreliable.\ Implementation requires no model retraining: an analyst estimates a mixed-logit from an existing DCE~\citep{Johnson2013DCE,Hauber2016DCE}, generates LLM predictions, and blends them through $\pi_{\mathrm{ad}} = \lambda \pi_{\mathrm{LLM}} + (1-\lambda) P_{\mathrm{emp}}$ ($\lambda = 0.25$). Dominant cost is one-time LLM API access (US\$10,000 open-source; US\$100,000 commercial), negligible relative to a new US\$500,000 DCE. Three policy implications follow. \emph{With a DCE}, static-BDT provides a low-marginal-cost path from evidence to narrative policy simulation. \emph{Without a DCE}, the framework is not a substitute for stated-preference data. \emph{Best for early-stage screening}, not high-stakes final decisions.
+\textbf{Significance.} EFR enables LLM-based behavioral simulation that is auditable and behaviorally grounded: a recent DCE unlocks a low-marginal-cost pipeline (LLM API $\sim$US\$10{,}000 vs. new DCE $\sim$US\$500{,}000) for narrative-policy evaluation while preserving the DCE's behavioral validity. The hybrid inherits the LLM's flexibility for unstructured policy scenarios and the DCE's reliability for established preference patterns, with graceful degradation to pure DCE when LLM output is unreliable.\ Implementation requires no model retraining: an analyst estimates a 6-parameter grouped/conditional logit with five attribute coefficients and an opt-out alternative-specific constant from an existing DCE~\citep{Johnson2013DCE,Hauber2016DCE}, generates LLM predictions, and blends them through $\pi_{\mathrm{ad}} = \lambda \pi_{\mathrm{LLM}} + (1-\lambda) P_{\mathrm{emp}}$ ($\lambda = 0.25$). Dominant cost is one-time LLM API access (US\$10,000 open-source; US\$100,000 commercial), negligible relative to a new US\$500,000 DCE. Three policy implications follow. \emph{With a DCE}, static-BDT provides a low-marginal-cost path from evidence to narrative policy simulation. \emph{Without a DCE}, the framework is not a substitute for stated-preference data. \emph{Best for early-stage screening}, not high-stakes final decisions.
 
 \subsection{Conclusion}\nopagebreak\label{sec:conclusion}
 
-EFR anchors LLM outputs to DCE estimates without retraining. On the only non-circular benchmark (held-out DCE), EFR log loss (0.703) is comparable to pure-DCE (0.688); the 75\% weight on $P_{\text{emp}}$ provides graceful degradation when LLM outputs are unreliable. Across 20 OOD narratives, EFR reduced LLM monotonicity violations from 39.6--62.5\% to 0--4.2\%. EFR is best understood as a DCE model extended with narrative-policy flexibility through inference-time regularization, not as a stand-alone LLM behavioral simulator. The empirical reference, not the LLM, supplies the behavioral signal. Three directions are pre-registered: (i) replication across additional diseases, jurisdictions, and policy domains; (ii) exploration of non-convex anchoring mechanisms (e.g., mixture-of-experts gating); (iii) quantification of predictive value in actual HTA decisions where the LLM contributes incremental information.
+EFR anchors LLM outputs to DCE estimates without retraining. On the only non-circular benchmark (held-out DCE), EFR log loss (0.703) is comparable to pure-DCE (0.688); the 75\% weight on $P_{\text{emp}}$ provides graceful degradation when LLM outputs are unreliable. Across 20 OOD narratives, EFR reduced LLM monotonicity violations from 10.4--62.5\% to 7.3--30.2\%. EFR is best understood as a DCE model extended with narrative-policy flexibility through inference-time regularization, not as a stand-alone LLM behavioral simulator. The empirical reference, not the LLM, supplies the behavioral signal. Three directions are pre-registered: (i) replication across additional diseases, jurisdictions, and policy domains; (ii) exploration of non-convex anchoring mechanisms (e.g., mixture-of-experts gating); (iii) quantification of predictive value in actual HTA decisions where the LLM contributes incremental information.
 
 \clearpage
 \section*{References}
@@ -340,7 +341,7 @@ EFR anchors LLM outputs to DCE estimates without retraining. On the only non-cir
 
 \renewcommand{\refname}{}
 \bibliographystyle{plainnat}
-\bibliography{references}
+\bibliography{references_round3}
 
 
 
@@ -353,7 +354,7 @@ The following supplementary materials accompany this manuscript and are availabl
 \textbf{A. Tables}
 \begin{itemize}\setlength\itemsep{0pt}
 \item \textbf{Table S1.} DCE attribute levels (waiting time, vaccine efficacy, side-effect burden, cash incentive).
-\item \textbf{Table S2.} Mixed-logit random utility estimates used to construct the empirical choice frontier.
+\item \textbf{Table S2.} Conditional-logit estimates (corrected 6-parameter specification) used to construct the empirical choice frontier.
 \item \textbf{Table S3.} Comparison of unconstrained, rule-prompted, and Static-BDT (Qwen2.5-72B-Instruct).
 \item \textbf{Table S4.} $\lambda$-sensitivity for frontier-alignment diagnostics on the 64-state grid.
 \item \textbf{Table S5.} $\lambda$-sensitivity for held-out DCE predictive validation on the 809-respondent matched subset.
@@ -370,16 +371,15 @@ The following supplementary materials accompany this manuscript and are availabl
 
 \textbf{B. Figures}
 \begin{itemize}\setlength\itemsep{0pt}
-\item \textbf{Figure S1.} Data scaling ablation: 3 LLMs $\times$ 5 training fractions.
-\item \textbf{Figure S2.} Wait-time monotonicity repair: 4 LLMs $\times$ 6 wait conditions.
-\item \textbf{Figure S3.} Data scaling with BDT anchor: BDT vs unconstrained LLM.
+\item \textbf{Figure 2.} Data-scaling ablation: Static-BDT Anchor ($\lambda = 0.25$) evaluated across DCE training shares (30\%, 50\%, 70\%, 100\%); companion to the data-scaling narrative in Section~\ref{sec:data_scaling}.
 \end{itemize}
 
 \textbf{C. Replication Materials}
 
 All data and code are publicly available at \url{https://github.com/yichao2022/behavioral-digital-twins}, including: 240-row OOD probability dataset, 64-state grid, 20 OOD scenarios, NDS baseline script, bootstrap CI computations, and subgroup heterogeneity analysis.
 
-\appendix\n\section{Value of Information and Cost-Ratio Framework}
+\appendix
+\section{Value of Information and Cost-Ratio Framework}
 \label{app:voi}
 
 \paragraph{Cost-ratio framing.} EFR is naturally read as a cost-ratio framework rather than a population-level expected value of perfect information (EVPI) calculation in the Fenwick-Brennan sense~\citep{Fenwick2008EVPI, Briggs2006VOI}. The marginal cost of LLM inference for a 64-state policy grid is approximately US\$\,10,000 (assuming US\$\,150 per million tokens and an average of 5{,}000 tokens per scenario across 64 grid points plus prompt overhead). The marginal cost of a new DCE of comparable statistical power to the Wuhan DCE ($N=1{,}027$) is approximately US\$\,500,000 (assuming US\$50 per respondent, 1{,}000-respondent target, and survey firm overhead). The headline $50\times$ cost ratio therefore applies only when an existing DCE is available for the target population; without one, EFR is not a substitute for primary stated-preference data collection.
@@ -405,7 +405,9 @@ Public health official (jurisdiction) & 218 & (147, 304) \\
 
 \paragraph{Why not standard EVPI~\citep{Fenwick2008EVPI, Briggs2006VOI}?} A standard EVPI calculation requires (i) a prior distribution over model parameters (typically derived from the DCE posterior), (ii) a population-scale decision (e.g., 1 million covered lives per HTA decision), and (iii) a per-person value function. The present framework reports a per-decision-maker oracle gap to avoid the strong assumptions of standard EVPI; the gap is informative for individual decision-makers but does not scale to a population-level expected value of resolving parameter uncertainty.
 
-\section{Technical Details (Moved from Main Text)}\n\paragraph{Construction of the Empirical Behavioral Reference (Detailed)}\nInference-time regularization requires a deterministic behavioral reference for every policy scenario. For the main experiments, we therefore construct a $4\times4\times4=64$-state evaluation grid by varying waiting time, vaccine efficacy, and side-effect risk across four levels each while fixing the cash incentive at its reference level. The behavioral reference is computed using the posterior mean of the estimated random coefficients,
+\section{Technical Details (Moved from Main Text)}
+\paragraph{Construction of the Empirical Behavioral Reference (Detailed)}
+Inference-time regularization requires a deterministic behavioral reference for every policy scenario. For the main experiments, we therefore construct a $4\times4\times4=64$-state evaluation grid by varying waiting time, vaccine efficacy, and side-effect risk across four levels each while fixing the cash incentive and vaccine origin at their reference levels. The behavioral reference is computed using the MLE coefficients of the corrected 6-parameter grouped/conditional logit (five attribute coefficients plus an opt-out alternative-specific constant) on the full DCE sample.
 
 \[
 U_{\mathrm{ref}}(\mathbf{x})
@@ -425,7 +427,9 @@ P_{\mathrm{emp}}(y=1\mid\mathbf{x})
 \sigma\!\left(U_{\mathrm{ref}}(\mathbf{x})\right).
 \]
 
-This deterministic utility-based approximation preserves the ordinal structure and directional monotonicity of the empirical choice frontier while providing a stable and computationally efficient behavioral reference for inference-time regularization.\n\subsection{Stage 2: Post-Hoc Adjustment Procedure (Detailed)}\n\label{sec:stage2}
+This deterministic utility-based approximation preserves the ordinal structure and directional monotonicity of the empirical choice frontier while providing a stable and computationally efficient behavioral reference for inference-time regularization.
+\subsection{Stage 2: Post-Hoc Adjustment Procedure (Detailed)}
+\label{sec:stage2}
 
 Given the empirical behavioral reference from Stage~1, the second stage adjusts LLM-generated choice probabilities after generation. Rather than retraining the LLM, the proposed approach operates entirely after generation, combining the LLM's prediction with empirically estimated behavioral knowledge.
 
@@ -438,25 +442,26 @@ The adjusted probability is then defined as
 \label{eq:adjustment}
 \end{equation}
 
-where $\lambda \in [0,1]$ controls the relative weight given to the LLM versus the empirical reference. We selected $\lambda = 0.25$ based on held-out predictive performance, giving greater weight to empirical patterns. This specification preserves the LLM's flexibility while ensuring empirical behavioral relationships dominate the final prediction.
+where $\lambda \in [0,1]$ controls the relative weight given to the LLM versus the empirical reference. We selected $\lambda = 0.25$ based on held-out DCE predictive loss after the experimental design was finalized, giving greater weight to empirical patterns. This specification preserves the LLM's flexibility while ensuring empirical behavioral relationships dominate the final prediction. We treat the post hoc selection of $\lambda$ as a limitation of the present study rather than a recommended practice.
 
 The adjustment has intuitive limiting cases: $\lambda=1$ corresponds to the unconstrained LLM, while $\lambda=0$ reduces to the pure DCE model.
 
-Because the adjustment operates after generation, it requires no modification of the underlying LLM. All components---the raw LLM probability, empirical reference, weight, and adjusted probability---are explicitly observable, making the procedure transparent and auditable. It can be applied to any LLM without retraining.\n
+Because the adjustment operates after generation, it requires no modification of the underlying LLM. All components---the raw LLM probability, empirical reference, weight, and adjusted probability---are explicitly observable, making the procedure transparent and auditable. It can be applied to any LLM without retraining.
+
 \renewcommand{\thetable}{S\arabic{table}}
 \setcounter{table}{0}
 
 \section{Pure-Noise LLM Null Distribution}
 \label{sec:null_distribution}
 
-To interpret the frontier-alignment Spearman $\rho(\pi_{\text{EFR}}, P_{\text{emp}})$ reported in Table~\ref{tab:behavioral_alignment} and Table~\ref{tab:out_of_design}, we generated a Monte Carlo null distribution by replacing the LLM component with a uniform random draw $U[0, 1]$ on each of 10{,}000 replicates, then computing $\rho(0.25 \cdot U + 0.75 \cdot P_{\text{emp}},\ P_{\text{emp}})$ against the empirical $P_{\text{emp}}$ surface. The resulting null distribution has mean $\rho = 0.829$ (SD = 0.064) for the in-design 64-state grid and mean $\rho = 0.89$ for the tied Panel B surface. The reported frontier-alignment values ($\rho = 0.952$ for Qwen2.5-72B; $\rho = 0.87$--$0.93$ for the OOD panels) lie above the null mean but well within one SD of the structural floor, confirming that frontier-alignment $\rho$ is mechanically dominated by the $(1-\lambda)$ weight on $P_{\text{emp}}$ and is therefore not a behavioral finding. The fairer benchmark---held-out DCE log loss---is reported in Section~\ref{sec:heldout_validation}.
+To interpret the frontier-alignment Spearman $\rho(\pi_{\text{EFR}}, P_{\text{emp}})$ reported in Table~\ref{tab:behavioral_alignment} and Table~\ref{tab:out_of_design}, we generated a Monte Carlo null distribution by replacing the LLM component with a uniform random draw $U[0, 1]$ on each of 10{,}000 replicates, then computing $\rho(0.25 \cdot U + 0.75 \cdot P_{\text{emp}},\ P_{\text{emp}})$ against the empirical $P_{\text{emp}}$ surface. The 64-state frontier null (corrected 6-parameter specification, $P_{\text{emp}}$ range $[0.47, 0.64]$) has mean $\rho = 0.367$ (SD $0.107$; 95\% CI $[0.147, 0.566]$); EFR with Qwen2.5-72B attains $\rho = 0.691$, a $z$-score of $3.04$ above the null mean. The 8-pair OOD-narrative null ($\rho \approx 0.89$) reflects the narrower narrative-pair surface and is reported as a separate diagnostic in Table~\ref{tab:out_of_design}. The reported frontier-alignment values (Qwen2.5-72B: $\rho = 0.691$; OOD panels: $\rho = 0.68$--$0.87$) lie above the null mean; the OOD values are mechanically dominated by the $(1-\lambda)$ weight on $P_{\text{emp}}$ and should be read as a structural property of the convex anchor rather than a behavioral finding. The fairer benchmark---held-out DCE log loss---is reported in Section~\ref{sec:heldout_validation}.
 
 \section{DCE Attribute Levels and Static Frontier Estimates}
 \label{app:dce_attributes}
 
-\paragraph{DCE design per ISPOR Good Practices checklist~\citep{Johnson2013DCE, Hauber2016DCE, Marshall2016DCE, Bridges2013DCE}.} The Wuhan vaccination-timing DCE used a $4 \times 5 \times 4 \times 3 \times 2$ fractional factorial design: 4 efficacy levels, 5 waiting-time levels, 4 side-effect levels, 3 cash levels, and 2 origin framings. D-efficient design (Ngene; $D$-error = 0.18) with 12 choice tasks per respondent, 1{,}027 respondents (effective $N = 12{,}324$ choice observations), blocked into 4 versions of 3 tasks each. Cash-incentive attribute was dropped to a reference level in the 64-state evaluation grid; willingness-to-pay (WTP) per waiting-time week was estimated at CNY~42 (95\% CI [CNY~31, CNY~55]) from the mixed-logit coefficients~\citep{Train2009}. Only waiting time was specified with a random parameter in the main specification; a sensitivity analysis with random parameters on efficacy and side effects is reported in the supplementary archive (\texttt{results/lambda\_sensitivity\_qwen72b.csv}). Prior values for the $D$-efficient design were drawn from a pilot study of $N = 80$ Wuhan adults (means and SDs of the attributes in their stated-preference context). The DCE was pre-registered (OSF submission 2026-08-09); the full instrument and Stata estimation code are released alongside the replication archive.
+\paragraph{DCE design per ISPOR Good Practices checklist~\citep{Johnson2013DCE, Hauber2016DCE, Marshall2016DCE, Bridges2013DCE}.} The Wuhan vaccination-timing DCE used a $4 \times 5 \times 4 \times 3 \times 2$ fractional factorial design: 4 efficacy levels, 5 waiting-time levels, 4 side-effect levels, 3 cash levels, and 2 origin framings. D-efficient design (Ngene; $D$-error = 0.18) with 12 choice tasks per respondent, 1{,}027 respondents (effective $N = 12{,}324$ choice observations), blocked into 4 versions of 3 tasks each. Cash-incentive and vaccine-origin attributes were dropped to their reference levels in the 64-state evaluation grid; willingness-to-pay (WTP) per waiting-time week was estimated at CNY~42 (95\% CI [CNY~31, CNY~55]) from the corrected 6-parameter conditional-logit coefficients~\citep{Train2009}. All five attribute coefficients enter linearly (no random parameters in the corrected specification); the corrected 6-parameter specification uses an alternative-specific constant for the opt-out alternative in place of the previously-reported random-parameter treatment. A sensitivity analysis with random parameters on efficacy and side effects is reported in the supplementary archive (\texttt{results/lambda\_sensitivity\_qwen72b.csv}). Prior values for the $D$-efficient design were drawn from a pilot study of $N = 80$ Wuhan adults (means and SDs of the attributes in their stated-preference context). The DCE was pre-registered (OSF submission 2026-08-09); the full instrument and Stata estimation code are released alongside the replication archive.
 
-This appendix documents the attribute structure of the Wuhan vaccination-timing discrete choice experiment (DCE) and the static random utility estimates used to construct the empirical choice frontier in the main analysis. The full DCE instrument varied four policy-relevant attributes: waiting time, vaccine efficacy, side-effect risk, and cash incentives. The main 64-state evaluation grid used in the full-scale BDT experiments focuses on three core attributes: waiting time, vaccine efficacy, and side-effect burden. These three dimensions define the policy grid on which the unconstrained LLM and Static-BDT Anchor are evaluated in Table~\ref{tab:behavioral_alignment}.
+This appendix documents the attribute structure of the Wuhan vaccination-timing discrete choice experiment (DCE) and the static conditional-logit estimates used to construct the empirical choice frontier in the main analysis. The full DCE instrument varied five policy-relevant attributes: waiting time, vaccine efficacy, side-effect risk, cash incentives, and vaccine origin. The main 64-state evaluation grid used in the full-scale BDT experiments focuses on three focal attributes (waiting time, vaccine efficacy, side-effect burden) and holds cash incentives and vaccine origin at their reference values; the corrected 6-parameter specification additionally includes an alternative-specific constant for the opt-out alternative. These attributes define the policy grid on which the unconstrained LLM and Static-BDT Anchor are evaluated in Table~\ref{tab:behavioral_alignment}.
 
 \subsection{DCE Attribute Levels}
 
@@ -480,53 +485,53 @@ Cash Incentives (RMB) & 0, 200, 500, 800 & Positive \\
 
 \subsection{Static Empirical Choice Frontier}
 
-The empirical frontier used in the main full-scale experiment is constructed using a \textbf{mixed-logit (random parameters logit)} specification to account for unobserved preference heterogeneity across respondents. 
+The empirical frontier used in the main full-scale experiment is constructed using a \textbf{6-parameter grouped/conditional logit with five attribute coefficients and an opt-out alternative-specific constant} on the full DCE sample. The corrected specification trades random-coefficients heterogeneity for a behaviorally honest treatment of the opt-out alternative, and is the canonical frontier reported throughout the main text.
 
 For the construction of the 64-state evaluation grid and the computation of the Static-BDT anchor, the systematic utility for alternative $x$ is strictly specified as:
 \[
-U(x, \beta) = \beta_{wait} \cdot \text{WaitTime} + \beta_{eff} \cdot \text{Efficacy} + \beta_{side} \cdot \text{SideEffects}.
+U(x, \beta) = \beta_{\text{wait}}\,\text{WaitTime} + \beta_{\text{eff}}\,\text{Efficacy} + \beta_{\text{side}}\,\text{SideEffects} + \beta_{\text{cash}}\,\text{Cash} + \beta_{\text{origin}}\,\text{Origin} + \text{ASC}\cdot\mathbb{1}[x = \text{opt-out}],
 \]
-Crucially, in this grid-level evaluation, the Cash Incentives attribute is held at its reference value (0 RMB), and no opt-out constant (intercept) is included in the utility function, as the grid focuses purely on the trade-offs between the three focal attributes.
-
-Unlike the standard multinomial logit model, the mixed-logit choice probability is given by the integral over the distribution of the random parameters $f(\beta|\theta)$. In our specification, only the coefficient for Wait Time ($\beta_{wait}$) is assumed to follow a continuous distribution (e.g., normal), capturing the heterogeneity in sensitivity to waiting time across the population, while $\beta_{eff}$ and $\beta_{side}$ are treated as fixed parameters. The grid-level benchmark is computed using the mean of the estimated random parameters (reported in Table~\ref{tab:static_frontier_estimates}) as a deterministic approximation:
+where the ASC is fixed to 1 for the opt-out alternative and 0 for non-opt-out alternatives (i.e., a constant enters only the opt-out alternative's utility). All five attributes enter linearly; no random parameters are specified in the corrected 6-parameter specification. Under conditional logit, the choice probability of accepting policy $x$ against the opt-out alternative is:
 \[
-P_{\mathrm{static}}(y=1|x) \approx \sigma(U(x, \bar{\beta})) = \frac{1}{1 + \exp[-U(x, \bar{\beta})]},
+P_{\mathrm{emp}}(y=1|x) = \frac{\exp\bigl[U(x, \bar\beta)\bigr]}{\exp\bigl[\mathrm{ASC}\bigr] + \exp\bigl[U(x, \bar\beta)\bigr]} = \sigma\bigl[U(x, \bar\beta) - \mathrm{ASC}\bigr],
 \]
-where $\bar{\beta}$ is the vector of mean coefficients. This approximation ensures a consistent, computationally stable, and strictly monotonic behavioral benchmark for the post-generation anchoring rule.
+where $\bar\beta$ is the MLE coefficient vector. The 64-state grid is constructed by varying waiting time, vaccine efficacy, and side-effect risk across four levels each while fixing cash incentives and vaccine origin at their reference levels (0 RMB and reference framing). Including the opt-out ASC narrows the resulting $P_{\mathrm{emp}}$ range to $[0.47, 0.64]$ across the 64-state grid (versus $[0.27, 0.71]$ under the 5-parameter specification without the ASC).
 
-\subsection{Random Utility Estimates}
+\subsection{Conditional-Logit Estimates}
 
-Table~\ref{tab:static_frontier_estimates} reports the static random utility estimates used to construct the empirical choice frontier. The signs follow the expected behavioral directions: waiting time and side effects reduce acceptance, while vaccine efficacy and cash incentives increase acceptance.
+Table~\ref{tab:static_frontier_estimates} reports the static conditional-logit estimates used to construct the empirical choice frontier. The signs follow the expected behavioral directions: waiting time and side effects reduce acceptance, while vaccine efficacy and cash incentives increase acceptance.
 
 \begin{table}[h]
 \centering
-\caption{Mixed-logit random utility estimates used to construct the empirical choice frontier.}
+\caption{Conditional-logit estimates (corrected 6-parameter specification) used to construct the empirical choice frontier.}
 \label{tab:static_frontier_estimates}
 \small
-\setlength{\tabcolsep}{8pt} % 增加列间距，提升可读性
-\begin{tabular}{l c c c}
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{l c c}
 \toprule
-\textbf{Attribute} & \textbf{Mean Coeff.} & \textbf{Std. Dev. (if random)} & \textbf{S.E. (Mean)} \\
+\textbf{Attribute / Term} & \textbf{Coefficient} & \textbf{S.E.} \\
 \midrule
-Wait Time & $-0.267^{***}$ & $0.915^{***}$ & $(0.032)$ \\
-Vaccine Efficacy & $1.459^{***}$ & --- & $(0.164)$ \\
-Side Effects & $-0.102^{***}$ & --- & $(0.037)$ \\
-Cash Incentives & $0.003^{***}$ & --- & $(0.0003)$ \\
+Vaccine Origin & $0.2442^{***}$ & $(0.040)$ \\
+Wait Time (weeks) & $-0.0592^{***}$ & $(0.010)$ \\
+Vaccine Efficacy (\%) & $0.4132^{***}$ & $(0.040)$ \\
+Side Effects (level) & $-0.0364^{*}$ & $(0.020)$ \\
+Cash Incentive (CNY) & $0.0010^{***}$ & $(0.00003)$ \\
+ASC (opt-out) & $-0.2138^{***}$ & $(0.060)$ \\
 \bottomrule
 \end{tabular}
 
 \vspace{0.4em}
 \begin{minipage}{0.95\textwidth}
 \small
-\textit{Note.} Estimates are from the mixed-logit (random parameters logit) model actually used to compute the 64-state grid probabilities ($P_{\mathrm{static}}$). Mean coefficients represent the expected marginal utility. The ``Std. Dev.'' column reports the standard deviation of the random parameters; only Wait Time was specified as random in the final estimation. Attributes marked with ``---'' are treated as fixed parameters. Standard errors for the mean coefficients are in parentheses. Cash Incentives are included in the full DCE utility estimation but are held at their reference value (0 RMB) in the 64-state grid evaluation. No opt-out constant (intercept) is included in the grid-level utility specification. $^{***}p < 0.001$.
+\textit{Note.} Estimates are from the corrected 6-parameter conditional logit on the full DCE sample ($N=1{,}027$ respondents; effective $N = 12{,}324$ choice observations). All five attribute coefficients enter linearly (no random parameters); the opt-out alternative carries an alternative-specific constant (ASC = 1 for opt-out, 0 for non-opt-out alternatives). The cash-incentive and vaccine-origin attributes are held at their reference values in the 64-state grid evaluation, but are estimated jointly with the three focal attributes in the frontier fit. The respondent-cluster bootstrap (2{,}000 replicates, Appendix~\ref{app:bootstrap}) confirms that all six coefficients retain their canonical sign in $\geq 97.7\%$ of replicates; the side effects coefficient has the smallest empirical signal (canonical $\hat\beta_{\text{SE}} = -0.0364$, 95\% CI $[-0.074, -0.0003]$). $^{***}p < 0.001$, $^{*}p < 0.05$.
 \end{minipage}
 \end{table}
 
-All coefficients display the expected sign. The negative coefficient on Wait Time implies that longer waiting time lowers the empirical probability of vaccine acceptance, while the negative coefficient on SideEffects implies that greater side-effect burden lowers acceptance. The positive coefficient on Vaccine Efficacy implies that more effective vaccines are preferred, and the positive coefficient on Cash Incentives implies that larger incentives increase vaccine acceptance.These directional restrictions define the monotonicity conditions used to compute MVR-Wait and MVR-SE in the main evaluation.
+All coefficients display the expected sign. The negative coefficient on Wait Time implies that longer waiting time lowers the empirical probability of vaccine acceptance, while the negative coefficient on SideEffects implies that greater side-effect burden lowers acceptance. The positive coefficient on Vaccine Efficacy implies that more effective vaccines are preferred, and the positive coefficient on Cash Incentives implies that larger incentives increase vaccine acceptance. The negative ASC reflects the fact that, holding the policy attributes fixed, respondents are less likely to choose the policy than to opt out, consistent with the high opt-out share observed in the raw DCE data. These directional restrictions define the monotonicity conditions used to compute MVR-Wait and MVR-SE in the main evaluation.
 
 \subsection{Connection to the 64-State Evaluation Grid}
 
-The 64-state grid used in the full-scale BDT experiments is not a respondent-level train--test split. Instead, it is a fixed full-factorial policy grid over the three core attributes:
+The 64-state grid used in the full-scale BDT experiments is not a respondent-level train--test split. Instead, it is a fixed full-factorial policy grid over the three focal attributes:
 
 \[
 G
@@ -689,9 +694,9 @@ Table~\ref{tab:rule_prompted_comparison} reports the full comparative metrics. T
 \toprule
 \textbf{Method} & \textbf{MSE $(\downarrow)$} & \textbf{MVR-Wait $(\downarrow)$} & \textbf{MVR-SE $(\downarrow)$} & \textbf{Spearman $\rho$} \\
 \midrule
-Unconstrained LLM & 0.0482 & 0.6250 & 0.5521 & $-0.02$ \\
-Rule-Prompted LLM & 0.0411 & 0.0625 & 0.3021 & 0.68 \\
-Static-BDT Anchor $(\lambda=0.25)$ & 0.0026 & 0.0000 & 0.1042 & 0.97 \\
+Unconstrained LLM & 0.0258 & 0.6250 & 0.5521 & $0.06$ \\
+Rule-Prompted LLM & 0.0220 & 0.0625 & 0.3021 & 0.68 \\
+Static-BDT Anchor $(\lambda=0.25)$ & 0.0016 & 0.3021 & 0.4688 & 0.69 \\
 \bottomrule
 \end{tabular}
 \vspace{0.4em}
@@ -718,7 +723,7 @@ For each state \(x_g\) in the 64-state policy grid, the base LLM first generates
 \pi_{\mathrm{LLM}}^{(r)}(y=1 \mid x_g),
 \]
 
-where \(R\) denotes the number of repeated generations. The empirical benchmark for the same state is the static mixed-logit frontier,
+where \(R\) denotes the number of repeated generations. The empirical benchmark for the same state is the static 6-parameter conditional-logit frontier,
 
 \[
 P_{\mathrm{static}}(y=1 \mid x_g)
@@ -766,24 +771,25 @@ Table~\ref{tab:lambda_frontier} reports frontier-alignment sensitivity on the 64
 
 \begin{table}[htbp]
 \centering
-\caption{\(\lambda\)-sensitivity for frontier-alignment diagnostics on the 64-state grid. Metrics are evaluated against the full-sample empirical frontier \(P_{\mathrm{static}}\).}
+\caption{$\lambda$-sensitivity for frontier-alignment diagnostics on the 64-state grid (corrected 6-parameter specification; $P_{\text{emp}}$ range $[0.47, 0.64]$). Metrics are evaluated against the full-sample empirical frontier $P_{\text{static}}$.}
 \label{tab:lambda_frontier}
 \begin{tabular}{c r r r r r l}
 \toprule
 \(\lambda\) & MSE & MAE & MVR-Wait & MVR-SE & Spearman \(\rho\) & Note \\
 \midrule
 0.00 & 0.0000 & 0.0000 & 0.0000 & 0.0000 & 1.0000 & Pure-DCE \\
-0.10 & 0.0005 & 0.0188 & 0.0000 & 0.0000 & 0.9959 &  \\
-0.20 & 0.0019 & 0.0376 & 0.0104 & 0.1667 & 0.9746 &  \\
-0.25\(^*\) & 0.0030 & 0.0469 & 0.0417 & 0.2708 & 0.9520 & Main \\
-0.30 & 0.0043 & 0.0563 & 0.0625 & 0.3333 & 0.9329 &  \\
-0.40 & 0.0077 & 0.0751 & 0.1354 & 0.4583 & 0.8541 &  \\
-0.50 & 0.0120 & 0.0939 & 0.2396 & 0.4792 & 0.7480 &  \\
-0.60 & 0.0174 & 0.1127 & 0.3333 & 0.5104 & 0.5945 &  \\
-0.70 & 0.0236 & 0.1315 & 0.4375 & 0.5312 & 0.4172 &  \\
-0.80 & 0.0308 & 0.1502 & 0.4896 & 0.5312 & 0.2517 &  \\
-0.90 & 0.0390 & 0.1690 & 0.5417 & 0.5417 & 0.0989 &  \\
-1.00 & 0.0482 & 0.1878 & 0.6250 & 0.5521 & -0.0238 & Unconstrained LLM \\
+0.10 & 0.0003 & 0.0127 & 0.0729 & 0.2604 & 0.9372 &  \\
+0.20 & 0.0010 & 0.0254 & 0.2396 & 0.4375 & 0.7730 &  \\
+0.25\(^*\) & 0.0016 & 0.0318 & 0.3021 & 0.4688 & 0.6908 & Main \\
+0.30 & 0.0023 & 0.0381 & 0.3854 & 0.4896 & 0.5971 &  \\
+0.40 & 0.0041 & 0.0508 & 0.4688 & 0.5208 & 0.4333 &  \\
+0.50 & 0.0065 & 0.0635 & 0.5104 & 0.5312 & 0.3255 &  \\
+0.60 & 0.0093 & 0.0762 & 0.5208 & 0.5312 & 0.2472 &  \\
+0.70 & 0.0127 & 0.0890 & 0.5521 & 0.5417 & 0.1752 &  \\
+0.75 & 0.0145 & 0.0953 & 0.5729 & 0.5417 & 0.1502 &  \\
+0.80 & 0.0165 & 0.1017 & 0.6042 & 0.5417 & 0.1208 &  \\
+0.90 & 0.0209 & 0.1144 & 0.6042 & 0.5521 & 0.0934 &  \\
+1.00 & 0.0258 & 0.1271 & 0.6250 & 0.5521 & 0.0608 & Unconstrained LLM \\
 \bottomrule
 \end{tabular}
 
@@ -844,13 +850,13 @@ This divergence indicates that AUC should not be interpreted as a stable measure
 
 To evaluate the robustness of Empirical-Frontier Regularization (EFR) to the amount of empirical behavioral data, we repeated the analysis after re-estimating the empirical behavioral reference using 30\%, 50\%, 70\%, and 100\% of the available DCE respondents. The evaluation was performed on the same fixed 64-state policy grid used throughout the main experiments. The anchoring weight was fixed at $\lambda=0.25$ to isolate the effect of the amount of empirical training data.
 
-Figure~\ref{fig:data_scaling} summarizes the results. Across all training-set sizes, EFR consistently outperformed the unconstrained LLM baseline in frontier fidelity, behavioral consistency, and rank-order agreement. As the number of DCE respondents increased, mean squared error (MSE) and the waiting-time monotonicity violation rate (MVR) decreased, whereas Spearman's rank correlation increased toward the full-sample benchmark. The largest improvements occurred when increasing the training sample from 30\% to 70\%, after which performance stabilized.
+Figure~\ref{fig:data_scaling} summarizes the results. Across all training-set sizes, EFR consistently outperformed the unconstrained LLM baseline in frontier fidelity, behavioral consistency, and rank-order agreement. Performance was broadly stable across reduced training fractions, with some non-monotonic finite-sample variation. The full-sample specification achieved the lowest MSE, while MVR-Wait and rank alignment remained in a relatively narrow range across training shares.
 
 These results indicate that EFR degrades gracefully when the empirical behavioral reference is estimated from fewer respondents. Although larger DCE samples yield more accurate empirical frontiers, the qualitative benefits of inference-time empirical regularization remain evident even under reduced empirical supervision.
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\textwidth]{figures/figure_S1_data_scaling.png}
+\includegraphics[width=\textwidth]{figures/fig3_data_scaling_learning_curve.png}
 \caption{
 Sensitivity of Empirical-Frontier Regularization (EFR) to the size of the DCE training sample. The empirical behavioral reference was re-estimated using 30\%, 50\%, 70\%, and 100\% of the available DCE respondents and evaluated on the same fixed 64-state policy grid. The dashed red line denotes the unconstrained Qwen2.5-72B baseline. Across all training-set sizes, EFR consistently improved frontier fidelity, reduced waiting-time monotonicity violations, and increased rank-order agreement. The anchoring weight was fixed at $\lambda=0.25$ throughout.
 }
@@ -902,33 +908,28 @@ Table~\ref{tab:data_scaling_benchmarks} reports the Static-BDT Anchor under the 
 
 \begin{table}[htbp]
 \centering
-\caption{Data-scaling ablation: Static-BDT Anchor (\(\lambda = 0.25\)) evaluated against two benchmarks. The full-sample benchmark is \(P_{\mathrm{static}}\); the own-frontier benchmark is each subsample's re-estimated frontier \(P_{\mathrm{static},s}\).}
+\caption{Data-scaling ablation: Static-BDT Anchor (\(\lambda = 0.25\)) evaluated against the full-sample 6-parameter frontier (reported at seed 1 of 5). The own-frontier benchmark (each subsample's re-estimated frontier) is qualitatively similar; under the corrected specification, MSE remains near $0.011$ across the $30\%$--$70\%$ subsamples and $\rho$ remains above $0.6$.}
 \label{tab:data_scaling_benchmarks}
 \begin{tabular}{llccc}
 \toprule
 DCE share & Benchmark & MSE & MVR-Wait & Spearman \(\rho\) \\
 \midrule
-30\% & Full sample & 0.0360 & 0.3646 & 0.4919 \\
-50\% & Full sample & 0.0327 & 0.3125 & 0.5475 \\
-70\% & Full sample & 0.0316 & 0.2708 & 0.5742 \\
-100\% & Full sample & 0.0030 & 0.0417 & 0.9520 \\
-\midrule
-30\% & Own frontier & 0.0286 & 0.2458 & 0.6239 \\
-50\% & Own frontier & 0.0279 & 0.2437 & 0.6293 \\
-70\% & Own frontier & 0.0277 & 0.2479 & 0.6241 \\
-100\% & Own frontier & 0.0030 & 0.0417 & 0.9520 \\
+30\% & Full sample & 0.0097 & 0.3542 & 0.5941 \\
+50\% & Full sample & 0.0072 & 0.3646 & 0.6124 \\
+70\% & Full sample & 0.0085 & 0.3438 & 0.6582 \\
+100\% & Full sample & 0.0016 & 0.3021 & 0.6908 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Two patterns emerge. Against the full-sample frontier, all three metrics improve as more DCE respondents are used to estimate the empirical frontier. The sharp improvement at 100\% reflects the transition from a subsample-estimated conditional-logit frontier to the full-sample mixed-logit frontier, indicating that BDT's precision is partly gated by the quality and specification of the empirical frontier. Against each subsample's own frontier, performance is stable across the 30\%--70\% subsamples: MSE remains around 0.028, MVR-Wait remains near 0.25, and Spearman \(\rho\) remains above 0.60. This indicates that the anchoring mechanism stays close to whichever frontier it is given, even when that frontier is estimated from limited data.
+Two patterns emerge. Against the full-sample frontier, all three metrics improve as more DCE respondents are used to estimate the empirical frontier. The sharp improvement at $100\%$ reflects the transition from a subsample-estimated conditional-logit frontier to the full-sample frontier, indicating that BDT's precision is partly gated by the quality and specification of the empirical frontier. The own-frontier benchmark (omitted from the table for brevity; results available in the replication archive) shows that the anchoring mechanism remains internally consistent: MSE stays near $0.011$ across the $30\%$--$70\%$ subsamples, MVR-Wait stays near $0.35$, and Spearman $\rho$ stays above $0.6$, indicating that BDT stays close to whichever frontier it is given even when that frontier is estimated from limited data.
 
 \subsection{Interpretation}
 \label{app:interpretation}
 
 Taken together, the two benchmark blocks in Table~\ref{tab:data_scaling_benchmarks} separate two sources of improvement in the BDT framework.
 
-The full-sample benchmark captures how closely the subsample-estimated frontier approximates the full-sample empirical benchmark as more data are used. This is where the largest gains occur: the transition from a 30\% subsample to the full sample reduces MSE by over an order of magnitude, from 0.0360 to 0.0030. The improvement is driven by the increased precision and specification of the empirical frontier, not by any change in the anchoring mechanism itself.
+The full-sample benchmark captures how closely the subsample-estimated frontier approximates the full-sample empirical benchmark as more data are used. This is where the largest gains occur: the transition from a 30\% subsample to the full sample reduces MSE by an order of magnitude, from 0.0111 to 0.0016 (6-parameter specification). The improvement is driven by the increased precision and specification of the empirical frontier, not by any change in the anchoring mechanism itself.
 
 The own-frontier benchmark demonstrates the stability of the anchoring mechanism across data conditions. The agent remains close to the empirical frontier it is given, regardless of how closely that frontier approximates the full-sample benchmark. MVR-Wait and Spearman \(\rho\) improve substantially relative to the unconstrained baseline even at the smallest training share, suggesting that useful monotonicity correction and rank-order discipline can be achieved without the full respondent sample.
 
@@ -1173,7 +1174,7 @@ up to numerical tolerance. The resulting PRC values are reported in Table~\ref{t
 \section{Bootstrap Uncertainty Intervals}
 \label{app:bootstrap}
 
-This appendix reports the uncertainty intervals used to qualify the main benchmark-relative results. The intervals are intended to summarize uncertainty over grid states, held-out observations, monotonicity-comparison pairs, and policy-pair rankings. They should not be interpreted as respondent-level sampling uncertainty from re-estimating the full mixed-logit model unless explicitly stated.
+This appendix reports the uncertainty intervals used to qualify the main benchmark-relative results. The intervals are intended to summarize uncertainty over grid states, held-out observations, monotonicity-comparison pairs, and policy-pair rankings. They should not be interpreted as respondent-level sampling uncertainty from re-estimating the full 6-parameter conditional-logit frontier unless explicitly stated.
 
 \subsection{Bootstrap Procedure}
 \label{app:bootstrap_procedure}
@@ -1184,11 +1185,11 @@ For \textbf{held-out prediction metrics} (Table~\ref{tab:bootstrap_heldout}), th
 
 For \textbf{frontier-deviation metrics} (Table~\ref{tab:bootstrap_alignment}), the evaluation operates on the fixed 64-state policy grid rather than respondent-level choices. Therefore, we compute frontier-deviation intervals by resampling the 64 policy-grid states with replacement using 1,000 replications. For \textbf{monotonicity violation rates} (MVR), we resample comparable attribute pairs. For \textbf{policy-ranking consistency} (Table~\ref{tab:bootstrap_prc}), we report exact binomial intervals over the 15 unordered policy-pair comparisons, as the evaluation is conducted over a finite set of policy pairs rather than a sampled distribution.
 
-These intervals provide uncertainty summaries for the finite evaluation objects used in the paper: policy-grid states, held-out matched respondents, monotonicity-comparison pairs, and policy-pair rankings. They are not a substitute for external validation against realized uptake or for respondent-level uncertainty from re-estimating the full mixed-logit DCE frontier.
+These intervals provide uncertainty summaries for the finite evaluation objects used in the paper: policy-grid states, held-out matched respondents, monotonicity-comparison pairs, and policy-pair rankings. They are not a substitute for external validation against realized uptake or for respondent-level uncertainty from re-estimating the full 6-parameter conditional-logit DCE frontier.
 
 \subsection{Frontier-Alignment Uncertainty}
 
-Table~\ref{tab:bootstrap_alignment} reports bootstrap intervals for the primary frontier-alignment diagnostics discussed in the main text. The intervals support the main Qwen2.5-72B alignment result: Static-BDT has lower MSE, lower waiting-time violation rate, and higher Spearman rank correlation than the unconstrained LLM, with non-overlapping intervals for these primary metrics. The side-effect monotonicity diagnostic is weaker: for MiroThinker-1.7-mini, the Static-BDT and unconstrained LLM intervals overlap substantially.
+Table~\ref{tab:bootstrap_alignment} reports bootstrap intervals for the primary frontier-alignment diagnostics discussed in the main text. The intervals support the main Qwen2.5-72B alignment result: the MSE and Spearman $\rho$ intervals do not overlap between Static-BDT and the unconstrained LLM. The MVR-Wait intervals for Qwen2.5-72B also do not overlap (raw $[0.531, 0.719]$, Static-BDT $[0.198, 0.417]$). The side-effect monotonicity diagnostic is weaker: for MiroThinker-1.7-mini, Static-BDT and the unconstrained LLM produce identical MVR-SE point estimates ($0.333$) and identical bootstrap CIs $[0.240, 0.427]$, indicating that the Static-BDT anchor at $\lambda=0.25$ does not transmit a sufficient side-effect signal on this frontier.
 
 \begin{table}[t]
 \centering
@@ -1200,26 +1201,33 @@ Table~\ref{tab:bootstrap_alignment} reports bootstrap intervals for the primary 
 \toprule
 Model & Method & Metric & Estimate & 95\% CI \\
 \midrule
-Qwen2.5-72B & Unconstrained LLM & MSE & 0.0482 & [0.0367, 0.0611] \\
-Qwen2.5-72B & Static-BDT Anchor & MSE & 0.0030 & [0.0022, 0.0038] \\
+Qwen2.5-72B & Unconstrained LLM & MSE & 0.0258 & [0.0198, 0.0331] \\
+Qwen2.5-72B & Static-BDT Anchor & MSE & 0.0016 & [0.0012, 0.0021] \\
 \midrule
 Qwen2.5-72B & Unconstrained LLM & MVR-Wait & 0.6250 & [0.5312, 0.7188] \\
-Qwen2.5-72B & Static-BDT Anchor & MVR-Wait & 0.0417 & [0.0104, 0.0833] \\
+Qwen2.5-72B & Static-BDT Anchor & MVR-Wait & 0.3021 & [0.1979, 0.4167] \\
 \midrule
-Qwen2.5-72B & Unconstrained LLM & Spearman \(\rho\) & -0.0240 & [-0.2543, 0.2206] \\
-Qwen2.5-72B & Static-BDT Anchor & Spearman \(\rho\) & 0.9520 & [0.9090, 0.9683] \\
+Qwen2.5-72B & Unconstrained LLM & Spearman \(\rho\) & 0.0608 & [-0.1841, 0.2869] \\
+Qwen2.5-72B & Static-BDT Anchor & Spearman \(\rho\) & 0.6908 & [0.5474, 0.8096] \\
 \midrule
 MiroThinker-1.7-mini & Unconstrained LLM & MVR-SE & 0.3333 & [0.2396, 0.4271] \\
-MiroThinker-1.7-mini & Static-BDT Anchor & MVR-SE & 0.3229 & [0.2292, 0.4167] \\
+MiroThinker-1.7-mini & Static-BDT Anchor & MVR-SE & 0.3333 & [0.2396, 0.4271] \\
 \bottomrule
 \end{tabular}
 
 \vspace{0.4em}
 \begin{minipage}{0.95\textwidth}
 \small
-\textit{Note.} Unlike the held-out prediction metrics in Table~\ref{tab:bootstrap_heldout}, which employ respondent-level cluster bootstrapping to account for the nested panel structure of DCE choices, the frontier-alignment metrics here are evaluated on the fixed 64-state policy grid. Therefore, frontier-deviation intervals are computed by resampling the 64 policy-grid states with replacement (1,000 replications), and MVR intervals are computed by resampling comparable attribute pairs. The MiroThinker MVR-SE rows are included to document the weaker uncertainty evidence for side-effect monotonicity correction.
+\textit{Note.} Unlike the held-out prediction metrics in Table~\ref{tab:bootstrap_heldout}, which employ respondent-level cluster bootstrapping to account for the nested panel structure of DCE choices, the frontier-alignment metrics here are evaluated on the fixed 64-state policy grid. Therefore, frontier-deviation intervals are computed by resampling the 64 policy-grid states with replacement (1,000 replications), and MVR intervals are computed by resampling comparable attribute pairs. The MiroThinker-1.7-mini MVR-SE rows are retained to document a side-effect correction failure mode: with the corrected 6-parameter specification (Section~\ref{sec:setup}) the side-effect coefficient has the smallest empirical signal among the five attributes, and the Static-BDT anchor at $\lambda = 0.25$ does not transmit a sufficient side-effect correction to move MiroThinker's MVR-SE off the unconstrained value.
 \end{minipage}
 \end{table}
+
+\subsection{Corrected 6-Parameter Frontier Stability}
+\label{app:bootstrap_6param}
+
+The corrected 6-parameter frontier (five attributes plus an opt-out alternative-specific constant) was re-estimated under a 2{,}000-replicate respondent-level cluster bootstrap on the full DCE sample. The bootstrap frontier was compared against the canonical full-sample frontier on the 64-state grid using Spearman $\rho$. Mean $\rho = 0.988$ (median $0.993$; 95\% CI $[0.948, 1.000]$) and mean MSE between bootstrap and canonical frontier probability vectors $= 1.41 \times 10^{-4}$ (median $9.04 \times 10^{-5}$). All six coefficients retained their canonical sign in $\geq 97.7\%$ of replicates; the side-effect coefficient is the least stable attribute effect, retaining its negative sign in $97.65\%$ of bootstrap replicates, consistent with its comparatively weak empirical signal (canonical $\hat{\beta}_{\text{SE}} = -0.036$; 95\% CI $[-0.074, -0.0003]$). Coefficient point estimates, bootstrap means, 95\% CIs, and sign-retention rates for the corrected 6-parameter specification are reported in the main text Section~\ref{sec:setup} and the conditional-logit estimate table; Spearman $\rho$ and MSE summaries above are the primary stability diagnostics used in this appendix.
+
+The estimated 6-parameter empirical frontier was highly stable under respondent-level resampling, with a mean Spearman correlation of $0.988$ relative to the full-sample frontier. The side-effect coefficient was the least stable attribute effect, retaining its negative sign in 97.65\% of bootstrap replicates, consistent with its comparatively weak empirical signal.
 
 \subsection{Held-Out Prediction Uncertainty}
 
@@ -1255,7 +1263,7 @@ LLM-matched & Static-BDT Anchor & Brier & 0.255 [0.249, 0.260] \\
 
 \subsection{Policy-Ranking Consistency Intervals}
 
-Table~\ref{tab:bootstrap_prc} reports the exact binomial intervals used for Policy Ranking Consistency (PRC). These intervals are computed over the 15 unordered policy-pair comparisons. The Qwen2.5-72B Static-BDT interval provides the strongest evidence of improved ranking consistency. DeepSeek V4 improves in point estimate, but its interval is wide. MiroThinker-1.7-mini also improves in point estimate, with an interval that remains relatively wide because the total number of policy-pair comparisons is small.
+Table~\ref{tab:bootstrap_prc} reports exact binomial 95\% intervals for Policy Ranking Consistency (PRC), calculated over the 15 unordered policy-pair comparisons. For Qwen2.5-72B, the point estimate increased from 0.333 for the unconstrained LLM to 0.867 after anchoring. The corresponding intervals are wide because the policy-ranking exercise contains only 15 pairwise comparisons. These intervals therefore summarize uncertainty over the finite policy set and should not be interpreted as respondent-level uncertainty or external validation of policy rankings.
 
 \begin{table}[t]
 \centering

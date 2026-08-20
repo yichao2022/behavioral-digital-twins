@@ -1,0 +1,321 @@
+state,wait,eff,se,U_static,P_static,prompt_unconstrained,P_static_6
+1,0,0.3,0.0,0.43780591,0.6077361,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.3, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5836504530986286
+2,2,0.3,0.0,-0.09704802,0.47575702,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.3, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5546036365199052
+3,4,0.3,0.0,-0.63190194,0.3470794,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.3, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.525178958616469
+4,6,0.3,0.0,-1.16675586,0.23744188,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.3, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.4955783902657652
+5,0,0.5,0.0,0.72967651,0.67473428,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.5, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.6035833889007828
+6,2,0.5,0.0,0.19482259,0.54855217,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.5, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5749143756243998
+7,4,0.5,0.0,-0.34003133,0.41580187,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.5, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.545732451068761
+8,6,0.5,0.0,-0.87488526,0.2942388,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.5, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5162329180600642
+9,0,0.7,0.0,1.02154711,0.73527385,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.7, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.6231781491493127
+10,2,0.7,0.0,0.48669319,0.61932712,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.7, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5949753146569325
+11,4,0.7,0.0,-0.04816073,0.48796214,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.7, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5661312566878002
+12,6,0.7,0.0,-0.58301465,0.35823922,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.7, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.536832134974656
+13,0,0.9,0.0,1.31341772,0.7880845,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.9, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.642378217596288
+14,2,0.9,0.0,0.7785638,0.6853705,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.9, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.6147239701536465
+15,4,0.9,0.0,0.24370987,0.56062769,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.9, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5863084333965564
+16,6,0.9,0.0,-0.29114405,0.42772381,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.9, and side effect risk is 0.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5573064010956416
+17,0,0.3,1.0,0.33615384,0.58325594,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.3, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5747710603054739
+18,2,0.3,1.0,-0.19870008,0.45048777,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.3, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5455870736046975
+19,4,0.3,1.0,-0.73355401,0.32441531,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.3, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5160864711911088
+20,6,0.3,1.0,-1.26840793,0.21952991,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.3, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.48647332643335556
+21,0,0.5,1.0,0.62802444,0.65204138,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.5, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.59483399630048
+22,2,0.5,1.0,0.09317052,0.52327579,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.5, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5659872156345069
+23,4,0.5,1.0,-0.4416834,0.39133992,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.5, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5366863273434841
+24,6,0.5,1.0,-0.97653733,0.27357939,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.5, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5071298916735953
+25,0,0.7,1.0,0.91989505,0.71502072,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.7, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.6145850787698105
+26,2,0.7,1.0,0.38504112,0.59508838,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.7, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5861661943807597
+27,4,0.7,1.0,-0.1498128,0.46261669,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.7, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5571617219893652
+28,6,0.7,1.0,-0.68466672,0.33522054,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.7, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5277621423797006
+29,0,0.9,1.0,1.21176565,0.77061121,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.9, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.6339658143627575
+30,2,0.9,1.0,0.67691173,0.66304908,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.9, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.6060599814653564
+31,4,0.9,1.0,0.1420578,0.53545485,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.9, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5774446867192027
+32,6,0.9,1.0,-0.39279612,0.40304437,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.9, and side effect risk is 1.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.54829999015537
+33,0,0.3,2.0,0.23450177,0.55835826,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.3, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5658431634334734
+34,2,0.3,2.0,-0.30035215,0.4254714,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.3, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5365405134386985
+35,4,0.3,2.0,-0.83520607,0.3025454,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.3, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5069833208748399
+36,6,0.3,2.0,-1.37006,0.20261015,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.3, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.47737723145479694
+37,0,0.5,2.0,0.52637237,0.62863663,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.5, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5860239409901721
+38,2,0.5,2.0,-0.00848155,0.49787963,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.5, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5570170331835825
+39,4,0.5,2.0,-0.54333547,0.36741201,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.5, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5276159919645135
+40,6,0.5,2.0,-1.07818939,0.25384881,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.5, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.49802213531650374
+41,0,0.7,2.0,0.81824298,0.69386325,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.7, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.6059199690107073
+42,2,0.7,2.0,0.28338906,0.5703769,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.7, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5773015972643601
+43,4,0.7,2.0,-0.25146487,0.43746298,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.7, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5481547540521313
+44,6,0.7,2.0,-0.78631879,0.31295964,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.7, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5186737854056919
+45,0,0.9,2.0,1.11011358,0.75215029,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.9, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.6254708994144367
+46,2,0.9,2.0,0.57525966,0.63997593,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.9, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5973287837618152
+47,4,0.9,2.0,0.04040574,0.51010006,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.9, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5685307852036752
+48,6,0.9,2.0,-0.49444819,0.37884625,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.9, and side effect risk is 2.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5392618294499048
+49,0,0.3,3.0,0.1328497,0.53316366,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.3, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5568723347021974
+50,2,0.3,3.0,-0.40200422,0.4008309,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.3, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5274698368157249
+51,4,0.3,3.0,-0.93685814,0.28153542,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.3, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.497875537784698
+52,6,0.3,3.0,-1.47171206,0.18668253,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.3, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.4682961167540611
+53,0,0.5,3.0,0.42472031,0.60461222,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.5, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5771584948365384
+54,2,0.5,3.0,-0.11013362,0.47249439,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.5, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5480095097463223
+55,4,0.5,3.0,-0.64498754,0.34411997,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.5, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5185273882904908
+56,6,0.5,3.0,-1.17984146,0.2350807,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.5, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.48891569132122226
+57,0,0.7,3.0,0.71659091,0.67185587,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.7, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5971877306194027
+58,2,0.7,3.0,0.18173699,0.54530961,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.7, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5683869334360456
+59,4,0.7,3.0,-0.35311693,0.41262678,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.7, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5391161300300922
+60,6,0.7,3.0,-0.88797086,0.29152875,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.7, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5095730549998058
+61,0,0.9,3.0,1.00846151,0.73271896,"You are evaluating a vaccination decision. The current wait time is 0 months, vaccine effectiveness is 0.9, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.6168979711832685
+62,2,0.9,3.0,0.47360759,0.61623727,"You are evaluating a vaccination decision. The current wait time is 2 months, vaccine effectiveness is 0.9, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5885354513049956
+63,4,0.9,3.0,-0.06124633,0.4846932,"You are evaluating a vaccination decision. The current wait time is 4 months, vaccine effectiveness is 0.9, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5595722650810825
+64,6,0.9,3.0,-0.59610025,0.3552364,"You are evaluating a vaccination decision. The current wait time is 6 months, vaccine effectiveness is 0.9, and side effect risk is 3.0. Would you get vaccinated now?
+Respond exactly in this format:
+Decision: Yes or No
+Probability: a number between 0 and 100
+Reasoning: one short sentence",0.5301977777287565

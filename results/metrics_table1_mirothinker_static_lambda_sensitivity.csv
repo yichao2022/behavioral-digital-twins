@@ -1,0 +1,6 @@
+model,method,MSE,MAE,CHR_Wait,CHR_SE,Spearman_rho,Pearson_r,selected_lambda,parse_success_rate
+MiroThinker,Unconstrained LLM,0.08727493,0.26447825,0.1042,0.3333,0.5306,0.5364,,1.0000
+MiroThinker,Static-BDT Anchor (λ=0.25),0.00545468,0.06611956,0.0833,0.3333,0.7579,0.7501,0.25,1.0000
+MiroThinker,Static-BDT Anchor (λ=0.50),0.02181873,0.13223912,0.1042,0.3333,0.6895,0.6256,0.50,1.0000
+MiroThinker,Static-BDT Anchor (λ=0.75),0.04909215,0.19835868,0.1042,0.3333,0.6788,0.5685,0.75,1.0000
+MiroThinker,"Static-BDT Anchor (MSE-opt, λ=0.25)",0.00545468,0.06611956,0.0833,0.3333,0.7579,0.7501,0.25,1.0000

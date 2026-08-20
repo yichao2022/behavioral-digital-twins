@@ -1,19 +1,19 @@
 # PRC Audit Report
 
 ## Files Used
-- `/Users/cary/.openclaw/workspace/bdt_eval_grid_static.csv`
-- `/Users/cary/.openclaw/workspace/llm_parsed_outputs_qwen72b_unconstrained.csv`
-- `/Users/cary/.openclaw/workspace/llm_parsed_outputs_deepseek_unconstrained.csv`
-- `/Users/cary/.openclaw/workspace/llm_parsed_outputs_mirothinker_unconstrained.csv`
-- `/Users/cary/.openclaw/workspace/static_bdt_anchor_qwen72b.csv`
-- `/Users/cary/.openclaw/workspace/static_bdt_anchor_deepseek.csv`
-- `/Users/cary/.openclaw/workspace/static_bdt_anchor_mirothinker.csv`
+- `/Users/cary/bdt_repo/bdt_eval_grid_static.csv`
+- `/Users/cary/bdt_repo/llm_parsed_outputs_qwen72b_unconstrained.csv`
+- `/Users/cary/bdt_repo/llm_parsed_outputs_deepseek_unconstrained.csv`
+- `/Users/cary/bdt_repo/llm_parsed_outputs_mirothinker_unconstrained.csv`
+- `/Users/cary/bdt_repo/static_bdt_anchor_qwen72b.csv`
+- `/Users/cary/bdt_repo/static_bdt_anchor_deepseek.csv`
+- `/Users/cary/bdt_repo/static_bdt_anchor_mirothinker.csv`
 
 ## External Search
 - No synced Google Drive / CloudStorage folder with stronger candidates was found outside the workspace.
 
 ## Candidate File Inspection
-### `/Users/cary/.openclaw/workspace/bdt_eval_grid_static.csv`
+### `/Users/cary/bdt_repo/bdt_eval_grid_static.csv`
 - File type: `csv`
 - Rows: 64
 - Columns: `state, wait, eff, se, U_static, P_static, prompt_unconstrained`
@@ -74,7 +74,7 @@
 ]
 ```
 
-### `/Users/cary/.openclaw/workspace/llm_parsed_outputs_qwen72b_unconstrained.csv`
+### `/Users/cary/bdt_repo/llm_parsed_outputs_qwen72b_unconstrained.csv`
 - File type: `csv`
 - Rows: 640
 - Columns: `model, condition, repeat, state, wait, eff, se, P_static, raw_response, decision, probability_0_100, probability_0_1, reasoning, parse_success`
@@ -170,7 +170,7 @@
 ]
 ```
 
-### `/Users/cary/.openclaw/workspace/static_bdt_anchor_qwen72b.csv`
+### `/Users/cary/bdt_repo/static_bdt_anchor_qwen72b.csv`
 - File type: `csv`
 - Rows: 64
 - Columns: `state, wait, eff, se, P_static, p_LLM_mean, pi_BDT_lam0.25, pi_BDT_lam0.50, pi_BDT_lam0.75, pi_BDT_mseopt, lambda_star`
@@ -251,7 +251,7 @@
 ]
 ```
 
-### `/Users/cary/.openclaw/workspace/llm_parsed_outputs_deepseek_unconstrained.csv`
+### `/Users/cary/bdt_repo/llm_parsed_outputs_deepseek_unconstrained.csv`
 - File type: `csv`
 - Rows: 640
 - Columns: `model, condition, repeat, state, wait, eff, se, P_static, raw_response, decision, probability_0_100, probability_0_1, reasoning, parse_success`
@@ -347,7 +347,7 @@
 ]
 ```
 
-### `/Users/cary/.openclaw/workspace/static_bdt_anchor_deepseek.csv`
+### `/Users/cary/bdt_repo/static_bdt_anchor_deepseek.csv`
 - File type: `csv`
 - Rows: 64
 - Columns: `state, wait, eff, se, P_static, p_LLM_mean, lambda_star, pi_BDT`
@@ -413,7 +413,7 @@
 ]
 ```
 
-### `/Users/cary/.openclaw/workspace/llm_parsed_outputs_mirothinker_unconstrained.csv`
+### `/Users/cary/bdt_repo/llm_parsed_outputs_mirothinker_unconstrained.csv`
 - File type: `csv`
 - Rows: 640
 - Columns: `model, condition, repeat, state, wait, eff, se, P_static, raw_response, decision, probability_0_100, probability_0_1, reasoning, parse_success`
@@ -509,7 +509,7 @@
 ]
 ```
 
-### `/Users/cary/.openclaw/workspace/static_bdt_anchor_mirothinker.csv`
+### `/Users/cary/bdt_repo/static_bdt_anchor_mirothinker.csv`
 - File type: `csv`
 - Rows: 64
 - Columns: `state, wait, eff, se, P_static, p_LLM_mean, pi_BDT_lam0.25, pi_BDT_lam0.50, pi_BDT_lam0.75, pi_BDT_mseopt, lambda_star`
@@ -608,14 +608,14 @@
 - MiroThinker-1.7-mini: parse-success rows = 640 / 640; states with `pi_llm` means = 64 / 64; complete = True; missing states = []
 
 ## Existing `pi_bdt` Validation
-- Qwen2.5-72B: checked `pi_BDT_lam0.25` in `/Users/cary/.openclaw/workspace/static_bdt_anchor_qwen72b.csv`; matches `0.25*pi_llm + 0.75*P_static` = `True`; max abs diff = `0.0000000050`.
-- DeepSeek V4 Pro: checked `pi_BDT` in `/Users/cary/.openclaw/workspace/static_bdt_anchor_deepseek.csv`; matches `0.25*pi_llm + 0.75*P_static` = `False`; max abs diff = `0.1541901950`.
-- MiroThinker-1.7-mini: checked `pi_BDT_lam0.25` in `/Users/cary/.openclaw/workspace/static_bdt_anchor_mirothinker.csv`; matches `0.25*pi_llm + 0.75*P_static` = `True`; max abs diff = `0.0000000050`.
+- Qwen2.5-72B: checked `pi_BDT_lam0.25` in `/Users/cary/bdt_repo/static_bdt_anchor_qwen72b.csv`; matches `0.25*pi_llm + 0.75*P_static` = `True`; max abs diff = `0.0000000050`.
+- DeepSeek V4 Pro: checked `pi_BDT` in `/Users/cary/bdt_repo/static_bdt_anchor_deepseek.csv`; matches `0.25*pi_llm + 0.75*P_static` = `False`; max abs diff = `0.1541901950`.
+- MiroThinker-1.7-mini: checked `pi_BDT_lam0.25` in `/Users/cary/bdt_repo/static_bdt_anchor_mirothinker.csv`; matches `0.25*pi_llm + 0.75*P_static` = `True`; max abs diff = `0.0000000050`.
 - DeepSeek's existing anchor file did not represent the fixed `lambda=0.25` formula, so `pi_bdt` was recomputed from `pi_llm` and `P_static`.
 
 ## Outputs
-- `/Users/cary/.openclaw/workspace/outputs/prc_analysis/clean_analysis_dataframe.csv`
-- `/Users/cary/.openclaw/workspace/outputs/prc_analysis/policy_ate_results.csv`
-- `/Users/cary/.openclaw/workspace/outputs/prc_analysis/policy_ranking_prc.csv`
-- `/Users/cary/.openclaw/workspace/outputs/prc_analysis/prc_table.tex`
+- `/Users/cary/bdt_repo/outputs/prc_analysis/clean_analysis_dataframe.csv`
+- `/Users/cary/bdt_repo/outputs/prc_analysis/policy_ate_results.csv`
+- `/Users/cary/bdt_repo/outputs/prc_analysis/policy_ranking_prc.csv`
+- `/Users/cary/bdt_repo/outputs/prc_analysis/prc_table.tex`
 
